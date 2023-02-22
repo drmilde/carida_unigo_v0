@@ -134,7 +134,9 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
                         //textAlign: TextAlign.left,
                       ),
                     ),
+                    SizedBox(height:8),
                     Icon(Icons.arrow_downward),
+                    SizedBox(height:8),
                     Container(
                       child: Text(
                         ziel,
