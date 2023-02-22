@@ -1,7 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:projects/sb/screens/buchungen/buchungen_screen.dart';
 
-import '../buchungen/buchungen_screen.dart';
 import '../chat/chat_screen.dart';
 import '../einstellungen/einstellungen_screen.dart';
 import '../hinzufuegen/hinzufuegen_screen.dart';
