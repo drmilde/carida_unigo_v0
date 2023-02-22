@@ -20,14 +20,13 @@ class HinzufuegenScreen extends StatefulWidget {
 class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
   UGStateController _controller = Get.find();
   UniGoService service = UniGoService();
+  var formKey = GlobalKey<FormBuilderState>();
 
   @override
   void initState() {
     super.initState();
   }
 
-  final _formKey = GlobalKey<FormState>();
-  var formKey = GlobalKey<FormBuilderState>();
 
   final List<Color> colors = [
     Color.fromARGB(255, 202, 211, 211),

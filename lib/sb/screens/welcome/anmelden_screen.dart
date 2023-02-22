@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:projects/services/controller/ug_state_controller.dart';
+import 'package:projects/services/extensions/unigo_service_angebot_extension.dart';
 
 import '../../../screens/widgets/custom_round_button.dart';
+import '../../../screens/widgets/forms/form_submit_button.dart';
+import '../../../screens/widgets/forms/form_text_field.dart';
 import '../../../screens/widgets/svg_dynamic_scaffold_widget.dart';
 import '../../../screens/widgets/unigo_bottom_navigation_bar.dart';
+import '../../../services/model/angebot.dart';
+import '../../../services/unigo_service.dart';
 import '../home/main_screen.dart';
 
 class AnmeldenScreen extends StatefulWidget {
@@ -17,7 +23,9 @@ class AnmeldenScreen extends StatefulWidget {
 
 class _AnmeldenScreenState extends State<AnmeldenScreen> {
   UGStateController _controller = Get.find();
-  final _formKey = GlobalKey<FormState>();
+  UniGoService service = UniGoService();
+  var formKey = GlobalKey<FormBuilderState>();
+
   List<Color> colors = [];
 
   @override
@@ -74,60 +82,27 @@ class _AnmeldenScreenState extends State<AnmeldenScreen> {
                   child: Column(
                     //mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Container(
-                        margin: EdgeInsets.fromLTRB(30, 0, 150, 0),
-                        width: double.infinity,
-                        child: Column(
-                          children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.fromLTRB(0, 180, 0, 10),
-                              width: double.infinity,
-                              child: Material(
-                                elevation: 2.0,
-                                shadowColor: Colors.grey,
-                                child: TextFormField(
-                                  style: TextStyle(color: colors[3]),
-                                  keyboardType: TextInputType.emailAddress,
-                                  autocorrect: false,
-                                  decoration: InputDecoration(
-                                    labelText: 'E-Mail Adresse',
-                                    border: UnderlineInputBorder(),
-                                    //filled: true,
-                                    //fillColor: colors[0],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                              width: double.infinity,
-                              child: Material(
-                                elevation: 2.0,
-                                shadowColor: Colors.grey,
-                                child: TextFormField(
-                                  style: TextStyle(color: colors[3]),
-                                  keyboardType: TextInputType.visiblePassword,
-                                  decoration: InputDecoration(
-                                    labelText: 'Passwort',
-                                    border: UnderlineInputBorder(),
-                                    //filled: true,
-                                    //fillColor: colors[0],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                      //_oldForm(),
+                      SizedBox(height: 150),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                        child: _buildForm(context),
                       ),
                       Container(
                         //color:Colors.blue,
                         width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(60, 260, 60, 20),
-                        child: CustomRoundButton(
+                        margin: EdgeInsets.fromLTRB(60, 200, 60, 20),
+                        child: CustomFormSubmitButton(
+                          formKey: formKey,
                           text: "Anmelden",
-                          textColor: _controller.appConstants.white,
-                          color: _controller.appConstants.turquoise,
-                          callback: () {
+                          callback: () async {
+                            String email = formKey.currentState!.value['email'];
+                            String passwort =
+                                formKey.currentState!.value['passwort'];
+
+                            // TODO es wurde etwas verändert
+                            _controller.change();
+
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => MainScreen()));
                           },
@@ -141,6 +116,90 @@ class _AnmeldenScreenState extends State<AnmeldenScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildForm(BuildContext context) {
+    return FormBuilder(
+      key: formKey,
+      // enabled: false,
+      onChanged: () {
+        formKey.currentState!.save();
+      },
+      autovalidateMode: AutovalidateMode.disabled,
+      skipDisabled: true,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CustomFormTextField(
+            formKey: formKey,
+            name: "email",
+            labelText: "E-Mail Adresse",
+            value: "mail@host.de",
+            showBorder: true,
+            width: 200,
+          ),
+          const SizedBox(height: 16),
+          CustomFormTextField(
+            formKey: formKey,
+            name: "passwort",
+            labelText: "Passwort",
+            value: "vollgeheim",
+            showBorder: true,
+            width: 200,
+          ),
+          SizedBox(height: 40),
+          Container(),
+        ],
+      ),
+    );
+  }
+
+  Widget _oldForm() {
+    return Container(
+      margin: EdgeInsets.fromLTRB(30, 0, 150, 0),
+      width: double.infinity,
+      child: Column(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 180, 0, 10),
+            width: double.infinity,
+            child: Material(
+              elevation: 2.0,
+              shadowColor: Colors.grey,
+              child: TextFormField(
+                style: TextStyle(color: colors[3]),
+                keyboardType: TextInputType.emailAddress,
+                autocorrect: false,
+                decoration: InputDecoration(
+                  labelText: 'E-Mail Adresse',
+                  border: UnderlineInputBorder(),
+                  //filled: true,
+                  //fillColor: colors[0],
+                ),
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+            width: double.infinity,
+            child: Material(
+              elevation: 2.0,
+              shadowColor: Colors.grey,
+              child: TextFormField(
+                style: TextStyle(color: colors[3]),
+                keyboardType: TextInputType.visiblePassword,
+                decoration: InputDecoration(
+                  labelText: 'Passwort',
+                  border: UnderlineInputBorder(),
+                  //filled: true,
+                  //fillColor: colors[0],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

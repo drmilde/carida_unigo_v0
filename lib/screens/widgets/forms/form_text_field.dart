@@ -9,6 +9,7 @@ class CustomFormTextField extends StatelessWidget {
   String name = "textFieldName";
   String labelText = "";
   String value = "";
+  bool showBorder = false;
 
   double width = 300;
 
@@ -18,6 +19,7 @@ class CustomFormTextField extends StatelessWidget {
       this.labelText = "",
       this.value = "",
       this.width = 300,
+      this.showBorder = false,
       Key? key})
       : super(key: key);
 
@@ -45,7 +47,7 @@ class CustomFormTextField extends StatelessWidget {
           focusColor: Colors.white,
           hoverColor: Colors.white,
           errorStyle: TextStyle(
-            color:Colors.black,
+            color: Colors.black,
             fontSize: 10,
           ),
           labelStyle: TextStyle(
@@ -56,7 +58,7 @@ class CustomFormTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           border: OutlineInputBorder(
-            borderSide: BorderSide.none,
+            borderSide: showBorder? BorderSide(width: 2) : BorderSide.none,
             borderRadius: BorderRadius.circular(10),
           ),
         ),
