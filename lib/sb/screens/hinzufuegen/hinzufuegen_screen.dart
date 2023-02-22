@@ -105,6 +105,7 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
       autovalidateMode: AutovalidateMode.disabled,
       skipDisabled: true,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           CustomFormTextField(
             formKey: formKey,
@@ -124,16 +125,25 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
             labelText: "Ziel1",
           ),
           const SizedBox(height: 16),
-          CustomFormTextField(
-            formKey: formKey,
-            name: "datum",
-            labelText: "Datum",
-          ),
-          const SizedBox(height: 16),
-          CustomFormTextField(
-            formKey: formKey,
-            name: "zeit",
-            labelText: "Uhrzeit",
+          Container(
+            width: 300,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomFormTextField(
+                  formKey: formKey,
+                  width: 140,
+                  name: "datum",
+                  labelText: "Datum",
+                ),
+                CustomFormTextField(
+                  formKey: formKey,
+                  width: 140,
+                  name: "zeit",
+                  labelText: "Uhrzeit",
+                ),
+              ],
+            ),
           ),
           SizedBox(height: 40),
           CustomFormSubmitButton(

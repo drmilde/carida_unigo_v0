@@ -32,7 +32,7 @@ class CustomFormTextField extends StatelessWidget {
     required String value,
   }) {
     return Container(
-      width: 300,
+      width: width,
       child: FormBuilderTextField(
         autovalidateMode: AutovalidateMode.disabled,
         name: name,
