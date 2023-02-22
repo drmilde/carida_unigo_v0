@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:projects/sb/screens/buchungen/buchungen_screen.dart';
 
 import '../chat/chat_screen.dart';
@@ -81,11 +82,11 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   AppBar _buildAppBar(String title, BuildContext context, int index) {
-    if(index == 2){
+    if (index == 2) {
       return AppBar(
         title: Text(
           title,
-          style: TextStyle(
+          style: GoogleFonts.inter(
             color: Color.fromARGB(255, 28, 31, 31),
             fontSize: 28,
           ),
