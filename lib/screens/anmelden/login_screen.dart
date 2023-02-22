@@ -24,7 +24,7 @@ class LoginScreen extends StatelessWidget {
     return SVGDynamicScaffoldWidget(
       drawer: Drawer(),
       showDrawer: false,
-      appbar: AppBar(),
+      appBar: AppBar(),
       showAppbar: false,
       fab: FloatingActionButton(
         onPressed: () {},

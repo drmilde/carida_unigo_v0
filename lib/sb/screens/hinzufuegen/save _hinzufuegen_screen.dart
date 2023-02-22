@@ -3,29 +3,18 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../services/controller/ug_state_controller.dart';
-import '../home_screen.dart';
-import '../widgets/custom_dialog_widget.dart';
-import '../widgets/forms/form_submit_button.dart';
-import '../widgets/forms/form_text_field.dart';
-import '../widgets/svg_dynamic_scaffold_widget.dart';
-import '../widgets/svg_logo_widget.dart';
-import '../widgets/unigo_bottom_navigation_bar.dart';
+import '../../../screens/widgets/forms/form_submit_button.dart';
+import '../../../screens/widgets/forms/form_text_field.dart';
+import '../../../screens/widgets/svg_dynamic_scaffold_widget.dart';
+import '../../../screens/widgets/svg_logo_widget.dart';
+import '../../../screens/widgets/unigo_bottom_navigation_bar.dart';
+import '../../../services/controller/ug_state_controller.dart';
 
-class PasswortVergessenScreen extends StatelessWidget {
+class SaveHinzufuegenScreen extends StatelessWidget {
   UGStateController _controller = Get.find();
   var formKey = GlobalKey<FormBuilderState>();
 
-  CustomDialog dialog = CustomDialog(
-    title: "Passwort vergessen?",
-    text1: "Ein Link zum Zurücksetzen"
-        " des Passworts wurde an Ihre E-Mail"
-        " Adresse gesendet.",
-    text2: "",
-    button1Text: "Alles Klar",
-  );
-
-  PasswortVergessenScreen({Key? key}) : super(key: key);
+  SaveHinzufuegenScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +44,7 @@ class PasswortVergessenScreen extends StatelessWidget {
         ),
         SizedBox(height: 100),
         Text(
-          "Passwort\nvergessen",
-          textAlign: TextAlign.center,
+          "Registrieren",
           style: GoogleFonts.inter(
             fontSize: 32,
             fontWeight: FontWeight.w500,
@@ -67,7 +55,6 @@ class PasswortVergessenScreen extends StatelessWidget {
       ],
     );
   }
-
   Widget _buildForm(BuildContext context) {
     return FormBuilder(
       key: formKey,
@@ -81,36 +68,47 @@ class PasswortVergessenScreen extends StatelessWidget {
         children: <Widget>[
           CustomFormTextField(
             formKey: formKey,
-            name: "email",
-            labelText: "E-Mail Adresse",
+            name: "standort",
+            labelText: "Standort",
           ),
-          SizedBox(height: 16),
-          Container(
-            width: 300,
-            child: Text(
-              "Geben Sie Ihre E-Mail Adresse ein, "
-              "um Ihr Passwort zurückzusetzen.",
-              textAlign: TextAlign.center,
-              style: GoogleFonts.inter(
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
+          const SizedBox(height: 16),
+          CustomFormTextField(
+            formKey: formKey,
+            name: "ziel",
+            labelText: "Ziel",
           ),
-          SizedBox(height: 40),
+          const SizedBox(height: 16),
+          CustomFormTextField(
+            formKey: formKey,
+            name: "ziel1",
+            labelText: "Ziel1",
+          ),
+          const SizedBox(height: 16),
+          CustomFormTextField(
+            formKey: formKey,
+            name: "datum",
+            labelText: "Passwort wiederholen",
+          ),
+          const SizedBox(height: 16),
+          CustomFormTextField(
+            formKey: formKey,
+            name: "zeit",
+            labelText: "Uhrzeit",
+          ),
+          SizedBox(height: 60),
           CustomFormSubmitButton(
             formKey: formKey,
-            text: "Senden",
+            text: "Speichern",
             callback: () async {
+              String standort = formKey.currentState!.value['standort'];
+              String ziel = formKey.currentState!.value['ziel'];
+              String ziel1 = formKey.currentState!.value['ziel1'];
               String email = formKey.currentState!.value['email'];
+              String datum = formKey.currentState!.value['datum'];
+              String zeit = formKey.currentState!.value['zeit'];
 
-              // TODO es wurde etwas verändert
+              // TODO es wurde etwas verdatändert
               _controller.change();
-
-              int? answer = await dialog.showCustomDialog(context);
-
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()));
             },
           ),
           Container(),

@@ -37,7 +37,7 @@ class _RegistrierenScreenState extends State<RegistrierenScreen> {
     return SVGDynamicScaffoldWidget(
       drawer: Drawer(),
       showDrawer: false,
-      appbar: AppBar(),
+      appBar: AppBar(),
       showAppbar: false,
       fab: FloatingActionButton(
         onPressed: () {},

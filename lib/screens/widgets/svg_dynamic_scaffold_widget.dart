@@ -5,10 +5,13 @@ class SVGDynamicScaffoldWidget extends StatefulWidget {
   Widget drawer;
   Widget bottomNavigationBar;
   bool showBottonNavigationBar = false;
-  PreferredSizeWidget appbar;
+  PreferredSizeWidget appBar;
   Widget body;
   Widget fab;
   bool showFab = false;
+
+  bool extendBody =  true;
+  bool extendBodyBehindAppBar =  true;
 
   double maxWidth = 480;
   double centerColumnWidth = 390; // iPhone 12 Pro
@@ -22,7 +25,7 @@ class SVGDynamicScaffoldWidget extends StatefulWidget {
   SVGDynamicScaffoldWidget({
     required this.drawer,
     required this.bottomNavigationBar,
-    required this.appbar,
+    required this.appBar,
     required this.body,
     required this.fab,
     this.showBottonNavigationBar = false,
@@ -33,6 +36,8 @@ class SVGDynamicScaffoldWidget extends StatefulWidget {
     this.showDrawer = true,
     this.image = "assets/background.svg",
     this.backgroundColor,
+    this.extendBody = true,
+    this.extendBodyBehindAppBar = true,
   });
 
   @override
@@ -57,7 +62,7 @@ class _SVGDynamicScaffoldWidgetState extends State<SVGDynamicScaffoldWidget> {
   Widget narrowScaffold(String image) {
     return SafeArea(
       child: Scaffold(
-        appBar: widget.showAppbar ? widget.appbar : null,
+        appBar: widget.showAppbar ? widget.appBar : null,
         endDrawer: widget.showDrawer ? widget.drawer : null,
         bottomNavigationBar:
             widget.showBottonNavigationBar ? widget.bottomNavigationBar : null,
@@ -79,6 +84,8 @@ class _SVGDynamicScaffoldWidgetState extends State<SVGDynamicScaffoldWidget> {
           ],
         ),
         floatingActionButton: widget.showFab ? widget.fab : null,
+        extendBody: widget.extendBody,
+        extendBodyBehindAppBar: widget.extendBodyBehindAppBar,
       ),
     );
   }

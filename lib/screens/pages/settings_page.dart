@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../profil_screen.dart';
-import '../widgets/custom_dialog_widget.dart';
 import '../widgets/custom_round_button.dart';
 
 class SettingsPage extends StatelessWidget {

@@ -1,8 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projects/sb/screens/buchungen/buchungen_screen.dart';
 
+import '../../../services/controller/ug_state_controller.dart';
 import '../chat/chat_screen.dart';
 import '../einstellungen/einstellungen_screen.dart';
 import '../hinzufuegen/hinzufuegen_screen.dart';
@@ -17,6 +19,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  UGStateController _controller = Get.find();
   int index = 2;
 
   final screens = [
@@ -66,8 +69,29 @@ class _MainScreenState extends State<MainScreen> {
       ),
     ];
     return Scaffold(
+
+      /*
+      drawer: Drawer(),
+      showDrawer: false,
+      //appbar: AppBar(),
+      showAppbar: false,
+      fab: FloatingActionButton(
+        onPressed: () {},
+        child: Text("+"),
+      ),
+      showFab: false,
+      //bottomNavigationBar: UnigoBottomNavigationsBar(),
+      showBottonNavigationBar: true,
+
+      backgroundColor: _controller.appConstants.dark_grey,
+      image: "assets/images/background2.svg",
+
+       */
+
+
       extendBody: true,
       extendBodyBehindAppBar: true,
+
       //backgroundColor: Color.fromARGB(255, 28, 31, 31),
       appBar: _buildAppBar(title[index], context, index),
       bottomNavigationBar: CurvedNavigationBar(

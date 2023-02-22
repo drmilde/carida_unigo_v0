@@ -37,7 +37,7 @@ class _RegistrierenTwoScreenState extends State<RegistrierenTwoScreen> {
     return SVGDynamicScaffoldWidget(
       drawer: Drawer(),
       showDrawer: false,
-      appbar: AppBar(),
+      appBar: AppBar(),
       showAppbar: false,
       fab: FloatingActionButton(
         onPressed: () {},

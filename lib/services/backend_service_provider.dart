@@ -20,13 +20,13 @@ class BackendServiceProvider {
     required Function(String) listFromJson,
   }) async {
     var url = Uri.https(host, '${apiPath}/${resourcePath}.json');
-    print (url);
+    //print (url);
     var response = await http.get(
       url,
       headers: headers,
     );
     String resUTF8 = utf8.decode(response.bodyBytes);
-    print(response.statusCode);
+    //print(response.statusCode);
 
     if (response.statusCode == 200) {
       RT data = listFromJson(resUTF8);
