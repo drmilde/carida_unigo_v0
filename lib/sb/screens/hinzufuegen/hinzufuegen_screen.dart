@@ -3,9 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:projects/services/controller/ug_state_controller.dart';
+import 'package:projects/services/extensions/unigo_service_angebot_extension.dart';
 
 import '../../../screens/widgets/forms/form_submit_button.dart';
 import '../../../screens/widgets/forms/form_text_field.dart';
+import '../../../services/model/angebot.dart';
+import '../../../services/unigo_service.dart';
 
 class HinzufuegenScreen extends StatefulWidget {
   const HinzufuegenScreen({Key? key}) : super(key: key);
@@ -16,6 +19,7 @@ class HinzufuegenScreen extends StatefulWidget {
 
 class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
   UGStateController _controller = Get.find();
+  UniGoService service = UniGoService();
 
   @override
   void initState() {
@@ -111,18 +115,21 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
             formKey: formKey,
             name: "standort",
             labelText: "Standort",
+            value: "Hünfeld",
           ),
           const SizedBox(height: 16),
           CustomFormTextField(
             formKey: formKey,
             name: "ziel",
             labelText: "Ziel",
+            value: "Hochschule Fulda",
           ),
           const SizedBox(height: 16),
           CustomFormTextField(
             formKey: formKey,
-            name: "ziel1",
-            labelText: "Ziel1",
+            name: "freiplaetze",
+            labelText: "Freiplätze",
+            value: "2",
           ),
           const SizedBox(height: 16),
           Container(
@@ -135,12 +142,14 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
                   width: 140,
                   name: "datum",
                   labelText: "Datum",
+                  value: "2023-02-22",
                 ),
                 CustomFormTextField(
                   formKey: formKey,
                   width: 140,
                   name: "zeit",
                   labelText: "Uhrzeit",
+                  value: "12:30:42"
                 ),
               ],
             ),
@@ -152,10 +161,26 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
             callback: () async {
               String standort = formKey.currentState!.value['standort'];
               String ziel = formKey.currentState!.value['ziel'];
-              String ziel1 = formKey.currentState!.value['ziel1'];
-              String email = formKey.currentState!.value['email'];
+              String freiplaetze = formKey.currentState!.value['freiplaetze'];
               String datum = formKey.currentState!.value['datum'];
               String zeit = formKey.currentState!.value['zeit'];
+
+              Angebot angebot = Angebot(
+                id: 0,
+                datum: DateTime.parse("${datum}"),
+                uhrzeit: "${zeit}",
+                freiplaetze: 0,
+                startort: "${standort}",
+                zielort: "${ziel}",
+                hasprofile: [],
+              );
+
+              print (angebot);
+
+              bool result =
+                  await service.createAngebotById(id: 0, data: angebot);
+
+              print(result);
 
               // TODO es wurde etwas verdatändert
               _controller.change();
