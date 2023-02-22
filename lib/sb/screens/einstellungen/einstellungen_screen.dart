@@ -1,6 +1,6 @@
-import 'package:carpool_unigo/screens/home/home_screen.dart';
-import 'package:carpool_unigo/screens/home/main_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../home/main_screen.dart';
 
 class EinstellungenScreen extends StatelessWidget {
   const EinstellungenScreen({Key? key}) : super(key: key);

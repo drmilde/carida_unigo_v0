@@ -4,15 +4,8 @@ import 'package:projects/screens/pages/chat_page.dart';
 import 'package:projects/screens/pages/fahrten_page.dart';
 import 'package:projects/screens/pages/home_page.dart';
 import 'package:projects/screens/pages/settings_page.dart';
-import 'package:projects/screens/profil_screen.dart';
-import 'package:projects/screens/widgets/custom_dialog_widget.dart';
 import 'package:projects/services/controller/ug_state_controller.dart';
 
-import '../../services/osrm/model/osrm.dart';
-import '../../services/osrm/model/osrm_service_provider.dart';
-import 'prototyp_dummies/dummy_login_screen.dart';
-import 'prototyp_dummies/osrm/dummy_osrm_screen.dart';
-import 'widgets/custom_round_button.dart';
 import 'widgets/svg_dynamic_scaffold_widget.dart';
 import 'widgets/unigo_bottom_navigation_bar.dart';
 

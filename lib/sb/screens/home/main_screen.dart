@@ -1,11 +1,12 @@
-import 'package:carpool_unigo/screens/buchungen/buchungen_screen.dart';
-import 'package:carpool_unigo/screens/chat/chat_screen.dart';
-import 'package:carpool_unigo/screens/einstellungen/einstellungen_screen.dart';
-import 'package:carpool_unigo/screens/hinzufuegen/hinzufuegen_screen.dart';
-import 'package:carpool_unigo/screens/home/home_screen.dart';
-import 'package:carpool_unigo/screens/suche/suche_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/material.dart';
+
+import '../buchungen/buchungen_screen.dart';
+import '../chat/chat_screen.dart';
+import '../einstellungen/einstellungen_screen.dart';
+import '../hinzufuegen/hinzufuegen_screen.dart';
+import '../suche/suche_screen.dart';
+import 'home_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);

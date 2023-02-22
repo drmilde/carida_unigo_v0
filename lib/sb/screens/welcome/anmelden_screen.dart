@@ -1,8 +1,12 @@
-import 'package:carpool_unigo/screens/home/main_screen.dart';
-import 'package:carpool_unigo/screens/welcome/registrieren_two_screen.dart';
-import 'package:carpool_unigo/widgets/svg_scaffold_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:projects/services/controller/ug_state_controller.dart';
+
+import '../../../screens/widgets/custom_round_button.dart';
+import '../../../screens/widgets/svg_dynamic_scaffold_widget.dart';
+import '../../../screens/widgets/unigo_bottom_navigation_bar.dart';
+import '../home/main_screen.dart';
 
 class AnmeldenScreen extends StatefulWidget {
   const AnmeldenScreen({Key? key}) : super(key: key);
@@ -12,21 +16,42 @@ class AnmeldenScreen extends StatefulWidget {
 }
 
 class _AnmeldenScreenState extends State<AnmeldenScreen> {
+  UGStateController _controller = Get.find();
   final _formKey = GlobalKey<FormState>();
-  final List<Color> colors = [
-    Color.fromARGB(255, 202, 211, 211),
-    Color.fromARGB(255, 0, 173, 167),
-    Color.fromARGB(255, 139, 208, 106),
-    Color.fromARGB(255, 28, 31, 31),
-    Color.fromARGB(255, 255, 255, 255),
-  ];
+  List<Color> colors = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    colors = [
+      _controller.appConstants.light_grey,
+      _controller.appConstants.turquoise,
+      _controller.appConstants.light_green,
+      _controller.appConstants.dark_grey,
+      _controller.appConstants.white,
+    ];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SvgScaffoldWidget(
+    return SVGDynamicScaffoldWidget(
+      drawer: Drawer(),
+      showDrawer: false,
+      appbar: AppBar(),
+      showAppbar: false,
+      fab: FloatingActionButton(
+        onPressed: () {},
+        child: Text("+"),
+      ),
+      showFab: false,
+      bottomNavigationBar: UnigoBottomNavigationsBar(),
+      showBottonNavigationBar: false,
+
+      backgroundColor: _controller.appConstants.dark_grey,
       image: "assets/images/background2.svg",
-      color: colors[3],
-      child: SingleChildScrollView(
+      //color: colors[3],
+      body: SingleChildScrollView(
         child: Container(
           //color: Colors.yellow,
           width: double.infinity,
@@ -97,27 +122,22 @@ class _AnmeldenScreenState extends State<AnmeldenScreen> {
                       Container(
                         //color:Colors.blue,
                         width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(60, 200, 60, 20),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) => MainScreen()),
-                            );
+                        margin: EdgeInsets.fromLTRB(60, 260, 60, 20),
+                        child: CustomRoundButton(
+                          text: "Anmelden",
+                          textColor: _controller.appConstants.white,
+                          color: _controller.appConstants.turquoise,
+                          callback: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => MainScreen()));
                           },
-                          child: Text(
-                            'Anmelden',
-                            style: TextStyle(
-                              color: colors[4],
-                            ),
-                          ),
                         ),
                       ),
+                      SvgPicture.asset('assets/images/logo.svg'),
                     ],
                   ),
                 ),
               ),
-              SvgPicture.asset('assets/images/logo.svg'),
             ],
           ),
         ),

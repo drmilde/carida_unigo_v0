@@ -11,4 +11,8 @@ class AppConstants {
 
   double headerFontsSize = 24;
 
+  Color light_grey = Color.fromARGB(255, 202, 211, 211);
+  Color turquoise = Color.fromARGB(255, 0, 173, 167);
+  Color light_green = Color.fromARGB(255, 139, 208, 106);
+  Color dark_grey = Color.fromARGB(255, 28, 31, 31);
 }

@@ -16,6 +16,9 @@ class SVGDynamicScaffoldWidget extends StatefulWidget {
   bool showDrawer = true;
   bool showAppbar = true;
 
+  final String image;
+  final Color? backgroundColor;
+
   SVGDynamicScaffoldWidget({
     required this.drawer,
     required this.bottomNavigationBar,
@@ -28,6 +31,8 @@ class SVGDynamicScaffoldWidget extends StatefulWidget {
     this.maxWidth = 600,
     this.centerColumnWidth = 420,
     this.showDrawer = true,
+    this.image = "assets/background.svg",
+    this.backgroundColor,
   });
 
   @override
@@ -41,15 +46,15 @@ class _SVGDynamicScaffoldWidgetState extends State<SVGDynamicScaffoldWidget> {
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.maxWidth > widget.centerColumnWidth) {
-          return wideScaffold();
+          return wideScaffold(widget.image);
         } else {
-          return narrowScaffold();
+          return narrowScaffold(widget.image);
         }
       },
     );
   }
 
-  Widget narrowScaffold() {
+  Widget narrowScaffold(String image) {
     return SafeArea(
       child: Scaffold(
         appBar: widget.showAppbar ? widget.appbar : null,
@@ -57,6 +62,7 @@ class _SVGDynamicScaffoldWidgetState extends State<SVGDynamicScaffoldWidget> {
         bottomNavigationBar:
             widget.showBottonNavigationBar ? widget.bottomNavigationBar : null,
         // body: widget.body,
+        backgroundColor: widget.backgroundColor,
         body: Stack(
           children: [
             Positioned.fill(
@@ -64,7 +70,7 @@ class _SVGDynamicScaffoldWidgetState extends State<SVGDynamicScaffoldWidget> {
                 //width: widget.centerColumnWidth,
                 //height: MediaQuery.of(context).size.height,
                 child: SvgPicture.asset(
-                  "assets/background.svg",
+                  image,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -77,7 +83,7 @@ class _SVGDynamicScaffoldWidgetState extends State<SVGDynamicScaffoldWidget> {
     );
   }
 
-  Widget wideScaffold() {
+  Widget wideScaffold(String image) {
     return Scaffold(
       body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -89,7 +95,7 @@ class _SVGDynamicScaffoldWidgetState extends State<SVGDynamicScaffoldWidget> {
           ),
           Container(
             width: widget.centerColumnWidth,
-            child: narrowScaffold(),
+            child: narrowScaffold(image),
           ),
           Expanded(
             child: Container(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:projects/screens/anmelden/login_screen.dart';
+import 'package:projects/sb/screens/welcome/start_screen.dart';
 import 'package:projects/screens/widgets/custom_round_button.dart';
 
 import '../../services/controller/ug_state_controller.dart';
@@ -62,8 +62,13 @@ class PreLoadingScreen extends StatelessWidget {
             text: "Login/Registrieren",
             textColor: _controller.appConstants.white,
             callback: () {
+              /*
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => LoginScreen()));
+
+               */
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => StartScreen()));
             }),
         Expanded(
           child: Container(

@@ -1,6 +1,5 @@
-import 'package:carpool_unigo/screens/home/main_screen.dart';
-import 'package:carpool_unigo/screens/welcome/start_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:projects/sb/screens/welcome/start_screen.dart';
 
 
 
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
         ),
 
       ),
-      home: const StartScreen(),
+      home: StartScreen(),
     );
   }
 }
