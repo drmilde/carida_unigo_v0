@@ -9,12 +9,16 @@ class CustomFormSubmitButton extends StatelessWidget {
   UGStateController _controller = Get.find();
   var formKey = GlobalKey<FormBuilderState>();
   String text = "Submit";
+  Color? color;
+  Color? textColor;
   VoidCallback callback;
 
   CustomFormSubmitButton({
     required this.formKey,
     required this.callback,
     this.text = "Submit",
+    this.color,
+    this.textColor,
     Key? key,
   }) : super(key: key);
 
@@ -27,7 +31,8 @@ class CustomFormSubmitButton extends StatelessWidget {
       {String text = "Submit", required VoidCallback callback}) {
     return CustomRoundButton(
       text: text,
-      textColor: _controller.appConstants.white,
+      textColor: textColor,
+      color: color,
       callback: () {
         if (formKey.currentState?.saveAndValidate() ?? false) {
           callback();

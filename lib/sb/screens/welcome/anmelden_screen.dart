@@ -95,6 +95,8 @@ class _AnmeldenScreenState extends State<AnmeldenScreen> {
                         child: CustomFormSubmitButton(
                           formKey: formKey,
                           text: "Anmelden",
+                          textColor: _controller.appConstants.white,
+                          color: _controller.appConstants.turquoise,
                           callback: () async {
                             String email = formKey.currentState!.value['email'];
                             String passwort =
@@ -151,54 +153,6 @@ class _AnmeldenScreenState extends State<AnmeldenScreen> {
           ),
           SizedBox(height: 40),
           Container(),
-        ],
-      ),
-    );
-  }
-
-  Widget _oldForm() {
-    return Container(
-      margin: EdgeInsets.fromLTRB(30, 0, 150, 0),
-      width: double.infinity,
-      child: Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 180, 0, 10),
-            width: double.infinity,
-            child: Material(
-              elevation: 2.0,
-              shadowColor: Colors.grey,
-              child: TextFormField(
-                style: TextStyle(color: colors[3]),
-                keyboardType: TextInputType.emailAddress,
-                autocorrect: false,
-                decoration: InputDecoration(
-                  labelText: 'E-Mail Adresse',
-                  border: UnderlineInputBorder(),
-                  //filled: true,
-                  //fillColor: colors[0],
-                ),
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-            width: double.infinity,
-            child: Material(
-              elevation: 2.0,
-              shadowColor: Colors.grey,
-              child: TextFormField(
-                style: TextStyle(color: colors[3]),
-                keyboardType: TextInputType.visiblePassword,
-                decoration: InputDecoration(
-                  labelText: 'Passwort',
-                  border: UnderlineInputBorder(),
-                  //filled: true,
-                  //fillColor: colors[0],
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );
