@@ -22,22 +22,19 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
   UniGoService service = UniGoService();
   var formKey = GlobalKey<FormBuilderState>();
 
-  List<Color> colors = [];
-
   @override
   void initState() {
-    colors = [
-      _controller.appConstants.light_grey,
-      _controller.appConstants.turquoise,
-      _controller.appConstants.light_green,
-      _controller.appConstants.dark_grey,
-      _controller.appConstants.white,
-    ];
     super.initState();
   }
 
 
-
+  final List<Color> colors = [
+    Color.fromARGB(255, 202, 211, 211),
+    Color.fromARGB(255, 0, 173, 167),
+    Color.fromARGB(255, 139, 208, 106),
+    Color.fromARGB(255, 28, 31, 31),
+    Color.fromARGB(255, 255, 255, 255),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -47,21 +44,16 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
           height: double.infinity,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: _controller.appConstants.white,
-          ),
+              //color: Colors.green,
+              ),
           child: SingleChildScrollView(
             child: Container(
-              constraints:
-              BoxConstraints(minHeight: MediaQuery.of(context).size.height ),
               //color: Colors.red,
-              //alignment: Alignment.bottomCenter,
+              alignment: Alignment.bottomCenter,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _praeferenzen(),
-                  _fahrzeug(),
+                  Container(),
                   _fahrtHinzufuegen(),
-                  //SizedBox(height: 80,),
                 ],
               ),
             ),
@@ -71,221 +63,16 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
     );
   }
 
-  Padding _praeferenzen() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Container(
-        width: double.infinity,
-        margin: EdgeInsets.fromLTRB(0, 130, 0, 10),
-        padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-        decoration: BoxDecoration(
-          color: _controller.appConstants.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 4,
-              blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
-        ),
-        //color: Colors.yellow,
-        child: Column(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
-                  child: Text(
-                    'Präferenzen',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    //textAlign: TextAlign.left,
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  width: double.infinity,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                        decoration: BoxDecoration(
-                          color: _controller.appConstants.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 4,
-                              blurRadius: 7,
-                              offset: Offset(0, 3), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: Icon(Icons.smoking_rooms),
-                      ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                        decoration: BoxDecoration(
-                          color: _controller.appConstants.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 4,
-                              blurRadius: 7,
-                              offset: Offset(0, 3), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: Icon(Icons.volume_up),
-                      ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                        decoration: BoxDecoration(
-                          color: _controller.appConstants.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 4,
-                              blurRadius: 7,
-                              offset: Offset(0, 3), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: Icon(Icons.pets),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Padding _fahrzeug() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Container(
-        width: double.infinity,
-        margin: EdgeInsets.fromLTRB(0, 10, 0, 20),
-        padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-        decoration: BoxDecoration(
-          color: _controller.appConstants.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 4,
-              blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
-        ),
-        //color: Colors.yellow,
-        child: Column(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
-                  child: Text(
-                    'Fahrzeuge',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    //textAlign: TextAlign.left,
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  width: double.infinity,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                        decoration: BoxDecoration(
-                          color: _controller.appConstants.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 4,
-                              blurRadius: 7,
-                              offset: Offset(0, 3), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          children: [
-                            Icon(Icons.directions_car),
-                            Text('Opel Corsa'),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                        decoration: BoxDecoration(
-                          color: _controller.appConstants.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 4,
-                              blurRadius: 7,
-                              offset: Offset(0, 3), // changes position of shadow
-                            ),
-                          ],
-                        ),
-
-                        child: Row(
-                          children: [
-                            Icon(Icons.add),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   Container _fahrtHinzufuegen() {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: colors[4],
+        color: colors[0],
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 4,
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 3,
             blurRadius: 7,
             offset: Offset(0, 3), // changes position of shadow
           ),
@@ -294,12 +81,10 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
       //child: _oldForm(),
       child: Column(
         children: [
-          //SizedBox(height: 20,),
-          Container(
-            margin: EdgeInsets.fromLTRB(10, 20, 10, 100),
-            //color: Colors.blue,
-            child: _buildForm(context),
+          SizedBox(
+            height: 100,
           ),
+          _buildForm(context),
         ],
       ),
     );
@@ -324,7 +109,6 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
       skipDisabled: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           CustomFormTextField(
             formKey: formKey,
@@ -360,21 +144,19 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
                   value: "2023-02-22",
                 ),
                 CustomFormTextField(
-                    formKey: formKey,
-                    width: 140,
-                    name: "zeit",
-                    labelText: "Uhrzeit",
-                    value: "12:30:42"
+                  formKey: formKey,
+                  width: 140,
+                  name: "zeit",
+                  labelText: "Uhrzeit",
+                  value: "12:30:42"
                 ),
               ],
             ),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 40),
           CustomFormSubmitButton(
             formKey: formKey,
-            text: "Hinzugügen",
-            textColor: _controller.appConstants.white,
-            color: _controller.appConstants.turquoise,
+            text: "Speichern",
             callback: () async {
               String standort = formKey.currentState!.value['standort'];
               String ziel = formKey.currentState!.value['ziel'];
@@ -395,7 +177,7 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
               print (angebot);
 
               bool result =
-              await service.createAngebotById(id: 0, data: angebot);
+                  await service.createAngebotById(id: 0, data: angebot);
 
               print(result);
 
@@ -403,11 +185,10 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
               _controller.change();
             },
           ),
-          //SizedBox(height: 20),
+          SizedBox(height: 40),
+          Container(),
         ],
       ),
     );
   }
-
-
 }

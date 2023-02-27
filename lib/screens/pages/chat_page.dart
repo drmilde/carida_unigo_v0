@@ -5,7 +5,7 @@ import '../../services/osrm/model/osrm.dart';
 import '../../services/osrm/model/osrm_service_provider.dart';
 import '../profil_screen.dart';
 import '../prototyp_dummies/dummy_login_screen.dart';
-import '../prototyp_dummies/osrm/dummy_osrm_screen.dart';
+import '../prototyp_dummies/osrm/osrm_list_screen.dart';
 import '../widgets/custom_round_button.dart';
 import '../widgets/custom_dialog_widget.dart';
 
