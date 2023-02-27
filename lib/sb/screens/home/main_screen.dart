@@ -35,7 +35,7 @@ class _MainScreenState extends State<MainScreen> {
     'Fahrt suchen',
     '',
     'Fahrt hinzufügen',
-    'Chats',
+    'Nachrichten',
   ];
   //final String t = 'hallo';
 
