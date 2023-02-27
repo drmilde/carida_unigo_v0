@@ -97,6 +97,8 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
                   child: Text(
                     'Präferenzen',
                     style: TextStyle(
@@ -106,9 +108,8 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
                     //textAlign: TextAlign.left,
                   ),
                 ),
-                SizedBox(height:8),
                 Container(
-                  margin: EdgeInsets.fromLTRB(0, 19, 0, 10),
+                  margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                   width: double.infinity,
                   child: Row(
@@ -202,6 +203,8 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
                   child: Text(
                     'Fahrzeuge',
                     style: TextStyle(
@@ -211,9 +214,8 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
                     //textAlign: TextAlign.left,
                   ),
                 ),
-                SizedBox(height:8),
                 Container(
-                  margin: EdgeInsets.fromLTRB(0, 19, 0, 10),
+                  margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                   width: double.infinity,
                   child: Row(
