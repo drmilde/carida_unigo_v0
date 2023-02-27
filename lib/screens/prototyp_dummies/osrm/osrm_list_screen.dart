@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
+import 'package:projects/sb/screens/maps/polyline_screen.dart';
+import 'package:projects/screens/widgets/custom_round_button.dart';
 
 import '../../../../services/controller/ug_state_controller.dart';
 import '../../../../services/osrm/model/osrm.dart' as osrm;
@@ -52,6 +54,21 @@ class _OsrmListScreenState extends State<OsrmListScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _buildForm(context),
+              CustomRoundButton(
+                height: 24,
+                text: ("karte"),
+                callback: () {
+                  List<osrm.Step> steps = osrmRoute.getSteps();
+                  print(steps);
+
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PolylineScreen(steps: steps),
+                      ));
+                },
+              ),
+              SizedBox(height: 8),
               Obx(
                 () {
                   int _change = _controller.somethingChanged.value;
