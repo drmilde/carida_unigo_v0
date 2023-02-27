@@ -38,30 +38,22 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
+    return SafeArea(
+      child: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: _controller.appConstants.white,
+        ),
         child: Container(
-          height: double.infinity,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: _controller.appConstants.white,
-          ),
-          child: SingleChildScrollView(
-            child: Container(
-              constraints:
-                  BoxConstraints(minHeight: MediaQuery.of(context).size.height),
-              //color: Colors.red,
-              //alignment: Alignment.bottomCenter,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _praeferenzen(),
-                  _fahrzeug(),
-                  _fahrtHinzufuegen(),
-                  //SizedBox(height: 80,),
-                ],
-              ),
-            ),
+          child: Column(
+            //mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _praeferenzen(),
+              _fahrzeug(),
+              _fahrtHinzufuegen(),
+              //SizedBox(height: 80,),
+            ],
           ),
         ),
       ),
@@ -73,7 +65,6 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Container(
         width: double.infinity,
-        margin: EdgeInsets.fromLTRB(0, 130, 0, 10),
         padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
         decoration: BoxDecoration(
           color: _controller.appConstants.white,
@@ -388,7 +379,7 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
               String datum = formKey.currentState!.value['datum'];
               String zeit = formKey.currentState!.value['zeit'];
 
-              print (standort);
+              print(standort);
 
               Angebot angebot = Angebot(
                 id: 0,

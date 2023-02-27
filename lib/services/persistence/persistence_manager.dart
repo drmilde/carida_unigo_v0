@@ -8,16 +8,16 @@ class PersitenceManager {
   Future<UserConfig> loadStore() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String json = preferences.getString(store_key) ??
-        appconfigToJson(
+        userConfigToJson(
           UserConfig.empty(),
         );
-    UserConfig config = appconfigFromJson(json);
+    UserConfig config = userConfigFromJson(json);
     return config;
   }
 
   Future<bool> saveStore(UserConfig config) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    String json = appconfigToJson(config);
+    String json = userConfigToJson(config);
     preferences.setString(store_key, json);
     return true;
   }

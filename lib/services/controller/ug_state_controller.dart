@@ -10,7 +10,7 @@ class UGStateController extends GetxController {
   var selectedPage = 0.obs; // selected Pag in BottomNavigationBar
 
   late UserConfig userConfig;
-  bool appConfigLoaded = false; // wenn geladen/wenn gespeichert
+  bool userConfigLoaded = false; // wenn geladen/wenn gespeichert
 
   AppConstants appConstants = AppConstants();
 
@@ -27,6 +27,7 @@ class UGStateController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    userConfig = UserConfig.empty();
     //loadStore();
   }
 
@@ -39,16 +40,16 @@ class UGStateController extends GetxController {
   /* persistence */
 
   void loadStore() {
-    appConfigLoaded = false;
+    userConfigLoaded = false;
     persistenceManager.loadStore().then((value) {
       userConfig = value;
-      appConfigLoaded = true;
+      userConfigLoaded = true;
     });
   }
 
   void saveStore() {
     persistenceManager
         .saveStore(userConfig)
-        .then((value) => appConfigLoaded = value);
+        .then((value) => userConfigLoaded = value);
   }
 }
