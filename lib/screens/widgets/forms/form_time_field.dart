@@ -16,12 +16,12 @@ class CustomFormTimeField extends StatelessWidget {
 
   CustomFormTimeField(
       {required this.formKey,
-        this.name = "textFieldName",
-        this.labelText = "",
-        required this.value,
-        this.width = 300,
-        this.showBorder = false,
-        Key? key})
+      this.name = "textFieldName",
+      this.labelText = "",
+      required this.value,
+      this.width = 300,
+      this.showBorder = false,
+      Key? key})
       : super(key: key);
 
   @override
@@ -34,57 +34,59 @@ class CustomFormTimeField extends StatelessWidget {
     required String labelText,
     required DateTime value,
   }) {
+    FormBuilderDateTimePicker dtpicker = FormBuilderDateTimePicker(
+      autovalidateMode: AutovalidateMode.disabled,
+      name: name,
+      inputType: InputType.time,
+      cursorColor: Colors.black,
+      decoration: InputDecoration(
+        hintText: labelText,
+        labelText: labelText,
+        filled: true,
+        fillColor: Colors.white,
+        focusColor: Colors.white,
+        hoverColor: Colors.white,
+        errorStyle: TextStyle(
+          color: Colors.black,
+          fontSize: 10,
+        ),
+        labelStyle: TextStyle(
+          color: Colors.black,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: showBorder
+              ? BorderSide(
+                  width: 2,
+                  color: _controller.appConstants.turquoise,
+                )
+              : BorderSide.none,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        border: OutlineInputBorder(
+          borderSide: showBorder
+              ? BorderSide(
+                  width: 2,
+                )
+              : BorderSide.none,
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+      onChanged: (val) {
+        // TODO do something sensible here
+      },
+      initialValue: value,
+      // valueTransformer: (text) => num.tryParse(text),
+      validator: FormBuilderValidators.compose([
+        FormBuilderValidators.required(),
+      ]),
+      // initialValue: '12',
+      keyboardType: TextInputType.text,
+      textInputAction: TextInputAction.next,
+    );
+
     return Container(
       width: width,
-      child: FormBuilderDateTimePicker (
-        autovalidateMode: AutovalidateMode.disabled,
-        name: name,
-        inputType: InputType.time,
-        cursorColor: Colors.black,
-        decoration: InputDecoration(
-          hintText: labelText,
-          labelText: labelText,
-          filled: true,
-          fillColor: Colors.white,
-          focusColor: Colors.white,
-          hoverColor: Colors.white,
-          errorStyle: TextStyle(
-            color: Colors.black,
-            fontSize: 10,
-          ),
-          labelStyle: TextStyle(
-            color: Colors.black,
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: showBorder
-                ? BorderSide(
-              width: 2,
-              color: _controller.appConstants.turquoise,
-            )
-                : BorderSide.none,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          border: OutlineInputBorder(
-            borderSide: showBorder
-                ? BorderSide(
-              width: 2,
-            )
-                : BorderSide.none,
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-        onChanged: (val) {
-          // TODO do something sensible here
-        },
-        initialValue: value,
-        // valueTransformer: (text) => num.tryParse(text),
-        validator: FormBuilderValidators.compose([
-          FormBuilderValidators.required(),
-        ]),
-        // initialValue: '12',
-        keyboardType: TextInputType.text,
-        textInputAction: TextInputAction.next,
-      ),
+      child: dtpicker,
     );
   }
 }
