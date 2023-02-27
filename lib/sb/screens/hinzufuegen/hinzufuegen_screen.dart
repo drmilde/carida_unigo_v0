@@ -372,7 +372,7 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
           SizedBox(height: 20),
           CustomFormSubmitButton(
             formKey: formKey,
-            text: "Suchen",
+            text: "Hinzugügen",
             textColor: _controller.appConstants.white,
             color: _controller.appConstants.turquoise,
             callback: () async {

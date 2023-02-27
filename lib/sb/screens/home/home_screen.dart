@@ -307,7 +307,7 @@ class _HomeScreenState extends State<HomeScreen> {
             width: double.infinity,
             margin: EdgeInsets.fromLTRB(60, 10, 60, 20),
             child: CustomRoundButton(
-              text: "Anmelden",
+              text: "Starten",
               textColor: _controller.appConstants.white,
               color: _controller.appConstants.turquoise,
               callback: () {
