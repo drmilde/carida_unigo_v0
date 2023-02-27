@@ -59,78 +59,91 @@ class _HomeScreenState extends State<HomeScreen> {
           decoration: BoxDecoration(
               //color: Colors.green,
               ),
-          child: SingleChildScrollView(
-            child: Column(
-              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _profilePicture(image),
-                _name(),
-                _ratingBar(),
-                Container(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: _erfolge(erfolge[0], erfolge[1]),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: _erfolge(erfolge[2], erfolge[3]),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: _erfolge(erfolge[4], erfolge[5]),
-                      ),
-                    ],
-                  ),
-                ),
-                /*Container(
-                  width: double.infinity,
-                  height: 1,
-                  color: colors[1].withOpacity(0.3),
-                  margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                ),*/
-                Container(
-                  width: double.infinity,
-                  //margin: EdgeInsets.fromLTRB(20, 10, 20, 20),
-                  decoration: BoxDecoration(
-                    color: colors[4],
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 3,
-                        blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  //color: Colors.yellow,
-                  child: Column(children: [
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20, 40, 20, 20),
-                      child: Text(
-                        'Deine nächste Fahrt:',
-                        style: TextStyle(fontSize: 24),
-                      ),
+          child: Column(
+            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _profilePicture(image),
+              _spacerLarge(),
+              _name(),
+              _spacerLarge(),
+              _ratingBar(),
+              _spacerLarge(),
+              _statistics(),
+              _spacerLarge(),
+              Container(
+                width: double.infinity,
+                //margin: EdgeInsets.fromLTRB(20, 10, 20, 20),
+                decoration: BoxDecoration(
+                  color: colors[4],
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 3,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
                     ),
-                    _naechsteFahrt(fahrtDaten[0],fahrtDaten[1],fahrtDaten[2]),
-                    //_buchungenButton(),
-                  ]),
+                  ],
                 ),
-              ],
-            ),
+                //color: Colors.yellow,
+                child: Column(children: [
+                  _spacerSmall(),
+                  Container(
+                    //margin: EdgeInsets.fromLTRB(20, 40, 20, 20),
+                    child: Text(
+                      'Deine nächste Fahrt:',
+                      style: TextStyle(fontSize: 24),
+                    ),
+                  ),
+                  _spacerLarge(),
+                  _naechsteFahrt(fahrtDaten[0],fahrtDaten[1],fahrtDaten[2]),
+                  //_buchungenButton(),
+                ]),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 
+  Container _statistics() {
+    return Container(
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: _erfolge(erfolge[0], erfolge[1]),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: _erfolge(erfolge[2], erfolge[3]),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: _erfolge(erfolge[4], erfolge[5]),
+                  ),
+                ],
+              ),
+            );
+  }
+
+  Widget _spacerLarge() {
+    return SizedBox(
+              height: 32,
+            );
+  }
+  Widget _spacerSmall() {
+    return SizedBox(
+              height: 16,
+            );
+  }
+
   Container _buchungenButton() {
     return Container(
       height: 60,
       width: double.infinity,
-      margin: EdgeInsets.fromLTRB(60, 40, 60, 140),
+      //margin: EdgeInsets.fromLTRB(60, 40, 60, 140),
       decoration: BoxDecoration(
         color: colors[1],
         borderRadius: BorderRadius.circular(20),
@@ -157,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Container _ratingBar() {
     return Container(
-      margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
+      //margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
       child: RatingBar.builder(
         initialRating: 3,
         minRating: 1,
@@ -178,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Container _name() {
     return Container(
-      margin: EdgeInsets.fromLTRB(25, 15, 25, 10),
+      //margin: EdgeInsets.fromLTRB(25, 15, 25, 10),
       width: double.infinity,
       //color: Colors.pink,
       child: Text(
@@ -194,7 +207,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Container _erfolge(String oben, String unten) {
     return Container(
-      margin: EdgeInsets.fromLTRB(25, 10, 25, 30),
+      //margin: EdgeInsets.fromLTRB(25, 10, 25, 30),
       child: Column(
         children: [
           Text(
@@ -217,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Container _profilePicture(String image) {
     return Container(
-      margin: EdgeInsets.fromLTRB(25, 90, 25, 0),
+      //margin: EdgeInsets.fromLTRB(25, 90, 25, 0),
       height: 150,
       width: 150,
       /*decoration: BoxDecoration(
@@ -246,66 +259,23 @@ class _HomeScreenState extends State<HomeScreen> {
   Container _naechsteFahrt(String start, String ziel, String time) {
     return Container(
       //color: Colors.red,
-      margin: EdgeInsets.fromLTRB(25, 0, 25, 120),
-      padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+      //margin: EdgeInsets.fromLTRB(25, 0, 25, 120),
+      //padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
       width: double.infinity,
       child: Column(
         children: [
-          Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Container(
-                  child: Column(
-                    children: [
-                      Icon(
-                        Icons.location_pin,
-                        size: 60,
-                        color: colors[3],
-                      ),
-                      Text(start),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  child: Icon(
-                    Icons.arrow_forward_outlined,
-                    size: 60,
-                    color: colors[3],
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  child: Column(
-                    children: [
-                      Icon(
-                        Icons.location_pin,
-                        size: 60,
-                        color: colors[3],
-                      ),
-                      Text(ziel),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+          _displayFahrtInfo(start, ziel),
+          _spacerLarge(),
           Container(
-            margin: EdgeInsets.fromLTRB(20, 20, 20, 20),
+            //margin: EdgeInsets.fromLTRB(20, 20, 20, 20),
             child: Text(
               time,
               style: TextStyle(fontSize: 18),
             ),
           ),
-          Container(
-            //color:Colors.blue,
-            width: double.infinity,
-            margin: EdgeInsets.fromLTRB(60, 10, 60, 20),
+          _spacerLarge(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 0),
             child: CustomRoundButton(
               text: "Starten",
               textColor: _controller.appConstants.white,
@@ -316,8 +286,56 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
           ),
+          _spacerLarge(),
         ],
       ),
     );
+  }
+
+  Row _displayFahrtInfo(String start, String ziel) {
+    return Row(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Container(
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.location_pin,
+                      size: 60,
+                      color: colors[3],
+                    ),
+                    Text(start),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                child: Icon(
+                  Icons.arrow_forward_outlined,
+                  size: 60,
+                  color: colors[3],
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.location_pin,
+                      size: 60,
+                      color: colors[3],
+                    ),
+                    Text(ziel),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        );
   }
 }

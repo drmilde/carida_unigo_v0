@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:projects/screens/widgets/custom_popup_widget.dart';
 import 'package:projects/services/controller/ug_state_controller.dart';
 import 'package:projects/services/extensions/unigo_service_angebot_extension.dart';
 
@@ -23,6 +25,8 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
   UGStateController _controller = Get.find();
   UniGoService service = UniGoService();
   var formKey = GlobalKey<FormBuilderState>();
+
+  late CustomPopUp dialog;
 
   List<Color> colors = [];
 
@@ -370,10 +374,9 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
           ),
           SizedBox(height: 21),
 
-
           CustomFormSubmitButton(
             formKey: formKey,
-            text: "Hinzugügen",
+            text: "Hinzufügen",
             textColor: _controller.appConstants.white,
             color: _controller.appConstants.turquoise,
             callback: () async {
@@ -398,11 +401,30 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
                 hasprofile: [],
               );
 
-
               bool result =
                   await service.createAngebotById(id: 0, data: angebot);
 
               print(result);
+
+              if (result) {
+                dialog = CustomPopUp(
+                  title: "Fahrt hinzugefügt",
+                  content: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Container(
+                      child: Text(
+                        "Ihre Fahrt wurde erfolgreich hinzugefügt.",
+                        style: GoogleFonts.inter(
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ),
+                  button1Text: "ok",
+                );
+
+                var _ = dialog.showCustomDialog(context);
+              }
 
               // TODO es wurde etwas verdatändert
               _controller.change();
