@@ -5,8 +5,10 @@ import 'package:get/get.dart';
 import 'package:projects/services/controller/ug_state_controller.dart';
 import 'package:projects/services/extensions/unigo_service_angebot_extension.dart';
 
+import '../../../screens/widgets/forms/form_date_field.dart';
 import '../../../screens/widgets/forms/form_submit_button.dart';
 import '../../../screens/widgets/forms/form_text_field.dart';
+import '../../../screens/widgets/forms/form_time_field.dart';
 import '../../../services/model/angebot.dart';
 import '../../../services/unigo_service.dart';
 
@@ -347,20 +349,20 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomFormTextField(
+                CustomFormDateField(
                   formKey: formKey,
                   width: 140,
                   name: "datum",
                   labelText: "Datum",
-                  value: "2023-02-22",
+                  value: DateTime.now(),
                   showBorder: true,
                 ),
-                CustomFormTextField(
+                CustomFormTimeField(
                   formKey: formKey,
                   width: 140,
                   name: "zeit",
                   labelText: "Uhrzeit",
-                  value: "12:30:42",
+                  value: DateTime.now(),
                   showBorder: true,
                 ),
               ],
@@ -376,22 +378,24 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
               String standort = formKey.currentState!.value['standort'];
               String ziel = formKey.currentState!.value['ziel'];
               String freiplaetze = formKey.currentState!.value['freiplaetze'];
-              String datum = formKey.currentState!.value['datum'];
-              String zeit = formKey.currentState!.value['zeit'];
+              DateTime datum = formKey.currentState!.value['datum'];
+              DateTime zeit = formKey.currentState!.value['zeit'];
 
               print(standort);
 
+              String zs = zeit.toString();
+              zs = zs.substring(zs.indexOf(" ")).trim();
+
               Angebot angebot = Angebot(
                 id: 0,
-                datum: DateTime.parse("${datum}"),
-                uhrzeit: "${zeit}",
-                freiplaetze: 0,
+                datum: datum,
+                uhrzeit: zs,
+                freiplaetze: int.parse(freiplaetze),
                 startort: "${standort}",
                 zielort: "${ziel}",
                 hasprofile: [],
               );
 
-              print(angebot);
 
               bool result =
                   await service.createAngebotById(id: 0, data: angebot);

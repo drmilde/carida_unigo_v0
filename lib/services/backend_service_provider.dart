@@ -1,5 +1,6 @@
 import 'dart:convert' show utf8;
 
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class BackendServiceProvider {
@@ -77,6 +78,10 @@ class BackendServiceProvider {
     );
     if (resonse.statusCode == 201) {
       return true as RT;
+    }
+    if (resonse.statusCode == 400) {
+      print (json);
+      return false as RT;
     }
     return false as RT;
   }
