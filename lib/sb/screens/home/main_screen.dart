@@ -37,7 +37,7 @@ class _MainScreenState extends State<MainScreen> {
     'Fahrt hinzufügen',
     'Chats',
   ];
-  final String t = 'hallo';
+  //final String t = 'hallo';
 
   @override
   Widget build(BuildContext context) {

@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:projects/screens/widgets/custom_round_button.dart';
+import 'package:projects/services/controller/ug_state_controller.dart';
+import '../../../services/unigo_service.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+
+  HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<Color> colors = [
-    Color.fromARGB(255, 202, 211, 211),
-    Color.fromARGB(255, 0, 173, 167),
-    Color.fromARGB(255, 139, 208, 106),
-    Color.fromARGB(255, 28, 31, 31),
-    Color.fromARGB(255, 255, 255, 255),
+  UGStateController _controller = Get.find();
+  UniGoService service = UniGoService();
+  //var formKey = GlobalKey<FormBuilderState>();
+  List<Color> colors = [
   ];
 
   final List<String> erfolge = [
@@ -32,8 +35,20 @@ class _HomeScreenState extends State<HomeScreen> {
     '26.03.2023  08:30 Uhr',
   ];
 
-  final String image = 'assets/images/profilbild.png';
+  final String image = 'assets/avatars/avatar0280.png';
   @override
+  void initState() {
+    // TODO: implement initState
+    colors = [
+      _controller.appConstants.light_grey,
+      _controller.appConstants.turquoise,
+      _controller.appConstants.light_green,
+      _controller.appConstants.dark_grey,
+      _controller.appConstants.white,
+    ];
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       //backgroundColor: Colors.red,
@@ -46,6 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
           child: SingleChildScrollView(
             child: Column(
+              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _profilePicture(image),
                 _name(),
@@ -68,28 +84,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-                Container(
+                /*Container(
                   width: double.infinity,
                   height: 1,
-                  color: colors[1],
+                  color: colors[1].withOpacity(0.3),
                   margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(20, 10, 20, 20),
-                  child: Text(
-                    'Deine nächste fahrt:',
-                    style: TextStyle(fontSize: 24),
-                  ),
-                ),
+                ),*/
                 Container(
                   width: double.infinity,
                   //margin: EdgeInsets.fromLTRB(20, 10, 20, 20),
                   decoration: BoxDecoration(
-                    color: colors[0],
+                    color: colors[4],
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.4),
+                        color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 3,
                         blurRadius: 7,
                         offset: Offset(0, 3), // changes position of shadow
@@ -98,6 +107,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   //color: Colors.yellow,
                   child: Column(children: [
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20, 40, 20, 20),
+                      child: Text(
+                        'Deine nächste Fahrt:',
+                        style: TextStyle(fontSize: 24),
+                      ),
+                    ),
                     _naechsteFahrt(fahrtDaten[0],fahrtDaten[1],fahrtDaten[2]),
                     //_buchungenButton(),
                   ]),
@@ -204,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
       margin: EdgeInsets.fromLTRB(25, 90, 25, 0),
       height: 150,
       width: 150,
-      decoration: BoxDecoration(
+      /*decoration: BoxDecoration(
         color: colors[0],
         borderRadius: BorderRadius.circular(80),
         boxShadow: [
@@ -215,10 +231,11 @@ class _HomeScreenState extends State<HomeScreen> {
             offset: Offset(0, 3), // changes position of shadow
           ),
         ],
-      ),
+      ),*/
       child: Center(
-        child: Container(
-          padding: EdgeInsets.fromLTRB(30, 30, 30, 30),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(80),
+          //padding: EdgeInsets.fromLTRB(30, 30, 30, 30),
           child:
               Image.asset(image, fit: BoxFit.contain),
         ),
@@ -229,14 +246,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Container _naechsteFahrt(String start, String ziel, String time) {
     return Container(
       //color: Colors.red,
-      margin: EdgeInsets.fromLTRB(25, 0, 25, 220),
+      margin: EdgeInsets.fromLTRB(25, 0, 25, 120),
       padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
       width: double.infinity,
       child: Column(
         children: [
-          SizedBox(
-            height: 20,
-          ),
           Row(
             children: [
               Expanded(
@@ -247,7 +261,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Icon(
                         Icons.location_pin,
                         size: 60,
-                        color: colors[2],
+                        color: colors[3],
                       ),
                       Text(start),
                     ],
@@ -272,7 +286,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Icon(
                         Icons.location_pin,
                         size: 60,
-                        color: colors[2],
+                        color: colors[3],
                       ),
                       Text(ziel),
                     ],
@@ -292,16 +306,14 @@ class _HomeScreenState extends State<HomeScreen> {
             //color:Colors.blue,
             width: double.infinity,
             margin: EdgeInsets.fromLTRB(60, 10, 60, 20),
-            child: ElevatedButton(
-              onPressed: () {
-
+            child: CustomRoundButton(
+              text: "Anmelden",
+              textColor: _controller.appConstants.white,
+              color: _controller.appConstants.turquoise,
+              callback: () {
+                /*Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => AnmeldenScreen()));*/
               },
-              child: Text(
-                'Starten',
-                style: TextStyle(
-                  color: colors[4],
-                ),
-              ),
             ),
           ),
         ],

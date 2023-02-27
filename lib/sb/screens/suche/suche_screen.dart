@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:get/get.dart';
+import 'package:projects/services/controller/ug_state_controller.dart';
+import 'package:projects/services/extensions/unigo_service_angebot_extension.dart';
+
+import '../../../screens/widgets/forms/form_submit_button.dart';
+import '../../../screens/widgets/forms/form_text_field.dart';
+import '../../../services/model/angebot.dart';
+import '../../../services/unigo_service.dart';
 
 class SuchenScreen extends StatefulWidget {
   const SuchenScreen({Key? key}) : super(key: key);
@@ -9,19 +18,26 @@ class SuchenScreen extends StatefulWidget {
 }
 
 class _SuchenScreenState extends State<SuchenScreen> {
+  UGStateController _controller = Get.find();
+  UniGoService service = UniGoService();
+  var formKey = GlobalKey<FormBuilderState>();
+
+  List<Color> colors = [];
+
   @override
   void initState() {
+    colors = [
+      _controller.appConstants.light_grey,
+      _controller.appConstants.turquoise,
+      _controller.appConstants.light_green,
+      _controller.appConstants.dark_grey,
+      _controller.appConstants.white,
+    ];
     super.initState();
   }
 
-  final _formKey = GlobalKey<FormState>();
-  final List<Color> colors = [
-    Color.fromARGB(255, 202, 211, 211),
-    Color.fromARGB(255, 0, 173, 167),
-    Color.fromARGB(255, 139, 208, 106),
-    Color.fromARGB(255, 28, 31, 31),
-    Color.fromARGB(255, 255, 255, 255),
-  ];
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +47,27 @@ class _SuchenScreenState extends State<SuchenScreen> {
           height: double.infinity,
           width: double.infinity,
           decoration: BoxDecoration(
-              //color: Colors.green,
-              ),
+            color: _controller.appConstants.white,
+          ),
           child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-
-                ),
-                _fahrtSuchen(),
-              ],
+            child: Container(
+              constraints:
+              BoxConstraints(minHeight: MediaQuery.of(context).size.height ),
+              //color: Colors.red,
+              //alignment: Alignment.bottomCenter,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: EdgeInsets.fromLTRB(20, 100, 20, 40),
+                    width: 250,
+                    height: 250,
+                    color: Colors.blue,
+                  ),
+                  _fahrtHinzufuegen(),
+                  //SizedBox(height: 80,),
+                ],
+              ),
             ),
           ),
         ),
@@ -48,120 +75,33 @@ class _SuchenScreenState extends State<SuchenScreen> {
     );
   }
 
-  Container _fahrtSuchen() {
+  Container _fahrtHinzufuegen() {
     return Container(
-      margin: EdgeInsets.fromLTRB(40, 200, 40, 110),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: colors[3],
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.1),
-                        spreadRadius: 3,
-                        blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: Form(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
-                      child: Column(
-                        //mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Material(
-                            elevation: 2.0,
-                            shadowColor: Colors.grey,
-                            child: TextFormField(
-                              style: TextStyle(color: colors[3]),
-                              keyboardType: TextInputType.streetAddress,
-                              autocorrect: false,
-                              decoration: InputDecoration(
-                                labelText: 'Standort',
-                                border: InputBorder.none,
-                                filled: true,
-                                fillColor: colors[4],
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 20),
-                          Material(
-                            elevation: 2.0,
-                            shadowColor: Colors.grey,
-                            child: TextFormField(
-                              style: TextStyle(color: colors[3]),
-                              keyboardType: TextInputType.streetAddress,
-                              decoration: InputDecoration(
-                                labelText: 'Ziel',
-                                border: InputBorder.none,
-                                filled: true,
-                                fillColor: colors[4],
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 20),
-                          Row(
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Material(
-                                  elevation: 2.0,
-                                  shadowColor: Colors.grey,
-                                  child: TextFormField(
-                                    style: TextStyle(color: colors[3]),
-                                    keyboardType: TextInputType.datetime,
-                                    decoration: InputDecoration(
-                                      labelText: 'Datum',
-                                      border: InputBorder.none,
-                                      filled: true,
-                                      fillColor: colors[4],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Material(
-                                  elevation: 2.0,
-                                  shadowColor: Colors.grey,
-                                  child: TextFormField(
-                                    style: TextStyle(color: colors[3]),
-                                    keyboardType: TextInputType.datetime,
-                                    decoration: InputDecoration(
-                                      labelText: 'Uhrzeit',
-                                      border: InputBorder.none,
-                                      filled: true,
-                                      fillColor: colors[4],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 40),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                textStyle: TextStyle(color: Colors.white)),
-                            onPressed: () {
-                              // Wenn alle Validatoren der Felder des Formulars gültig sind.
-                              if (_formKey.currentState!.validate()) {
-                                print(
-                                    "Formular ist gültig und kann verarbeitet werden");
-                              } else {
-                                print("Formular ist nicht gültig");
-                              }
-                            },
-                            child: Text('Suchen'),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: colors[4],
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 4,
+            blurRadius: 7,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+      //child: _oldForm(),
+      child: Column(
+        children: [
+          //SizedBox(height: 20,),
+          Container(
+            margin: EdgeInsets.fromLTRB(10, 20, 10, 100),
+            //color: Colors.blue,
+            child: _buildForm(context),
+          ),
+        ],
+      ),
+    );
   }
 
   String? zahlValidator(value) {
@@ -170,5 +110,94 @@ class _SuchenScreenState extends State<SuchenScreen> {
       return 'Es sind nur ungerade Zahlen erlaubt';
     }
     return null;
+  }
+
+  Widget _buildForm(BuildContext context) {
+    return FormBuilder(
+      key: formKey,
+      // enabled: false,
+      onChanged: () {
+        formKey.currentState!.save();
+      },
+      autovalidateMode: AutovalidateMode.disabled,
+      skipDisabled: true,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          CustomFormTextField(
+            formKey: formKey,
+            name: "standort",
+            labelText: "Standort",
+            value: "Hünfeld",
+          ),
+          const SizedBox(height: 16),
+          CustomFormTextField(
+            formKey: formKey,
+            name: "ziel",
+            labelText: "Ziel",
+            value: "Hochschule Fulda",
+          ),
+          const SizedBox(height: 16),
+          Container(
+            width: 300,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomFormTextField(
+                  formKey: formKey,
+                  width: 140,
+                  name: "datum",
+                  labelText: "Datum",
+                  value: "2023-02-22",
+                ),
+                CustomFormTextField(
+                    formKey: formKey,
+                    width: 140,
+                    name: "zeit",
+                    labelText: "Uhrzeit",
+                    value: "12:30:42"
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 20),
+          CustomFormSubmitButton(
+            formKey: formKey,
+            text: "Suchen",
+            textColor: _controller.appConstants.white,
+            color: _controller.appConstants.turquoise,
+            callback: () async {
+              String standort = formKey.currentState!.value['standort'];
+              String ziel = formKey.currentState!.value['ziel'];
+              String freiplaetze = formKey.currentState!.value['freiplaetze'];
+              String datum = formKey.currentState!.value['datum'];
+              String zeit = formKey.currentState!.value['zeit'];
+
+              Angebot angebot = Angebot(
+                id: 0,
+                datum: DateTime.parse("${datum}"),
+                uhrzeit: "${zeit}",
+                freiplaetze: 0,
+                startort: "${standort}",
+                zielort: "${ziel}",
+                hasprofile: [],
+              );
+
+              print (angebot);
+
+              bool result =
+              await service.createAngebotById(id: 0, data: angebot);
+
+              print(result);
+
+              // TODO es wurde etwas verdatändert
+              _controller.change();
+            },
+          ),
+          //SizedBox(height: 20),
+        ],
+      ),
+    );
   }
 }

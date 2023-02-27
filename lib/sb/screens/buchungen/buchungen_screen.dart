@@ -52,11 +52,11 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
                   );
                 },
               ),
-              SizedBox(
+              /*SizedBox(
                 height: 16,
-              ),
+              ),*/
               SizedBox(
-                height: 16,
+                height: 30,
               ),
             ],
           ),
@@ -80,7 +80,7 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
               fahrt.zielort,
               fahrt.uhrzeit,
               _controller.appConstants.dark_grey,
-              istFahrer ? Icon(Icons.directions_car) : Icon(Icons.thumb_up),
+              istFahrer ? Icon(Icons.directions_car, color: _controller.appConstants.turquoise,) : Icon(Icons.thumb_up, color: _controller.appConstants.light_green,),
               Icon(Icons.delete),
             );
           },
@@ -101,15 +101,15 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Container(
         width: double.infinity,
-        margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
+        margin: EdgeInsets.fromLTRB(0, 10, 0, 20),
         padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
         decoration: BoxDecoration(
-          color: _controller.appConstants.light_grey,
+          color: _controller.appConstants.white,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 3,
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 4,
               blurRadius: 7,
               offset: Offset(0, 3), // changes position of shadow
             ),
