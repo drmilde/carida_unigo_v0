@@ -11,6 +11,7 @@ class CustomRoundButton extends StatelessWidget {
   double height = 55;
   Color? color;
   Color? textColor;
+  bool showShadow = false;
 
   CustomRoundButton(
       {required this.text,
@@ -19,6 +20,7 @@ class CustomRoundButton extends StatelessWidget {
       this.textColor,
       this.width = 220,
       this.height = 45,
+      this.showShadow = false,
       Key? key})
       : super(key: key) {
     color = color ?? _controller.appConstants.button_dark;
@@ -35,14 +37,16 @@ class CustomRoundButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(height / 5),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
-              spreadRadius: 2,
-              blurRadius: 7,
-              offset: Offset(0, 2), // changes position of shadow
-            ),
-          ],
+          boxShadow: showShadow
+              ? [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 4,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ]
+              : [],
         ),
         child: Center(
           child: Text(

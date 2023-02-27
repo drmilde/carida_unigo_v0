@@ -12,6 +12,7 @@ class CustomFormSubmitButton extends StatelessWidget {
   Color? color;
   Color? textColor;
   VoidCallback callback;
+  bool showShadow = false;
 
   CustomFormSubmitButton({
     required this.formKey,
@@ -19,6 +20,7 @@ class CustomFormSubmitButton extends StatelessWidget {
     this.text = "Submit",
     this.color,
     this.textColor,
+    this.showShadow = false,
     Key? key,
   }) : super(key: key);
 
@@ -33,6 +35,7 @@ class CustomFormSubmitButton extends StatelessWidget {
       text: text,
       textColor: textColor,
       color: color,
+      showShadow: showShadow,
       callback: () {
         if (formKey.currentState?.saveAndValidate() ?? false) {
           callback();

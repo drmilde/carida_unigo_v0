@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-
-import '../../prototyp_dummies/widgets/dummy_circular_icon_button_widget.dart';
+import 'package:get/get.dart';
+import 'package:projects/services/controller/ug_state_controller.dart';
 
 class CustomFormTextField extends StatelessWidget {
+  UGStateController _controller = Get.find();
   var formKey = GlobalKey<FormBuilderState>();
   String name = "textFieldName";
   String labelText = "";
@@ -54,11 +55,20 @@ class CustomFormTextField extends StatelessWidget {
             color: Colors.black,
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide.none,
+            borderSide: showBorder
+                ? BorderSide(
+                    width: 2,
+                    color: _controller.appConstants.turquoise,
+                  )
+                : BorderSide.none,
             borderRadius: BorderRadius.circular(10),
           ),
           border: OutlineInputBorder(
-            borderSide: showBorder? BorderSide(width: 2) : BorderSide.none,
+            borderSide: showBorder
+                ? BorderSide(
+                    width: 2,
+                  )
+                : BorderSide.none,
             borderRadius: BorderRadius.circular(10),
           ),
         ),

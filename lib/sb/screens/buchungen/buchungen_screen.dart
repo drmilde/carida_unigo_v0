@@ -30,36 +30,34 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: 16),
-              Obx(
-                () {
-                  int _change = _controller.somethingChanged.value;
-                  return FutureBuilder<bool>(
-                    future: _loadFahrten(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return _buildListView(snapshot);
-                      } else if (snapshot.hasError) {
-                        return Text('${snapshot.error}');
-                      }
-                      return CircularProgressIndicator();
-                    },
-                  );
-                },
-              ),
-              /*SizedBox(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: 16),
+            Obx(
+              () {
+                int _change = _controller.somethingChanged.value;
+                return FutureBuilder<bool>(
+                  future: _loadFahrten(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return _buildListView(snapshot);
+                    } else if (snapshot.hasError) {
+                      return Text('${snapshot.error}');
+                    }
+                    return CircularProgressIndicator();
+                  },
+                );
+              },
+            ),
+            /*SizedBox(
                 height: 16,
               ),*/
-              SizedBox(
-                height: 30,
-              ),
-            ],
-          ),
+            SizedBox(
+              height: 24,
+            ),
+          ],
         ),
       ),
     );
@@ -80,7 +78,15 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
               fahrt.zielort,
               fahrt.uhrzeit,
               _controller.appConstants.dark_grey,
-              istFahrer ? Icon(Icons.directions_car, color: _controller.appConstants.turquoise,) : Icon(Icons.thumb_up, color: _controller.appConstants.light_green,),
+              istFahrer
+                  ? Icon(
+                      Icons.directions_car,
+                      color: _controller.appConstants.turquoise,
+                    )
+                  : Icon(
+                      Icons.thumb_up,
+                      color: _controller.appConstants.light_green,
+                    ),
               Icon(Icons.delete),
             );
           },
@@ -134,9 +140,9 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
                         //textAlign: TextAlign.left,
                       ),
                     ),
-                    SizedBox(height:8),
+                    SizedBox(height: 8),
                     Icon(Icons.arrow_downward),
-                    SizedBox(height:8),
+                    SizedBox(height: 8),
                     Container(
                       child: Text(
                         ziel,

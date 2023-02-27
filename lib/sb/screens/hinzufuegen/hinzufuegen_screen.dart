@@ -36,9 +36,6 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
     super.initState();
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +49,7 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
           child: SingleChildScrollView(
             child: Container(
               constraints:
-              BoxConstraints(minHeight: MediaQuery.of(context).size.height ),
+                  BoxConstraints(minHeight: MediaQuery.of(context).size.height),
               //color: Colors.red,
               //alignment: Alignment.bottomCenter,
               child: Column(
@@ -126,7 +123,8 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
                               color: Colors.grey.withOpacity(0.5),
                               spreadRadius: 4,
                               blurRadius: 7,
-                              offset: Offset(0, 3), // changes position of shadow
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
                             ),
                           ],
                         ),
@@ -143,7 +141,8 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
                               color: Colors.grey.withOpacity(0.5),
                               spreadRadius: 4,
                               blurRadius: 7,
-                              offset: Offset(0, 3), // changes position of shadow
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
                             ),
                           ],
                         ),
@@ -160,7 +159,8 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
                               color: Colors.grey.withOpacity(0.5),
                               spreadRadius: 4,
                               blurRadius: 7,
-                              offset: Offset(0, 3), // changes position of shadow
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
                             ),
                           ],
                         ),
@@ -232,7 +232,8 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
                               color: Colors.grey.withOpacity(0.5),
                               spreadRadius: 4,
                               blurRadius: 7,
-                              offset: Offset(0, 3), // changes position of shadow
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
                             ),
                           ],
                         ),
@@ -254,11 +255,11 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
                               color: Colors.grey.withOpacity(0.5),
                               spreadRadius: 4,
                               blurRadius: 7,
-                              offset: Offset(0, 3), // changes position of shadow
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
                             ),
                           ],
                         ),
-
                         child: Row(
                           children: [
                             Icon(Icons.add),
@@ -331,6 +332,7 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
             name: "standort",
             labelText: "Standort",
             value: "Hünfeld",
+            showBorder: true,
           ),
           const SizedBox(height: 16),
           CustomFormTextField(
@@ -338,6 +340,7 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
             name: "ziel",
             labelText: "Ziel",
             value: "Hochschule Fulda",
+            showBorder: true,
           ),
           const SizedBox(height: 16),
           CustomFormTextField(
@@ -345,6 +348,7 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
             name: "freiplaetze",
             labelText: "Freiplätze",
             value: "2",
+            showBorder: true,
           ),
           const SizedBox(height: 16),
           Container(
@@ -358,13 +362,15 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
                   name: "datum",
                   labelText: "Datum",
                   value: "2023-02-22",
+                  showBorder: true,
                 ),
                 CustomFormTextField(
-                    formKey: formKey,
-                    width: 140,
-                    name: "zeit",
-                    labelText: "Uhrzeit",
-                    value: "12:30:42"
+                  formKey: formKey,
+                  width: 140,
+                  name: "zeit",
+                  labelText: "Uhrzeit",
+                  value: "12:30:42",
+                  showBorder: true,
                 ),
               ],
             ),
@@ -382,6 +388,8 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
               String datum = formKey.currentState!.value['datum'];
               String zeit = formKey.currentState!.value['zeit'];
 
+              print (standort);
+
               Angebot angebot = Angebot(
                 id: 0,
                 datum: DateTime.parse("${datum}"),
@@ -392,10 +400,10 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
                 hasprofile: [],
               );
 
-              print (angebot);
+              print(angebot);
 
               bool result =
-              await service.createAngebotById(id: 0, data: angebot);
+                  await service.createAngebotById(id: 0, data: angebot);
 
               print(result);
 
@@ -408,6 +416,4 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
       ),
     );
   }
-
-
 }

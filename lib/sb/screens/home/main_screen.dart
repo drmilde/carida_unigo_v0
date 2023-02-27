@@ -89,8 +89,8 @@ class _MainScreenState extends State<MainScreen> {
        */
 
 
-      extendBody: true,
-      extendBodyBehindAppBar: true,
+      //extendBody: true,
+      //extendBodyBehindAppBar: true,
 
       //backgroundColor: Color.fromARGB(255, 28, 31, 31),
       appBar: _buildAppBar(title[index], context, index),

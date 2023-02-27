@@ -6,7 +6,6 @@ import 'package:latlong2/latlong.dart';
 
 import 'nominatim.dart';
 import 'remote_services.dart';
-import 'text_widget.dart';
 
 class MapScreen extends StatefulWidget {
   MapScreen({Key? key}) : super(key: key);
