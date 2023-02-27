@@ -4,6 +4,7 @@ import 'package:projects/sb/screens/welcome/start_screen.dart';
 import 'package:projects/screens/widgets/custom_round_button.dart';
 
 import '../../services/controller/ug_state_controller.dart';
+import '../sb/screens/onbaording/unigo_onboarding_screen.dart';
 import 'widgets/svg_dynamic_scaffold_widget.dart';
 import 'widgets/svg_logo_widget.dart';
 import 'widgets/unigo_bottom_navigation_bar.dart';
@@ -59,8 +60,9 @@ class PreLoadingScreen extends StatelessWidget {
         ),
         SizedBox(height: 300),
         CustomRoundButton(
-            text: "Login/Registrieren",
+            text: "Los geht\'s",
             textColor: _controller.appConstants.white,
+            color: _controller.appConstants.turquoise,
             callback: () {
               /*
               Navigator.of(context)
@@ -68,7 +70,7 @@ class PreLoadingScreen extends StatelessWidget {
 
                */
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => StartScreen()));
+                  .push(MaterialPageRoute(builder: (context) => UnigoOnboardingScreen()));
             }),
         Expanded(
           child: Container(
