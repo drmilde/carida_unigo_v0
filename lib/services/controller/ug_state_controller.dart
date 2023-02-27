@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:get/get.dart';
 import 'package:projects/config/app_constants.dart';
 
@@ -17,6 +19,24 @@ class UGStateController extends GetxController {
   int AvatarCount = 404;
   var myAvatar = 1.obs;
   var editAvatar = false.obs;
+
+  List<VoidCallback> callbacks = [
+    () {
+      print("Hallo 0");
+    },
+    () {
+      print("Hallo 1");
+    },
+    () {
+      print("Hallo 2");
+    },
+    () {
+      print("Hallo 3");
+    },
+    () {
+      print("Hallo 4");
+    },
+  ];
 
   void toggleEditAvatar() {
     editAvatar.value = !editAvatar.value;

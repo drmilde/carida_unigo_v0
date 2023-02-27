@@ -147,6 +147,7 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: Colors.transparent,
         leading: BackButton(
           color: Color.fromARGB(255, 28, 31, 31),
+          onPressed: _controller.callbacks[index],
         ),
       );
     }

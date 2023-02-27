@@ -231,6 +231,11 @@ class _SuchenScreenState extends State<SuchenScreen> {
                 FocusScope.of(context).unfocus();
                 setState(() {
                   showForm = false;
+                  _controller.callbacks[1] = () {
+                    setState(() {
+                      showForm = true;
+                    });
+                  };
                 });
               }
 
