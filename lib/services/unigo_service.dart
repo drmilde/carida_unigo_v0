@@ -17,6 +17,7 @@ class UniGoService {
     required T data,
     required RT initRTVal,
     required String resourcePath,
+    Map<String, String> searchParams = const {},
     required Function(String) listFromJson,
     required Function(String) objectFromJson,
     required Function(T) objectToJson,
@@ -29,6 +30,7 @@ class UniGoService {
           RT result = await BackendServiceProvider.getObjectList<RT, T>(
             resourcePath: resourcePath,
             listFromJson: listFromJson,
+            searchParams: searchParams,
           );
 
           return result as RT;

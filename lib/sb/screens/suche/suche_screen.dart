@@ -7,8 +7,10 @@ import 'package:projects/services/controller/ug_state_controller.dart';
 import 'package:projects/services/extensions/unigo_service_angebot_extension.dart';
 
 import '../../../screens/widgets/custom_popup_widget.dart';
+import '../../../screens/widgets/forms/form_date_field.dart';
 import '../../../screens/widgets/forms/form_submit_button.dart';
 import '../../../screens/widgets/forms/form_text_field.dart';
+import '../../../screens/widgets/forms/form_time_field.dart';
 import '../../../services/model/angebot.dart';
 import '../../../services/unigo_service.dart';
 import '../maps/nominatim.dart';
@@ -27,10 +29,14 @@ class _SuchenScreenState extends State<SuchenScreen> {
   List<Angebot> fahrten = [];
   bool istFahrer = true;
 
-  // Load the list data from server
-  Future<bool> _loadFahrten() async {
-    fahrten = await service.getAngebotList();
+  String search = "";
 
+  // Load the list data from server
+  Future<bool> _loadFahrten({String search = ""}) async {
+    print(search);
+    fahrten = await service.searchAngebotList(
+      searchparams: {"search": search},
+    );
     return true;
   }
 
@@ -45,9 +51,6 @@ class _SuchenScreenState extends State<SuchenScreen> {
   bool showForm = true;
 
   List<Color> colors = [];
-
-
-
 
   @override
   void initState() {
@@ -82,7 +85,12 @@ class _SuchenScreenState extends State<SuchenScreen> {
             SizedBox(
               height: 8,
             ),
-            showForm ? _fahrtSuchen() : _showList(context),
+            Obx(
+              () {
+                int _change = _controller.somethingChanged.value;
+                return showForm ? _fahrtSuchen() : _showList(context);
+              },
+            ),
             SizedBox(
               height: 24,
             ),
@@ -134,14 +142,6 @@ class _SuchenScreenState extends State<SuchenScreen> {
     );
   }
 
-  String? zahlValidator(value) {
-    var zahl = int.tryParse(value.toString()) ?? 0;
-    if (zahl % 2 == 0) {
-      return 'Es sind nur ungerade Zahlen erlaubt';
-    }
-    return null;
-  }
-
   Widget _buildForm(BuildContext context) {
     return FormBuilder(
       key: formKey,
@@ -157,8 +157,8 @@ class _SuchenScreenState extends State<SuchenScreen> {
         children: <Widget>[
           CustomFormTextField(
             formKey: formKey,
-            name: "standort",
-            labelText: "Standort",
+            name: "startort",
+            labelText: "Startort",
             value: "Hünfeld",
             showBorder: true,
           ),
@@ -176,20 +176,20 @@ class _SuchenScreenState extends State<SuchenScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomFormTextField(
+                CustomFormDateField(
                   formKey: formKey,
                   width: 140,
                   name: "datum",
                   labelText: "Datum",
-                  value: "2023-02-22",
+                  value: DateTime.now(),
                   showBorder: true,
                 ),
-                CustomFormTextField(
+                CustomFormTimeField(
                   formKey: formKey,
                   width: 140,
                   name: "zeit",
                   labelText: "Uhrzeit",
-                  value: "12:30:42",
+                  value: DateTime.now(),
                   showBorder: true,
                 ),
               ],
@@ -203,15 +203,15 @@ class _SuchenScreenState extends State<SuchenScreen> {
             color: _controller.appConstants.turquoise,
             showShadow: true,
             callback: () async {
-              String standort = formKey.currentState!.value['standort'];
+              String startort = formKey.currentState!.value['startort'];
               String ziel = formKey.currentState!.value['ziel'];
-              String datum = formKey.currentState!.value['datum'];
-              String zeit = formKey.currentState!.value['zeit'];
+              DateTime datum = formKey.currentState!.value['datum'];
+              DateTime zeit = formKey.currentState!.value['zeit'];
 
-              print(standort);
+              print(startort);
               if (formKey.currentState!.validate()) {
                 List<Nominatim> liste =
-                    await RemoteServices.fetchCoordinates(standort);
+                    await RemoteServices.fetchCoordinates(startort);
                 if (liste.isNotEmpty) {
                   print(liste[0].lat);
                   print(liste[0].lon);
@@ -222,25 +222,16 @@ class _SuchenScreenState extends State<SuchenScreen> {
                   _mapController.move(LatLng(lat, lng), zoom);
                 }
 
-                /*
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("${search}")),
-                );
-
-                 */
                 FocusScope.of(context).unfocus();
+
                 setState(() {
                   showForm = false;
-                  _controller.callbacks[1] = () {
-                    setState(() {
-                      showForm = true;
-                    });
-                  };
+                  search = startort;
                 });
-              }
 
-              // TODO es wurde etwas verändert
-              _controller.change();
+                // TODO es wurde etwas verändert
+                _controller.change();
+              }
             },
           ),
           //SizedBox(height: 20),
@@ -280,20 +271,15 @@ class _SuchenScreenState extends State<SuchenScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(height: 16),
-          Obx(
-            () {
-              int _change = _controller.somethingChanged.value;
-              return FutureBuilder<bool>(
-                future: _loadFahrten(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return _buildListView(snapshot);
-                  } else if (snapshot.hasError) {
-                    return Text('${snapshot.error}');
-                  }
-                  return CircularProgressIndicator();
-                },
-              );
+          FutureBuilder<bool>(
+            future: _loadFahrten(search: search),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return _buildListView(snapshot);
+              } else if (snapshot.hasError) {
+                return Text('${snapshot.error}');
+              }
+              return CircularProgressIndicator();
             },
           ),
           /*SizedBox(
@@ -349,7 +335,6 @@ class _SuchenScreenState extends State<SuchenScreen> {
   ) {
     return GestureDetector(
       onTap: () async {
-
         CustomPopUp dialog = CustomPopUp(
           title: "Angebot",
           content: _buildCardLayout(start, ziel, uhrzeit, color),
@@ -363,7 +348,8 @@ class _SuchenScreenState extends State<SuchenScreen> {
     );
   }
 
-  Padding _buildCardLayout(String start, String ziel, String uhrzeit, Color color) {
+  Padding _buildCardLayout(
+      String start, String ziel, String uhrzeit, Color color) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Container(

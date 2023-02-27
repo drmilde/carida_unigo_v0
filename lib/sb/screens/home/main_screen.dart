@@ -37,6 +37,7 @@ class _MainScreenState extends State<MainScreen> {
     'Fahrt hinzufügen',
     'Nachrichten',
   ];
+
   //final String t = 'hallo';
 
   @override
@@ -69,7 +70,6 @@ class _MainScreenState extends State<MainScreen> {
       ),
     ];
     return Scaffold(
-
       /*
       drawer: Drawer(),
       showDrawer: false,
@@ -87,7 +87,6 @@ class _MainScreenState extends State<MainScreen> {
       image: "assets/images/background2.svg",
 
        */
-
 
       //extendBody: true,
       //extendBodyBehindAppBar: true,

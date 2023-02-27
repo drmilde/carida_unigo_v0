@@ -19,8 +19,13 @@ class BackendServiceProvider {
   static Future<RT> getObjectList<RT, T>({
     required String resourcePath,
     required Function(String) listFromJson,
+    Map<String, String> searchParams = const {},
   }) async {
-    var url = Uri.https(host, '${apiPath}/${resourcePath}.json');
+    var url = Uri.https(
+      host,
+      '${apiPath}/${resourcePath}.json',
+      searchParams,
+    );
     //print (url);
     var response = await http.get(
       url,
@@ -80,7 +85,7 @@ class BackendServiceProvider {
       return true as RT;
     }
     if (resonse.statusCode == 400) {
-      print (json);
+      print(json);
       return false as RT;
     }
     return false as RT;

@@ -17,6 +17,21 @@ extension ServiceAngebotExtension on UniGoService {
     );
   }
 
+  Future<List<Angebot>> searchAngebotList({required Map<String, String> searchparams}) async {
+    return wrapper<List<Angebot>, Angebot>(
+      method: methodGetList,
+      id: -1,
+      data: Angebot.empty(datum: DateTime.now()),
+      initRTVal: [],
+      resourcePath: "angebot",
+      searchParams: searchparams,
+      objectFromJson: angebotFromJson,
+      listFromJson: angebotListFromJson,
+      objectToJson: angebotToJson,
+    );
+  }
+
+
   Future<Angebot> getAngebotById({required int id}) async {
     return wrapper<Angebot, Angebot>(
       method: methodGetObjectById,

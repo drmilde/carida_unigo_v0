@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:projects/sb/screens/onbaording/unigo_onboarding_screen.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:projects/screens/pre_loading_screen.dart';
 
 // Design in
@@ -49,6 +49,13 @@ class MyApp extends StatelessWidget {
           900: Color(0xFF00ADA7),
         }),
       ),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('de', 'DE'),
+      ],
       home: PreLoadingScreen(),
     );
   }

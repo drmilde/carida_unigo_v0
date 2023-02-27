@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:projects/sb/screens/welcome/start_screen.dart';
 import 'package:projects/screens/widgets/custom_round_button.dart';
+import 'package:projects/services/extensions/unigo_service_angebot_extension.dart';
+import 'package:projects/services/model/angebot.dart';
+import 'package:projects/services/unigo_service.dart';
 
 import '../../services/controller/ug_state_controller.dart';
+import '../sb/screens/home/main_screen.dart';
 import '../sb/screens/onbaording/unigo_onboarding_screen.dart';
 import 'widgets/svg_dynamic_scaffold_widget.dart';
 import 'widgets/svg_logo_widget.dart';
@@ -60,18 +63,49 @@ class PreLoadingScreen extends StatelessWidget {
         ),
         SizedBox(height: 300),
         CustomRoundButton(
-            text: "Los geht\'s",
-            textColor: _controller.appConstants.white,
-            color: _controller.appConstants.turquoise,
-            callback: () {
-              /*
+          text: "Los geht\'s",
+          textColor: _controller.appConstants.white,
+          color: _controller.appConstants.turquoise,
+          callback: () {
+            /*
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => LoginScreen()));
 
                */
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => UnigoOnboardingScreen()));
+          },
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        CustomRoundButton(
+          text: "Direkt zur App",
+          textColor: _controller.appConstants.white,
+          color: _controller.appConstants.turquoise,
+          callback: () {
+            /*
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => UnigoOnboardingScreen()));
-            }),
+                  .push(MaterialPageRoute(builder: (context) => LoginScreen()));
+
+               */
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => MainScreen()));
+          },
+        ),
+        CustomRoundButton(
+          text: "Test Search Angebot",
+          textColor: _controller.appConstants.white,
+          color: _controller.appConstants.turquoise,
+          callback: () async {
+            UniGoService service = UniGoService();
+            List<Angebot> angebote = await service.searchAngebotList(
+              searchparams: {"search": "lautern"},
+            );
+
+            print (angebote);
+          },
+        ),
         Expanded(
           child: Container(
             width: 100,
