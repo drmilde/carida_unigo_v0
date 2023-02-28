@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projects/sb/screens/welcome/start_screen.dart';
 import 'package:projects/screens/widgets/custom_round_button.dart';
 import 'package:projects/services/controller/ug_state_controller.dart';
 import 'package:get/get.dart';
@@ -57,7 +58,8 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
                 ),
                 CustomRoundButton(
                   callback: (){
-
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => StartScreen()));
                   },
                   text: 'Abmelden',
                   textColor: _controller.appConstants.white,
