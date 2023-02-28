@@ -29,7 +29,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  #flutter:
+  flutter:
+    sdk: flutter
   flutter_localizations:
     sdk: flutter
 
@@ -50,6 +51,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   latlong2: ^0.8.1
   onboarding: ^3.1.0
+  introduction_screen: ^3.1.6
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +78,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/introduction/
     - assets/avatars/
     - assets/fonts/
     - assets/background.svg

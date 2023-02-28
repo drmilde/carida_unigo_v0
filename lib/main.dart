@@ -51,10 +51,13 @@ class MyApp extends StatelessWidget {
       ),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: [
-        Locale('de', 'DE'),
+        Locale('de'),
+        Locale('en'), // English
+        Locale('es'),
       ],
       home: PreLoadingScreen(),
     );
