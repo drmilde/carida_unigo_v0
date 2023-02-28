@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projects/sb/screens/einstellungen/profil_einstellungen_screen.dart';
 import 'package:projects/sb/screens/welcome/start_screen.dart';
 import 'package:projects/screens/widgets/custom_round_button.dart';
 import 'package:projects/services/controller/ug_state_controller.dart';
@@ -214,62 +215,68 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
   Padding _profil() {
     return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.fromLTRB(0, 10, 0, 20),
-                  padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                  decoration: BoxDecoration(
-                    color: _controller.appConstants.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 4,
-                        blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  //color: Colors.yellow,
-                  child: Column(
-                    children: [
-                      Row(
-                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 80,
-                            height: 80,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(80),
-                              //padding: EdgeInsets.fromLTRB(30, 30, 30, 30),
-                              child: Image.asset(image, fit: BoxFit.contain),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 16,
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: Container(
-                              child: Text(
-                                name,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                //textAlign: TextAlign.left,
+                child: GestureDetector(
+                  onTap: (){
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) => ProfilEinstellungenScreen()));
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.fromLTRB(0, 10, 0, 20),
+                    padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                    decoration: BoxDecoration(
+                      color: _controller.appConstants.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 4,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    //color: Colors.yellow,
+                    child: Column(
+                      children: [
+                        Row(
+                          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: 80,
+                              height: 80,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(80),
+                                //padding: EdgeInsets.fromLTRB(30, 30, 30, 30),
+                                child: Image.asset(image, fit: BoxFit.contain),
                               ),
                             ),
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              child: Icon(Icons.edit),
+                            SizedBox(
+                              width: 16,
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                            Expanded(
+                              flex: 3,
+                              child: Container(
+                                child: Text(
+                                  name,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  //textAlign: TextAlign.left,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                child: Icon(Icons.edit),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
