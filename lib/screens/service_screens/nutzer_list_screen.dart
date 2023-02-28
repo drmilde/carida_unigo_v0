@@ -43,6 +43,7 @@ class _NutzerListScreenState extends State<NutzerListScreen> {
               geburtsdatum: "1.1.2000",
               hasprofile: [],
               email: "h.p@ligusterweg.hex",
+              uuid: "",
             );
 
             Nutzer result = await service.createNutzerById(id: 0, data: nutzer);

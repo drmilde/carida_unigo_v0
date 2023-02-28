@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:projects/sb/screens/welcome/anonymes_registrieren_screen.dart';
 import 'package:projects/screens/widgets/custom_round_button.dart';
 import 'package:projects/screens/widgets/svg_dynamic_scaffold_widget.dart';
 import 'package:projects/services/controller/ug_state_controller.dart';
@@ -58,7 +59,7 @@ class StartScreen extends StatelessWidget {
                   color: _controller.appConstants.light_grey,
                   callback: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => RegistrierenScreen()));
+                        builder: (context) => AnonymesRegistrierenScreen()));
                   },
                 ),
               ),

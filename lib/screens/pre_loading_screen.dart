@@ -2,21 +2,57 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:projects/sb/screens/onboarding/unigo_introduction_screen.dart';
 import 'package:projects/screens/widgets/custom_round_button.dart';
+import 'package:projects/services/extensions/unigo_service_nutzer_extension.dart';
+import 'package:projects/services/extensions/unigo_service_profil_extension.dart';
+import 'package:projects/services/persistence/user_config.dart';
+import 'package:projects/services/unigo_service.dart';
 
 import '../../services/controller/ug_state_controller.dart';
 import '../sb/screens/home/main_screen.dart';
 
+import '../services/model/nutzer.dart';
+import '../services/model/profil.dart';
 import 'widgets/svg_dynamic_scaffold_widget.dart';
 import 'widgets/svg_logo_widget.dart';
 import 'widgets/unigo_bottom_navigation_bar.dart';
 
 class PreLoadingScreen extends StatelessWidget {
   UGStateController _controller = Get.put(UGStateController());
+  UniGoService service = UniGoService();
 
   PreLoadingScreen({Key? key}) : super(key: key);
 
   Future<bool> _loadData() async {
     // TODO load relevant data
+    UserConfig _config = await _controller.persistenceManager.loadStore();
+    _controller.userConfig = _config;
+    print("UserConfig geladen. Status: ${_controller.userConfig.isValid()}");
+    print("UserConfig UUID: ${_controller.userConfig.user.uuid}");
+    print("UserConfig ID: ${_controller.userConfig.user.id}");
+    print("UserConfig PROFIL_ID: ${_controller.userConfig.user.profilId}");
+
+    // check user and profil
+    Nutzer nutzer = Nutzer.empty();
+    try {
+      nutzer = await service.getNutzerById(id: _controller.userConfig.user.id);
+    } on Exception catch (e) {
+      // TODO
+      print("Nutzer nicht gefunden");
+      _controller.userConfig = UserConfig.empty();
+    }
+
+    Profil profil = Profil.empty();
+    try {
+      profil =
+          await service.getProfilById(id: _controller.userConfig.user.profilId);
+    } on Exception catch (e) {
+      // TODO
+      print("Profil nicht gefunden");
+    }
+
+    int numberLoaded = await _controller.angebotCache.loadAngebotCache();
+    print("Anzahl Angebote: ${numberLoaded}");
+
     return true;
   }
 

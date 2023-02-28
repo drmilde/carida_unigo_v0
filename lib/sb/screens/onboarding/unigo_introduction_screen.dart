@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:projects/sb/screens/home/main_screen.dart';
+import 'package:projects/sb/screens/welcome/start_screen.dart';
 import 'package:projects/screens/widgets/custom_round_button.dart';
 import 'package:projects/screens/widgets/svg_logo_widget.dart';
 
-import '../home/main_screen.dart';
+import '../welcome/anonymes_registrieren_screen.dart';
 
 class UniGoIntroductionScreen extends StatefulWidget {
   const UniGoIntroductionScreen({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class UniGoIntroductionScreenState extends State<UniGoIntroductionScreen> {
 
   void _onIntroEnd(context) {
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => const MainScreen()),
+      MaterialPageRoute(builder: (_) => StartScreen()),
     );
   }
 
@@ -72,11 +73,12 @@ class UniGoIntroductionScreenState extends State<UniGoIntroductionScreen> {
         width: double.infinity,
         height: 48,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal:16, vertical: 0.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0.0),
           child: CustomRoundButton(
             callback: () {
-              _onIntroEnd(context);
-            },
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) =>  MainScreen()),
+              );            },
             text: "Direkt zur App!",
             textColor: Colors.white,
             height: 32,

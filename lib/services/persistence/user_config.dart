@@ -32,6 +32,10 @@ class UserConfig {
     this.profile = const Profile.empty(),
   });
 
+  bool isValid() {
+    return user.uuid.isNotEmpty;
+  }
+
   factory UserConfig.fromJson(Map<String, dynamic> json) => UserConfig(
         version: json["version"],
         user: User.fromJson(json["user"]),
@@ -114,6 +118,7 @@ class User {
     required this.email,
     required this.geburtsdatum,
     required this.uuid,
+    required this.id,
     required this.profilId,
   });
 
@@ -124,6 +129,7 @@ class User {
   final String email;
   final String geburtsdatum;
   final String uuid;
+  final int id;
   final int profilId;
 
   const User.empty({
@@ -134,6 +140,7 @@ class User {
     this.email = "",
     this.geburtsdatum = "",
     this.uuid = "",
+    this.id = 0,
     this.profilId = 0,
   });
 
@@ -145,6 +152,7 @@ class User {
         email: json["email"],
         geburtsdatum: json["geburtsdatum"],
         uuid: json["uuid"],
+        id: json["id"],
         profilId: json["profilId"],
       );
 
@@ -156,6 +164,7 @@ class User {
         "email": email,
         "geburtsdatum": geburtsdatum,
         "uuid": uuid,
+        "id": id,
         "profilId": profilId,
       };
 }

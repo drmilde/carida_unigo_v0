@@ -44,6 +44,7 @@ class UniGoService {
             objectFromJson: objectFromJson,
           );
 
+
           if (result!.isEmpty) {
             throw ObjectNotFoundException();
           }

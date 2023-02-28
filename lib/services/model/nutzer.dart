@@ -22,6 +22,7 @@ class Nutzer {
     required this.passwort,
     required this.email,
     required this.geburtsdatum,
+    required this.uuid,
     required this.hasprofile,
   });
 
@@ -32,6 +33,7 @@ class Nutzer {
     this.passwort = "",
     this.email = "",
     this.geburtsdatum = "",
+    this.uuid = "",
     this.hasprofile = const [],
   });
 
@@ -41,6 +43,7 @@ class Nutzer {
   String passwort;
   String email;
   String geburtsdatum;
+  String uuid;
   List<int> hasprofile;
 
   factory Nutzer.fromJson(Map<String, dynamic> json) => Nutzer(
@@ -50,6 +53,7 @@ class Nutzer {
         passwort: json["passwort"],
         email: json["email"],
         geburtsdatum: json["geburtsdatum"],
+        uuid: json["uuid"],
         hasprofile: List<int>.from(json["hasprofile"].map((x) => x)),
       );
 
@@ -60,6 +64,7 @@ class Nutzer {
         "passwort": passwort,
         "email": email,
         "geburtsdatum": geburtsdatum,
+        "uuid": uuid,
         "hasprofile": List<dynamic>.from(hasprofile.map((x) => x)),
       };
 }

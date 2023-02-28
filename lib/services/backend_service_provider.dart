@@ -3,6 +3,8 @@ import 'dart:convert' show utf8;
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+import 'model/object_not_found_exception.dart';
+
 class BackendServiceProvider {
   //static String host = "localhost:8000";
   //static String host = "10.0.2.2:8000";
@@ -52,14 +54,17 @@ class BackendServiceProvider {
       url,
       headers: headers,
     );
-    print(response.headers);
+
+    //print(response.headers);
+    //print(response.statusCode);
+
     String resUTF8 = utf8.decode(response.bodyBytes);
 
     if (response.statusCode == 200) {
       T object = objectFromJson(resUTF8);
-      return ([object] as RT);
+      return ([object as T] as RT);
     } else {
-      return [] as RT;
+      throw ObjectNotFoundException();
     }
   }
 
@@ -81,14 +86,15 @@ class BackendServiceProvider {
       },
       body: json,
     );
+    String answer = utf8.decode(resonse.bodyBytes);
     if (resonse.statusCode == 201) {
-      return true as RT;
+      return objectFromJson(answer) as RT;
     }
+
     if (resonse.statusCode == 400) {
-      print(json);
-      return false as RT;
+      return data as RT;
     }
-    return false as RT;
+    return data as RT;
   }
 
   static Future<RT> updateObjectById<RT, T>({

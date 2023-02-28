@@ -43,12 +43,12 @@ extension ServiceProfilExtension on UniGoService {
     );
   }
 
-  Future<bool> createProfilById({required int id, required Profil data}) async {
-    return wrapper<bool, Profil>(
+  Future<Profil> createProfilById({required int id, required Profil data}) async {
+    return wrapper<Profil, Profil>(
       method: methodCreateObjectById,
       id: id,
       data: data,
-      initRTVal: false,
+      initRTVal: Profil.empty(),
       resourcePath: "profil",
       objectFromJson: profilFromJson,
       listFromJson: profilListFromJson,

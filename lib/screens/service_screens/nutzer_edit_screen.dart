@@ -117,6 +117,7 @@ class NutzerEditScreen extends StatelessWidget {
                   geburtsdatum: _formKey.currentState!.value['geburtdatum'],
                   passwort: _formKey.currentState!.value['password'],
                   email: _formKey.currentState!.value['email'],
+                  uuid: "",
                   hasprofile: nutzer.hasprofile,
                 );
 
