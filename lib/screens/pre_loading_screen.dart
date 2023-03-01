@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:projects/sb/screens/onboarding/unigo_introduction_screen.dart';
 import 'package:projects/screens/widgets/custom_round_button.dart';
+import 'package:projects/services/authentification/ldap_login_screen.dart';
 import 'package:projects/services/extensions/unigo_service_nutzer_extension.dart';
 import 'package:projects/services/extensions/unigo_service_profil_extension.dart';
 import 'package:projects/services/persistence/user_config.dart';
@@ -24,30 +25,39 @@ class PreLoadingScreen extends StatelessWidget {
 
   Future<bool> _loadData() async {
     // TODO load relevant data
+
+    // UserConfig aus dem lokalen Speicher laden und
+    // im UGStateController speichern
     UserConfig _config = await _controller.persistenceManager.loadStore();
     _controller.userConfig = _config;
+
     print("UserConfig geladen. Status: ${_controller.userConfig.isValid()}");
     print("UserConfig UUID: ${_controller.userConfig.user.uuid}");
     print("UserConfig ID: ${_controller.userConfig.user.id}");
     print("UserConfig PROFIL_ID: ${_controller.userConfig.user.profilId}");
 
-    // check user and profil
-    Nutzer nutzer = Nutzer.empty();
+    // check, ob Nutzer und Profil auf dem Server exitieren ?
+    // falls nein, wird die UserConfig zurückgesetzt
+    // der Anwender muss sich neu registrieren, um eine
+    // neue UUID, ID und Profil_ID zu erhalten
     try {
-      nutzer = await service.getNutzerById(id: _controller.userConfig.user.id);
+      Nutzer nutzer =
+          await service.getNutzerById(id: _controller.userConfig.user.id);
+      print ("OK: Nutzer existiert auf dem Server");
     } on Exception catch (e) {
       // TODO
-      print("Nutzer nicht gefunden");
+      print("FAIL: Nutzer auf dem Server nicht gefunden");
       _controller.userConfig = UserConfig.empty();
     }
 
-    Profil profil = Profil.empty();
     try {
-      profil =
+      Profil profil =
           await service.getProfilById(id: _controller.userConfig.user.profilId);
+      print ("OK: Profil existiert auf dem Server");
     } on Exception catch (e) {
       // TODO
-      print("Profil nicht gefunden");
+      print("FAIL: Profil auf dem Server nicht gefunden");
+      _controller.userConfig = UserConfig.empty();
     }
 
     int numberLoaded = await _controller.angebotCache.loadAngebotCache();
@@ -125,6 +135,23 @@ class PreLoadingScreen extends StatelessWidget {
                */
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => MainScreen()));
+          },
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        CustomRoundButton(
+          text: "LDAP Screen\n(nur in Android/iOS)",
+          textColor: _controller.appConstants.white,
+          color: _controller.appConstants.turquoise,
+          callback: () {
+            /*
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => LoginScreen()));
+
+               */
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => LDAPLoginScreen()));
           },
         ),
         Expanded(

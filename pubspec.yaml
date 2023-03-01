@@ -51,6 +51,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   latlong2: ^0.8.1
   introduction_screen: ^3.1.6
+  dartdap: ^0.6.5
 
 dev_dependencies:
   flutter_test:

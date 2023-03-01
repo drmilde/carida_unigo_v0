@@ -8,6 +8,8 @@ import 'package:projects/screens/pre_loading_screen.dart';
 // https://www.figma.com/file/KG73Ctua7GSmwbwu3uWXvG/Prototyp-1?node-id=0%3A1&t=qwvKkf7XLdVeYxtk-0
 // https://www.figma.com/file/0FjcfC8V4czugJ7WvSbPNw/RIDA-APP
 
+// https://www.figma.com/file/0FjcfC8V4czugJ7WvSbPNw/RIDA-APP?node-id=343%3A1891&t=TFh0ajfcADHEHueH-1
+
 // Hier das Dokument zur Integrationsplanung
 //
 // https://hbx.fhhrz.net/getlink/fiMADdiYYFoyhRPchhwaZN/Integrationsplanung.docx
