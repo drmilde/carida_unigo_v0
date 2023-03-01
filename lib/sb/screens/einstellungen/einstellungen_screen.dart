@@ -24,7 +24,7 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
     'Bewertung',
     'Punkte',
     'Mitteilungen',
-    'Standort',
+    'Allgemein',
     'Datenschutz',
     'Impressum',
   ];
@@ -33,7 +33,7 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
     Icon(Icons.star),
     Icon(Icons.thumb_up),
     Icon(Icons.notifications),
-    Icon(Icons.location_pin),
+    Icon(Icons.settings),
     Icon(Icons.lock),
     Icon(Icons.warning),
   ];

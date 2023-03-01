@@ -3,8 +3,11 @@ import 'package:projects/sb/screens/einstellungen/einstellungen_screen.dart';
 import 'package:projects/sb/screens/welcome/start_screen.dart';
 import 'package:projects/screens/widgets/custom_round_button.dart';
 import 'package:projects/services/controller/ug_state_controller.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 
+import '../../../screens/widgets/forms/form_text_field.dart';
+import '../../../services/unigo_service.dart';
 import '../home/main_screen.dart';
 
 class ProfilEinstellungenScreen extends StatefulWidget {
@@ -17,6 +20,8 @@ class ProfilEinstellungenScreen extends StatefulWidget {
 
 class _ProfilEinstellungenScreenState extends State<ProfilEinstellungenScreen> {
   UGStateController _controller = Get.find();
+  UniGoService service = UniGoService();
+  var formKey = GlobalKey<FormBuilderState>();
 
   final String name = 'Tinkerbell';
 
@@ -34,6 +39,12 @@ class _ProfilEinstellungenScreenState extends State<ProfilEinstellungenScreen> {
     'assets/avatars/avatar0290.png',
   ];
 
+  final List<String> cars = [
+    'Opel Corsa',
+    'Audi A1',
+    'VW Polo',
+    'Ford Fiesta'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +59,7 @@ class _ProfilEinstellungenScreenState extends State<ProfilEinstellungenScreen> {
             child: Column(
               children: [
                 _profilbild(),
-                SizedBox(
-                  height: 16,
-                ),
+                //const SizedBox(height: 8),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Container(
@@ -70,64 +79,105 @@ class _ProfilEinstellungenScreenState extends State<ProfilEinstellungenScreen> {
                       ],
                     ),
                     //color: Colors.yellow,
-                    child: Column(
-                      children: [
-                        Row(
-                          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-
-                          ],
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Container(
-                          height: 2,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: _controller.appConstants.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.2),
-                                spreadRadius: 4,
-                                blurRadius: 7,
-                                offset: Offset(0, 3), // changes position of shadow
-                              ),
-                            ],
+                    child: FormBuilder(
+                      key: formKey,
+                      // enabled: false,
+                      onChanged: () {
+                        formKey.currentState!.save();
+                      },
+                      autovalidateMode: AutovalidateMode.disabled,
+                      skipDisabled: true,
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 8),
+                          CustomFormTextField(
+                            formKey: formKey,
+                            name: "username",
+                            labelText: "Username",
+                            value: "",
+                            showBorder: true,
                           ),
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Row(
-                          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-
-                          ],
-                        ),SizedBox(
-                          height: 16,
-                        ),
-                        Container(
-                          height: 2,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: _controller.appConstants.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.2),
-                                spreadRadius: 4,
-                                blurRadius: 7,
-                                offset: Offset(0, 3), // changes position of shadow
-                              ),
-                            ],
+                          const SizedBox(height: 16),
+                          Container(
+                            height: 2,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: _controller.appConstants.white,
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.2),
+                                  spreadRadius: 4,
+                                  blurRadius: 7,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                      ],
+                          const SizedBox(height: 16),
+                          CustomFormTextField(
+                            formKey: formKey,
+                            name: "ueber_mich",
+                            labelText: "Über mich",
+                            value: "",
+                            showBorder: true,
+                          ),
+                          const SizedBox(height: 16),
+                          Container(
+                            height: 2,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: _controller.appConstants.white,
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.2),
+                                  spreadRadius: 4,
+                                  blurRadius: 7,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                                  padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                                  decoration: BoxDecoration(
+                                    color: _controller.appConstants.white,
+                                    borderRadius: BorderRadius.circular(20),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 4,
+                                        blurRadius: 7,
+                                        offset: Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.add),
+                                    ],
+                                  ),
+                                ),
+                                _fahrzeug(cars[0]),
+                                _fahrzeug(cars[1]),
+                                _fahrzeug(cars[2]),
+                                _fahrzeug(cars[3]),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -145,6 +195,30 @@ class _ProfilEinstellungenScreenState extends State<ProfilEinstellungenScreen> {
     );
   }
 
+  Container _fahrzeug(String car) {
+    return Container(
+      margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
+      padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+      decoration: BoxDecoration(
+        color: _controller.appConstants.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 4,
+            blurRadius: 7,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.directions_car),
+          Text(car),
+        ],
+      ),
+    );
+  }
 
   Padding _profilbild() {
     return Padding(
