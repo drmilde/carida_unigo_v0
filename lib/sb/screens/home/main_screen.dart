@@ -33,7 +33,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<String> title = [
     'Meine Angebote',
     'Angebote suchen',
-    '',
+    'Dashboard',
     'Angebot hinzufügen',
     'Meine Nachrichten',
   ];
