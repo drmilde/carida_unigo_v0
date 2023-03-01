@@ -137,23 +137,6 @@ class PreLoadingScreen extends StatelessWidget {
                 .push(MaterialPageRoute(builder: (context) => MainScreen()));
           },
         ),
-        SizedBox(
-          height: 16,
-        ),
-        CustomRoundButton(
-          text: "LDAP Screen\n(nur in Android/iOS)",
-          textColor: _controller.appConstants.white,
-          color: _controller.appConstants.turquoise,
-          callback: () {
-            /*
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => LoginScreen()));
-
-               */
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => LDAPLoginScreen()));
-          },
-        ),
         Expanded(
           child: Container(
             width: 100,

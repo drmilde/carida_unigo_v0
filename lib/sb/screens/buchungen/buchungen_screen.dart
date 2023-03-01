@@ -30,35 +30,80 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Center(
+      child: DefaultTabController(
+        length: 2,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 16),
-            Obx(
-              () {
-                int _change = _controller.somethingChanged.value;
-                return FutureBuilder<bool>(
-                  future: _loadFahrten(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return _buildListView(snapshot);
-                    } else if (snapshot.hasError) {
-                      return Text('${snapshot.error}');
-                    }
-                    return CircularProgressIndicator();
-                  },
-                );
-              },
+            TabBar(
+              labelColor: Colors.black,
+              tabs: [
+                Tab(
+                  child: Row(
+                    children: [
+                      Text("Fahren"),
+                      SizedBox(width:32,),
+                      Icon(Icons.directions_car),
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.center,
+                  ),
+                  height: 48,
+                ),
+                Tab(
+                  child: Row(
+                    children: [
+                      Text("Mitfahren"),
+                      SizedBox(width:32,),
+                      Icon(Icons.thumb_up_off_alt_rounded),
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.center,
+                  ),
+                  height: 48,
+                ),
+              ],
             ),
-            /*SizedBox(
-                height: 16,
-              ),*/
-            SizedBox(
-              height: 24,
+            Expanded(
+              child: TabBarView(
+                children: [
+                  _fahren(),
+                  _fahren(),
+                ],
+              ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _fahren() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(height: 16),
+          Obx(
+            () {
+              int _change = _controller.somethingChanged.value;
+              return FutureBuilder<bool>(
+                future: _loadFahrten(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return _buildListView(snapshot);
+                  } else if (snapshot.hasError) {
+                    return Text('${snapshot.error}');
+                  }
+                  return CircularProgressIndicator();
+                },
+              );
+            },
+          ),
+          /*SizedBox(
+              height: 16,
+            ),*/
+          SizedBox(
+            height: 24,
+          ),
+        ],
       ),
     );
   }

@@ -31,11 +31,11 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   final List<String> title = [
-    'Buchungen',
-    'Fahrt suchen',
+    'Meine Angebote',
+    'Angebote suchen',
     '',
-    'Fahrt hinzufügen',
-    'Nachrichten',
+    'Angebot hinzufügen',
+    'Meine Nachrichten',
   ];
 
   //final String t = 'hallo';
@@ -107,6 +107,7 @@ class _MainScreenState extends State<MainScreen> {
   AppBar _buildAppBar(String title, BuildContext context, int index) {
     if (index == 2) {
       return AppBar(
+        centerTitle: true,
         title: Text(
           title,
           style: GoogleFonts.inter(
@@ -135,6 +136,7 @@ class _MainScreenState extends State<MainScreen> {
       );
     } else {
       return AppBar(
+        centerTitle: true,
         title: Text(
           title,
           style: TextStyle(
