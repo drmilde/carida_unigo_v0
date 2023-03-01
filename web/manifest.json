@@ -1,6 +1,6 @@
 {
-    "name": "projects",
-    "short_name": "projects",
+    "name": "UniGo",
+    "short_name": "UniGo",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
