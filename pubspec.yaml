@@ -81,6 +81,7 @@ flutter:
     - assets/introduction/
     - assets/avatars/
     - assets/fonts/
+    - assets/carida_for_campus.svg
     - assets/background.svg
     - assets/logo_unigo.svg
     - assets/icons/icon_negativ_car.svg

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:projects/sb/screens/onboarding/unigo_introduction_screen.dart';
+import 'package:projects/screens/widgets/carida_logo_widget.dart';
 import 'package:projects/screens/widgets/custom_round_button.dart';
-import 'package:projects/services/authentification/ldap_login_screen.dart';
 import 'package:projects/services/extensions/unigo_service_nutzer_extension.dart';
 import 'package:projects/services/extensions/unigo_service_profil_extension.dart';
 import 'package:projects/services/persistence/user_config.dart';
@@ -10,7 +10,6 @@ import 'package:projects/services/unigo_service.dart';
 
 import '../../services/controller/ug_state_controller.dart';
 import '../sb/screens/home/main_screen.dart';
-
 import '../services/model/nutzer.dart';
 import '../services/model/profil.dart';
 import 'widgets/svg_dynamic_scaffold_widget.dart';
@@ -105,7 +104,14 @@ class PreLoadingScreen extends StatelessWidget {
         SVGLogoWidget(
           width: 250,
         ),
-        SizedBox(height: 300),
+        SizedBox(height: 16),
+        CaridaLogoWidget(width: 250),
+        Expanded(
+          child: Container(
+            width: 200,
+            //height: 100,
+          ),
+        ),
         CustomRoundButton(
           text: "Los geht\'s",
           textColor: _controller.appConstants.white,

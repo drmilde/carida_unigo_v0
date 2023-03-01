@@ -42,7 +42,7 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
                   child: Row(
                     children: [
                       Text(
-                        "Fahren",
+                        "Selber fahren",
                         style: GoogleFonts.inter(
                           color: _controller.appConstants.black,
                           fontSize: 14,
