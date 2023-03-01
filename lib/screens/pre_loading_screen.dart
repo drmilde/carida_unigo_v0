@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:projects/sb/screens/onboarding/unigo_introduction_screen.dart';
 import 'package:projects/screens/widgets/carida_logo_widget.dart';
 import 'package:projects/screens/widgets/custom_round_button.dart';
+import 'package:projects/screens/widgets/hsfulda_logo_widget.dart';
 import 'package:projects/services/extensions/unigo_service_nutzer_extension.dart';
 import 'package:projects/services/extensions/unigo_service_profil_extension.dart';
 import 'package:projects/services/persistence/user_config.dart';
@@ -104,8 +105,10 @@ class PreLoadingScreen extends StatelessWidget {
         SVGLogoWidget(
           width: 250,
         ),
-        SizedBox(height: 16),
+        SizedBox(height: 32),
         CaridaLogoWidget(width: 250),
+        SizedBox(height: 16),
+        HSFuldaLogoWidget(width: 300),
         Expanded(
           child: Container(
             width: 200,

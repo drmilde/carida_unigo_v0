@@ -108,7 +108,7 @@ class UniGoIntroductionScreenState extends State<UniGoIntroductionScreen> {
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Fahrt hinzufügen",
+          title: "Angebot hinzufügen",
           bodyWidget: _buildBodyWidget(
             imageName: "hinzufuegen.png",
             text: "Hier können Sie ein Fahrtangebot hinzufügen.",
@@ -117,16 +117,17 @@ class UniGoIntroductionScreenState extends State<UniGoIntroductionScreen> {
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Buchungen",
+          title: "Meine Angebote",
           bodyWidget: _buildBodyWidget(
             imageName: "buchungen.png",
-            text: "Hier sehen Sie Ihre Buchungen und Ihre Fahrtangebote.",
+            text: "Hier sehen Sie Ihre wann Sie selber fahren und"
+                " und wann sie mitfahren möchten.",
             bodyStyle: bodyStyle,
           ),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Fahrt suchen",
+          title: "Angebot suchen",
           bodyWidget: _buildBodyWidget(
             imageName: "fahrtsuchen.png",
             text: "Suchen und finden Sie passende Fahrtangebote."
@@ -137,10 +138,13 @@ class UniGoIntroductionScreenState extends State<UniGoIntroductionScreen> {
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Der Chat",
+          title: "Meine Nachrichten",
           bodyWidget: _buildBodyWidget(
             imageName: "chat.png",
-            text: "Bleiben Sie Kontakt mit Ihren Fahrern und Mitfahrern.",
+            text: "Lesen Sie aktuelle Neuigkeiten zum Thema "
+                " 'Nachhaltige Mobilität an der Hochschule Fulda',"
+                " bleiben Sie in Kontakt mit Ihren Fahrern und Mitfahrern und"
+                " sammeln Sie Punkte.",
             bodyStyle: bodyStyle,
           ),
           decoration: pageDecoration,
