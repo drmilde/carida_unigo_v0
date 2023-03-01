@@ -111,26 +111,33 @@ class _MainScreenState extends State<MainScreen> {
         title: Text(
           title,
           style: GoogleFonts.inter(
-            color: Color.fromARGB(255, 28, 31, 31),
-            fontSize: 28,
+            color: _controller.appConstants.white,
+            fontSize: 18,
           ),
         ),
         elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: _controller.appConstants.turquoise,
+        leading: Container(),
+        /*
         leading: BackButton(
           color: Color.fromARGB(255, 28, 31, 31),
         ),
+
+         */
         actions: [
-          IconButton(
-            icon: Icon(
-              size: 30,
-              Icons.settings,
-              color: Color.fromARGB(255, 28, 31, 31),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: IconButton(
+              icon: Icon(
+                size: 30,
+                Icons.settings,
+                color: Color.fromARGB(255, 28, 31, 31),
+              ),
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => EinstellungenScreen()));
+              },
             ),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => EinstellungenScreen()));
-            },
           ),
         ],
       );
@@ -139,17 +146,21 @@ class _MainScreenState extends State<MainScreen> {
         centerTitle: true,
         title: Text(
           title,
-          style: TextStyle(
-            color: Color.fromARGB(255, 28, 31, 31),
-            fontSize: 28,
+          style: GoogleFonts.inter(
+            color: _controller.appConstants.white,
+            fontSize: 18,
           ),
         ),
         elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: _controller.appConstants.turquoise,
+        leading: Container(),
+        /*
         leading: BackButton(
           color: Color.fromARGB(255, 28, 31, 31),
           onPressed: _controller.callbacks[index],
         ),
+
+         */
       );
     }
   }

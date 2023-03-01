@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:projects/services/extensions/unigo_service_angebot_extension.dart';
 
 import '../../../services/controller/ug_state_controller.dart';
@@ -40,8 +41,16 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
                 Tab(
                   child: Row(
                     children: [
-                      Text("Fahren"),
-                      SizedBox(width:32,),
+                      Text(
+                        "Fahren",
+                        style: GoogleFonts.inter(
+                          color: _controller.appConstants.black,
+                          fontSize: 14,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 32,
+                      ),
                       Icon(Icons.directions_car),
                     ],
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -51,8 +60,16 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
                 Tab(
                   child: Row(
                     children: [
-                      Text("Mitfahren"),
-                      SizedBox(width:32,),
+                      Text(
+                        "Mitfahren",
+                        style: GoogleFonts.inter(
+                          color: _controller.appConstants.black,
+                          fontSize: 14,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 32,
+                      ),
                       Icon(Icons.thumb_up_off_alt_rounded),
                     ],
                     mainAxisAlignment: MainAxisAlignment.center,
