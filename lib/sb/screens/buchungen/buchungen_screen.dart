@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projects/sb/widgets/buchungen/angebot_card_widget.dart';
+import 'package:projects/sb/widgets/buchungen/date_select_widget.dart';
 import 'package:projects/services/extensions/unigo_service_angebot_extension.dart';
 
 import '../../../services/controller/ug_state_controller.dart';
@@ -35,6 +37,8 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
         length: 2,
         child: Column(
           children: [
+            SizedBox(height:8),
+            Container(width: 350, child: DateSelectWidget()),
             TabBar(
               labelColor: Colors.black,
               tabs: [
@@ -98,6 +102,7 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(height: 16),
+          SizedBox(height: 16),
           Obx(
             () {
               int _change = _controller.somethingChanged.value;
@@ -135,12 +140,15 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
           itemCount: fahrten.length,
           itemBuilder: (context, index) {
             final fahrt = fahrten[index];
-            return _buchungen(
-              fahrt.startort,
-              fahrt.zielort,
-              fahrt.uhrzeit,
-              _controller.appConstants.dark_grey,
-              istFahrer
+            return AngebotCardWidget(
+              angebot: fahrt,
+              onDelete: () async {
+                bool result = await service.deleteAngebotById(id: fahrt.id);
+                _controller.change();
+              },
+              onDetail: () {},
+              arrowColor: _controller.appConstants.dark_grey,
+              icon: istFahrer
                   ? Icon(
                       Icons.directions_car,
                       color: _controller.appConstants.turquoise,
@@ -149,115 +157,9 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
                       Icons.thumb_up,
                       color: _controller.appConstants.light_green,
                     ),
-              Icon(Icons.delete),
+              delete: Icon(Icons.delete),
             );
           },
-        ),
-      ),
-    );
-  }
-
-  Widget _buchungen(
-    String start,
-    String ziel,
-    String uhrzeit,
-    Color color,
-    Icon icon,
-    Icon delete,
-  ) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Container(
-        width: double.infinity,
-        margin: EdgeInsets.fromLTRB(0, 10, 0, 20),
-        padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-        decoration: BoxDecoration(
-          color: _controller.appConstants.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 4,
-              blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
-        ),
-        //color: Colors.yellow,
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      child: Text(
-                        start,
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        //textAlign: TextAlign.left,
-                      ),
-                    ),
-                    SizedBox(height: 8),
-                    Icon(Icons.arrow_downward),
-                    SizedBox(height: 8),
-                    Container(
-                      child: Text(
-                        ziel,
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(20, 10, 0, 10),
-                  child: Text(uhrzeit),
-                ),
-                Container(
-                  //color: Colors.green,
-                  margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                  child: Icon(
-                    Icons.keyboard_arrow_right,
-                    size: 50,
-                    color: color,
-                  ),
-                ),
-              ],
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(0, 19, 0, 10),
-              width: double.infinity,
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      child: icon,
-                    ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Container(
-                      margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      child: delete,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
         ),
       ),
     );

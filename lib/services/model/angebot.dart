@@ -43,6 +43,11 @@ class Angebot {
     this.hasprofile = const [],
   });
 
+  String getUhrzeitNormalized() {
+    List<String> parts = uhrzeit.split(":");
+    return "${parts[0]}:${parts[1]}";
+  }
+
   factory Angebot.fromJson(Map<String, dynamic> json) => Angebot(
         id: json["id"],
         startort: json["startort"],
