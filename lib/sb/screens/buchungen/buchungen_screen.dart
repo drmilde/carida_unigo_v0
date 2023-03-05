@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projects/sb/widgets/buchungen/angebot_card_widget.dart';
-import 'package:projects/sb/widgets/buchungen/date_select_widget.dart';
+import 'package:projects/sb/widgets/buchungen/weekday_select_widget.dart';
 import 'package:projects/services/extensions/unigo_service_angebot_extension.dart';
 
 import '../../../services/controller/ug_state_controller.dart';
@@ -10,7 +10,9 @@ import '../../../services/model/angebot.dart';
 import '../../../services/unigo_service.dart';
 
 class BuchungenScreen extends StatefulWidget {
-  const BuchungenScreen({Key? key}) : super(key: key);
+  DateTime today = DateTime.now();
+
+  BuchungenScreen({required this.today, Key? key}) : super(key: key);
 
   @override
   _BuchungenScreenState createState() => _BuchungenScreenState();
@@ -39,6 +41,11 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
           children: [
             WeekdaySelectWidget(
               today: DateTime.now(),
+              onChange: (date) {
+                setState(() {
+                  widget.today = date;
+                });
+              },
             ),
             TabBar(
               labelColor: Colors.black,
@@ -98,6 +105,12 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
   }
 
   Widget _fahren() {
+    DateTime nowDelta = DateTime.now().subtract(Duration(hours: 23));
+    if (widget.today.isBefore(nowDelta)) {
+      return Center(
+        child: Container(child: Text("Keine Angebote in der Vergangenheit")),
+      );
+    }
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

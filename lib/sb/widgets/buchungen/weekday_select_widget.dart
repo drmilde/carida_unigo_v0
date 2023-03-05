@@ -4,9 +4,10 @@ import 'package:projects/services/controller/ug_state_controller.dart';
 
 class WeekdaySelectWidget extends StatefulWidget {
   DateTime today = DateTime.now();
+  Function(DateTime) onChange;
 
-
-  WeekdaySelectWidget({required this.today, Key? key}) : super(key: key) {
+  WeekdaySelectWidget({required this.today, required this.onChange, Key? key})
+      : super(key: key) {
     // TODO: implement DateSelectWidget
   }
 
@@ -17,12 +18,14 @@ class WeekdaySelectWidget extends StatefulWidget {
 class _WeekdaySelectWidgetState extends State<WeekdaySelectWidget> {
   UGStateController _controller = Get.find();
   List<String> dateStrings = [];
+  List<DateTime> weekDates = [];
   int selected = 3;
 
   @override
   void initState() {
     selected = widget.today.weekday - 1;
-    DateTime mo = widget.today.subtract(Duration(days: (widget.today.weekday-1)));
+    DateTime mo =
+        widget.today.subtract(Duration(days: (widget.today.weekday - 1)));
     DateTime di = mo.add(Duration(days: 1));
     DateTime mi = di.add(Duration(days: 1));
     DateTime don = mi.add(Duration(days: 1));
@@ -38,6 +41,7 @@ class _WeekdaySelectWidgetState extends State<WeekdaySelectWidget> {
       "${sa.day}.${sa.month}",
       "${so.day}.${so.month}",
     ];
+    weekDates = [mo, di, mi, don, fr, sa, so];
 
     super.initState();
   }
@@ -66,6 +70,7 @@ class _WeekdaySelectWidgetState extends State<WeekdaySelectWidget> {
         setState(() {
           selected = index;
         });
+        widget.onChange(weekDates[selected]);
       },
       child: Container(
         width: 48,
@@ -85,9 +90,9 @@ class _WeekdaySelectWidgetState extends State<WeekdaySelectWidget> {
               date,
               style: TextStyle(
                 fontSize: (selected == index) ? 18 : 14,
-                  color: (selected == index)
-                      ? _controller.appConstants.turquoise
-                      : _controller.appConstants.black,
+                color: (selected == index)
+                    ? _controller.appConstants.turquoise
+                    : _controller.appConstants.black,
               ),
             ),
           ],

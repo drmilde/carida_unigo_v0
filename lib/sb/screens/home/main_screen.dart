@@ -23,7 +23,7 @@ class _MainScreenState extends State<MainScreen> {
   int index = 2;
 
   final screens = [
-    BuchungenScreen(),
+    BuchungenScreen(today: DateTime.now()),
     SuchenScreen(),
     HomeScreen(),
     HinzufuegenScreen(),
