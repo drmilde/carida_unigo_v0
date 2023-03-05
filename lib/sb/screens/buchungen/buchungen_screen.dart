@@ -37,8 +37,9 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
         length: 2,
         child: Column(
           children: [
-            SizedBox(height:8),
-            Container(width: 350, child: DateSelectWidget()),
+            WeekdaySelectWidget(
+              today: DateTime.now(),
+            ),
             TabBar(
               labelColor: Colors.black,
               tabs: [
@@ -59,7 +60,7 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
                     ],
                     mainAxisAlignment: MainAxisAlignment.center,
                   ),
-                  height: 48,
+                  height: 32,
                 ),
                 Tab(
                   child: Row(
@@ -78,7 +79,7 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
                     ],
                     mainAxisAlignment: MainAxisAlignment.center,
                   ),
-                  height: 48,
+                  height: 32,
                 ),
               ],
             ),
@@ -101,8 +102,6 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: 16),
-          SizedBox(height: 16),
           Obx(
             () {
               int _change = _controller.somethingChanged.value;
