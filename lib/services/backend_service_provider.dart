@@ -2,8 +2,15 @@ import 'dart:convert' show utf8;
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:projects/services/controller/ug_state_controller.dart';
+import 'package:projects/services/extensions/unigo_service_nutzer_extension.dart';
+import 'package:projects/services/extensions/unigo_service_profil_extension.dart';
+import 'package:projects/services/unigo_service.dart';
 
+import 'model/nutzer.dart';
 import 'model/object_not_found_exception.dart';
+import 'model/profil.dart';
+import 'persistence/user_config.dart';
 
 class BackendServiceProvider {
   //static String host = "localhost:8000";
@@ -15,6 +22,9 @@ class BackendServiceProvider {
   static var headers = {
     'Authorization': 'Token d4b07361a2605d8255c3bf3d706615a911c843bb'
   };
+
+  static UGStateController _controller = Get.find();
+  static UniGoService service = UniGoService();
 
   /* HELPER */
 
@@ -134,5 +144,92 @@ class BackendServiceProvider {
       return true as RT;
     }
     return false as RT;
+  }
+
+  /* komplexere Aktionen */
+
+  static Future<bool> registerNewUser() async {
+    // TODO load relevant data
+    // TODO create User and store id, profilID und UUID
+
+    bool result = true;
+
+    // Anlegen des Profils und speichern der profil_id
+    Profil profil = Profil.empty(
+      id: 0,
+      vorname: "vorname",
+      beschreibung: "beschreibung",
+      bewertung: "bewertung",
+      fahrzeug: "fahrzeug",
+      kmgefahren: 0,
+      raucher: "nein",
+      tier: "nein",
+    );
+
+    Profil profil_answer = await service.createProfilById(
+      id: 0,
+      data: profil,
+    );
+
+    // Falls Profil erfolgreich angelegt wurde, dann Nutzer anlegen
+    if (profil_answer.id != 0) {
+      Nutzer nutzer = Nutzer(
+        id: 0,
+        vorname: "anonym",
+        nachname: "anonym",
+        email: "mail@anonymus.de",
+        geburtsdatum: "01-01-1970",
+        passwort: "unbekannt",
+        uuid: "",
+        hasprofile: [profil_answer.id],
+      );
+
+      Nutzer nutzer_answer =
+          await service.createNutzerById(id: 0, data: nutzer);
+
+      /* Falls Nutzer erfolgreich angelegt wurde, Übertragung in das lokale Profil */
+      if (nutzer_answer.id != 0) {
+        print("Profil ID: ${profil_answer.id}");
+        print("Nutzer ID: ${nutzer_answer.id}");
+        print("Nutzer UUID: ${nutzer_answer.uuid}");
+
+        User user = User(
+          vorname: "",
+          nachname: "",
+          email: "",
+          fdnummer: "",
+          geburtsdatum: "",
+          passwort: "",
+          profilId: profil_answer.id,
+          id: nutzer_answer.id,
+          uuid: nutzer_answer.uuid,
+        );
+
+        Profile profile = Profile(
+          profilId: profil_answer.id,
+          uuid: nutzer_answer.uuid,
+          displayName: "",
+          tier: false,
+          rauchen: false,
+          bewertung: 0.0,
+          fahrzeug: ["fahrzeug"],
+          kmgefahren: 0,
+          punktegesammelt: 0,
+        );
+
+        UserConfig config = UserConfig(
+          version: "v1",
+          user: user,
+          profile: profile,
+        );
+
+        _controller.userConfig = config;
+        result = await _controller.persistenceManager
+            .saveStore(_controller.userConfig);
+
+        print("UserConfig created and persisted: ${result}");
+      }
+    }
+    return result;
   }
 }

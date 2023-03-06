@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:projects/sb/screens/home/main_screen.dart';
 import 'package:projects/sb/screens/welcome/anonymes_registrieren_screen.dart';
 import 'package:projects/screens/widgets/carida_logo_widget.dart';
 import 'package:projects/screens/widgets/custom_round_button.dart';
@@ -16,7 +17,12 @@ class StartScreen extends StatelessWidget {
   UGStateController _controller = Get.find();
   bool isRegistered = true;
 
-  StartScreen({Key? key}) : super(key: key);
+  StartScreen({Key? key}) : super(key: key) {
+    // TODO: implement StartScreen
+
+    isRegistered = _controller.userConfig.isValid();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +66,7 @@ class StartScreen extends StatelessWidget {
                     color: _controller.appConstants.light_grey,
                     callback: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => AnmeldenScreen()));
+                          builder: (context) => MainScreen()));
                     },
                   ),
                 )
@@ -80,7 +86,7 @@ class StartScreen extends StatelessWidget {
             height: 24,
           ),
           Container(
-            width: double.infinity,
+            width: 300,
             child: Text(
               'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.',
               style: TextStyle(
@@ -89,6 +95,9 @@ class StartScreen extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
+          ),
+          SizedBox(
+            height: 80,
           ),
         ],
       ),

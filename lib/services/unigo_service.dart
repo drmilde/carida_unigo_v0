@@ -9,6 +9,7 @@ class UniGoService {
   final String methodCreateObjectById = "createObjectById";
   final String methodDeleteObjectById = "deleteObjectById";
 
+
   // Hier alle CRUD Operationen
 
   Future<RT> wrapper<RT, T>({
