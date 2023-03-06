@@ -401,19 +401,20 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> {
                 hasprofile: [],
               );
 
-              bool result =
+              Angebot result =
                   await service.createAngebotById(id: 0, data: angebot);
+
 
               print(result);
 
-              if (result) {
+              if (result.id != 0) {
                 dialog = CustomPopUp(
-                  title: "Fahrt hinzugefügt",
+                  title: "Angebot hinzugefügt",
                   content: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Container(
                       child: Text(
-                        "Ihre Fahrt wurde erfolgreich hinzugefügt.",
+                        "Ihr Angebot wurde erfolgreich hinzugefügt.",
                         style: GoogleFonts.inter(
                           fontSize: 14,
                         ),

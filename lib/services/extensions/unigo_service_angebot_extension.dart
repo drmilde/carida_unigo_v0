@@ -59,13 +59,13 @@ extension ServiceAngebotExtension on UniGoService {
     );
   }
 
-  Future<bool> createAngebotById(
+  Future<Angebot> createAngebotById(
       {required int id, required Angebot data}) async {
-    return wrapper<bool, Angebot>(
+    return wrapper<Angebot, Angebot>(
       method: methodCreateObjectById,
       id: id,
       data: data,
-      initRTVal: false,
+      initRTVal: Angebot.empty(datum: DateTime.now()),
       resourcePath: "angebot",
       objectFromJson: angebotFromJson,
       listFromJson: angebotListFromJson,

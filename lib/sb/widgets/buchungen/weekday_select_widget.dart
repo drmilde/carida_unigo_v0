@@ -66,7 +66,6 @@ class _WeekdaySelectWidgetState extends State<WeekdaySelectWidget> {
   Widget _makeMyDay({String day = "", String date = "", int index = 0}) {
     return GestureDetector(
       onTap: () {
-        print(index);
         setState(() {
           selected = index;
         });

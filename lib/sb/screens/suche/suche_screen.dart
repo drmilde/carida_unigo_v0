@@ -37,6 +37,7 @@ class _SuchenScreenState extends State<SuchenScreen> {
     fahrten = await service.searchAngebotList(
       searchparams: {"search": search},
     );
+    print (fahrten.length);
     return true;
   }
 

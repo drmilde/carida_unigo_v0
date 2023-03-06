@@ -7,7 +7,7 @@ class AngebotCache {
   UniGoService service = UniGoService();
   List<Angebot> cache = [];
 
-  Future<int> loadAngebotCache() async {
+  Future<int> reload() async {
     cache = await service.getAngebotList();
     return cache.length;
   }

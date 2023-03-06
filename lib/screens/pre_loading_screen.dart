@@ -60,7 +60,7 @@ class PreLoadingScreen extends StatelessWidget {
       _controller.userConfig = UserConfig.empty();
     }
 
-    int numberLoaded = await _controller.angebotCache.loadAngebotCache();
+    int numberLoaded = await _controller.angebotCache.reload();
     print("Anzahl Angebote: ${numberLoaded}");
 
     return true;

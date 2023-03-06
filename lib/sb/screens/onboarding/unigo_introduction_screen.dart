@@ -69,32 +69,7 @@ class UniGoIntroductionScreenState extends State<UniGoIntroductionScreen> {
           ),
         ),
       ),
-      globalFooter: SizedBox(
-        width: double.infinity,
-        height: 48,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0.0),
-          child: CustomRoundButton(
-            callback: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) =>  MainScreen()),
-              );            },
-            text: "Direkt zur App!",
-            textColor: Colors.white,
-            height: 32,
-          ),
-        ),
-        /*
-        child: ElevatedButton(
-          child: const Text(
-            'Direkt zur App!',
-            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-          ),
-          onPressed: () => _onIntroEnd(context),
-        ),
-
-         */
-      ),
+      //globalFooter: _globalFooter(context),
       pages: [
         PageViewModel(
           title: "Das Dashboard",
@@ -180,6 +155,36 @@ class UniGoIntroductionScreenState extends State<UniGoIntroductionScreen> {
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
         ),
       ),
+    );
+  }
+
+  SizedBox _globalFooter(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 48,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0.0),
+        child: CustomRoundButton(
+          callback: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => MainScreen()),
+            );
+          },
+          text: "Direkt zur App!",
+          textColor: Colors.white,
+          height: 32,
+        ),
+      ),
+      /*
+      child: ElevatedButton(
+        child: const Text(
+          'Direkt zur App!',
+          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+        ),
+        onPressed: () => _onIntroEnd(context),
+      ),
+
+       */
     );
   }
 

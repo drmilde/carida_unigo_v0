@@ -45,7 +45,7 @@ class _AngebotListScreenState extends State<AngebotListScreen> {
                 zielort: "da",
                 hasprofile: []);
 
-            bool result = await service.createAngebotById(id: 0, data: angebot);
+            Angebot result = await service.createAngebotById(id: 0, data: angebot);
 
             setState(() {
               // update der Liste

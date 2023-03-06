@@ -81,6 +81,7 @@ flutter:
     - assets/introduction/
     - assets/avatars/
     - assets/fonts/
+    - assets/carida_background.svg
     - assets/carida_for_campus.svg
     - assets/logo_hochschule_fulda.svg
     - assets/background.svg

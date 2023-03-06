@@ -27,7 +27,8 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
 
   // Load the list data from server
   Future<bool> _loadFahrten() async {
-    fahrten = await service.getAngebotList();
+    //fahrten = await service.getAngebotList();
+    await _controller.angebotCache.reload();
 
     return true;
   }
@@ -149,9 +150,15 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
           setState(() {});
         },
         child: ListView.builder(
-          itemCount: fahrten.length,
+          //itemCount: fahrten.length,
+          itemCount: _controller.angebotCache.cache.length,
           itemBuilder: (context, index) {
-            final fahrt = fahrten[index];
+            //final fahrt = fahrten[index];
+            final fahrt = _controller.angebotCache.cache[index];
+            DateTime now = fahrt.datum;
+            if (widget.today.subtract(Duration(hours: 23, minutes: 59)).isAfter(now)) {
+              return Container();
+            }
             return AngebotCardWidget(
               angebot: fahrt,
               onDelete: () async {
