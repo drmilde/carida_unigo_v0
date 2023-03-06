@@ -16,7 +16,7 @@ class RemoteServices {
     search = search.replaceAll(",", " ");
     search = search.replaceAll(RegExp(r"\s+"), " ");
     search = search.replaceAll(" ", "+");
-    print(search);
+    //print(search);
 
     String uri_string = "https://nominatim.openstreetmap.org/search?q=" +
         search +
