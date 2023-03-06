@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:projects/sb/screens/onboarding/unigo_introduction_screen.dart';
+import 'package:projects/sb/screens/welcome/start_screen.dart';
 import 'package:projects/screens/widgets/carida_logo_widget.dart';
 import 'package:projects/screens/widgets/custom_round_button.dart';
 import 'package:projects/screens/widgets/hsfulda_logo_widget.dart';
@@ -43,7 +44,7 @@ class PreLoadingScreen extends StatelessWidget {
     try {
       Nutzer nutzer =
           await service.getNutzerById(id: _controller.userConfig.user.id);
-      print ("OK: Nutzer existiert auf dem Server");
+      print("OK: Nutzer existiert auf dem Server");
     } on Exception catch (e) {
       // TODO
       print("FAIL: Nutzer auf dem Server nicht gefunden");
@@ -53,7 +54,7 @@ class PreLoadingScreen extends StatelessWidget {
     try {
       Profil profil =
           await service.getProfilById(id: _controller.userConfig.user.profilId);
-      print ("OK: Profil existiert auf dem Server");
+      print("OK: Profil existiert auf dem Server");
     } on Exception catch (e) {
       // TODO
       print("FAIL: Profil auf dem Server nicht gefunden");
@@ -137,13 +138,8 @@ class PreLoadingScreen extends StatelessWidget {
           textColor: _controller.appConstants.white,
           color: _controller.appConstants.turquoise,
           callback: () {
-            /*
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => LoginScreen()));
-
-               */
             Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => MainScreen()));
+                .push(MaterialPageRoute(builder: (context) => StartScreen()));
           },
         ),
         Expanded(

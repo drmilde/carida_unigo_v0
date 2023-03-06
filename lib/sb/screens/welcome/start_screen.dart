@@ -8,20 +8,23 @@ import 'package:projects/screens/widgets/hsfulda_logo_widget.dart';
 import 'package:projects/screens/widgets/svg_dynamic_scaffold_widget.dart';
 import 'package:projects/screens/widgets/svg_logo_widget.dart';
 import 'package:projects/services/controller/ug_state_controller.dart';
+import 'package:projects/services/extensions/unigo_service_app_logic_extension.dart';
+import 'package:projects/services/unigo_service.dart';
 
+import '../../../screens/widgets/custom_popup_widget.dart';
 import '../../../screens/widgets/unigo_bottom_navigation_bar.dart';
 import 'anmelden_screen.dart';
 import 'registrieren_screen.dart';
 
 class StartScreen extends StatelessWidget {
   UGStateController _controller = Get.find();
+  UniGoService service = UniGoService();
   bool isRegistered = true;
 
   StartScreen({Key? key}) : super(key: key) {
     // TODO: implement StartScreen
 
     isRegistered = _controller.userConfig.isValid();
-
   }
 
   @override
@@ -47,7 +50,7 @@ class StartScreen extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(
-              height: MediaQuery.of(context).size.height/2.25,
+            height: MediaQuery.of(context).size.height / 2.25,
           ),
           SVGLogoWidget(width: 150),
           CaridaLogoWidget(width: 150),
@@ -76,9 +79,28 @@ class StartScreen extends StatelessWidget {
                     text: "Registrieren",
                     textColor: _controller.appConstants.dark_grey,
                     color: _controller.appConstants.light_grey,
-                    callback: () {
+                    callback: () async {
+                      CustomPopUp dialog = CustomPopUp(
+                        title: "Willkommen bei Carida",
+                        content: Container(
+                          width: 250,
+                          child: Text("Wir haben für Sie einen"
+                              " anonymen Nutzer und ein leeres Profil angelegt."
+                              " Bitte aktualisieren Sie jetzt Ihr Profil."
+                              " Wir speichern keine persönlichen"
+                              " Informationen auf dem Server."),
+                        ),
+                        button1Text: "Weiter zur App!",
+                      );
+
+                      bool userRegistered = await service.registerNewUser();
+
+                      if (userRegistered) {
+                        int? answer = await dialog.showCustomDialog(context);
+                      }
+
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => AnonymesRegistrierenScreen()));
+                          builder: (context) => MainScreen()));
                     },
                   ),
                 ),

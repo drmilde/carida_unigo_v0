@@ -6,8 +6,6 @@ import 'package:projects/sb/screens/welcome/start_screen.dart';
 import 'package:projects/screens/widgets/custom_round_button.dart';
 import 'package:projects/screens/widgets/svg_logo_widget.dart';
 
-import '../welcome/anonymes_registrieren_screen.dart';
-
 class UniGoIntroductionScreen extends StatefulWidget {
   const UniGoIntroductionScreen({Key? key}) : super(key: key);
 
