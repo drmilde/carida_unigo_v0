@@ -88,7 +88,7 @@ class _AnmeldenScreenState extends State<AnmeldenScreen> {
                       Container(
                         //color:Colors.blue,
                         width: double.infinity,
-                        margin: EdgeInsets.fromLTRB(60, 200, 60, 20),
+                        margin: EdgeInsets.fromLTRB(60, 130, 60, 20),
                         child: CustomFormSubmitButton(
                           formKey: formKey,
                           text: "Anmelden",
@@ -107,10 +107,13 @@ class _AnmeldenScreenState extends State<AnmeldenScreen> {
                           },
                         ),
                       ),
-                      SvgPicture.asset('assets/images/logo.svg'),
                     ],
                   ),
                 ),
+              ),
+              Container(
+                //color: Colors.blue,
+                child: SvgPicture.asset('assets/images/logo.svg', height: 50, width: 300,),
               ),
             ],
           ),

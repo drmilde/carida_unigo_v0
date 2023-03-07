@@ -49,7 +49,7 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
               },
             ),
             TabBar(
-              labelColor: Colors.black,
+              labelColor: _controller.appConstants.dark_grey,
               tabs: [
                 Tab(
                   child: Row(

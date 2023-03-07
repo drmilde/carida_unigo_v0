@@ -116,7 +116,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ),
         elevation: 0,
-        backgroundColor: _controller.appConstants.turquoise,
+        //backgroundColor: _controller.appConstants.turquoise,
         leading: Container(),
         /*
         leading: BackButton(
