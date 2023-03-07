@@ -93,7 +93,7 @@ class _SuchenScreenState extends State<SuchenScreen> {
               },
             ),
             SizedBox(
-              height: 24,
+              height: 16,
             ),
           ],
         ),
@@ -111,13 +111,11 @@ class _SuchenScreenState extends State<SuchenScreen> {
   Container _fahrtSuchen() {
     // TODO Schatten unten weg ???
     return Container(
+      margin: EdgeInsets.all(16),
       width: double.infinity,
       decoration: BoxDecoration(
         color: colors[4],
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-        ),
+        borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),

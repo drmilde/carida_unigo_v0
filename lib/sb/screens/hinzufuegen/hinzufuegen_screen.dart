@@ -378,6 +378,7 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> with TickerProvid
             text: "Hinzufügen",
             textColor: _controller.appConstants.white,
             color: _controller.appConstants.turquoise,
+            showShadow: true,
             callback: () async {
               String standort = formKey.currentState!.value['standort'];
               String ziel = formKey.currentState!.value['ziel'];
