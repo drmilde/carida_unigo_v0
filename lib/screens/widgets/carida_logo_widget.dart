@@ -13,7 +13,7 @@ class CaridaLogoWidget extends StatelessWidget {
         width: width,
         height: width / ar,
         child: SvgPicture.asset(
-          "assets/carida_for_campus.svg",
+          "assets/images/logo_caRida.svg",
           fit: BoxFit.contain,
         ));
   }
