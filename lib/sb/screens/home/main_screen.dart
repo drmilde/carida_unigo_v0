@@ -8,6 +8,7 @@ import '../../../services/controller/ug_state_controller.dart';
 import '../chat/chat_screen.dart';
 import '../einstellungen/einstellungen_screen.dart';
 import '../hinzufuegen/hinzufuegen_screen.dart';
+import '../hinzufuegen/hinzufuegen_screen_old.dart';
 import '../suche/suche_screen.dart';
 import 'home_screen.dart';
 
@@ -31,9 +32,9 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   final List<String> title = [
-    'Meine Angebote',
+    'Meine Fahrten',
     'Angebote suchen',
-    'Dashboard',
+    '',
     'Angebot hinzufügen',
     'Meine Nachrichten',
   ];
@@ -111,12 +112,12 @@ class _MainScreenState extends State<MainScreen> {
         title: Text(
           title,
           style: GoogleFonts.inter(
-            color: _controller.appConstants.white,
+            color: _controller.appConstants.dark_grey,
             fontSize: 18,
           ),
         ),
         elevation: 0,
-        //backgroundColor: _controller.appConstants.turquoise,
+        backgroundColor: Colors.transparent,
         leading: Container(),
         /*
         leading: BackButton(
@@ -147,12 +148,12 @@ class _MainScreenState extends State<MainScreen> {
         title: Text(
           title,
           style: GoogleFonts.inter(
-            color: _controller.appConstants.white,
+            color: _controller.appConstants.dark_grey,
             fontSize: 18,
           ),
         ),
         elevation: 0,
-        backgroundColor: _controller.appConstants.turquoise,
+        backgroundColor: Colors.transparent,
         leading: Container(),
         /*
         leading: BackButton(
