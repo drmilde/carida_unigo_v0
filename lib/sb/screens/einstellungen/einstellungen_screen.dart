@@ -6,6 +6,7 @@ import 'package:projects/services/controller/ug_state_controller.dart';
 import 'package:get/get.dart';
 
 import '../home/main_screen.dart';
+import 'bewertung_screen.dart';
 
 class EinstellungenScreen extends StatefulWidget {
   const EinstellungenScreen({Key? key}) : super(key: key);
@@ -27,6 +28,8 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
     'Allgemein',
     'Datenschutz',
     'Impressum',
+    'Hilfe',
+    'Feedback'
   ];
 
   final List<Icon> icons =[
@@ -36,13 +39,15 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
     Icon(Icons.settings),
     Icon(Icons.lock),
     Icon(Icons.warning),
+    Icon(Icons.help),
+    Icon(Icons.feedback)
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
-      extendBodyBehindAppBar: true,
+      //extendBody: true,
+      //extendBodyBehindAppBar: true,
       //backgroundColor: Color.fromARGB(255, 28, 31, 31),
       appBar: _buildAppBar('Einstellungen', context),
       body: SafeArea(
@@ -54,6 +59,7 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
                 _einstellungen(titel[0], titel[1], icons[0], icons[1]),
                 _einstellungen(titel[2], titel[3], icons[2], icons[3]),
                 _einstellungen(titel[4], titel[5], icons[4], icons[5]),
+                _einstellungen(titel[6], titel[7], icons[6], icons[7]),
                 SizedBox(
                   height: 16,
                 ),
@@ -96,49 +102,58 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
                   //color: Colors.yellow,
                   child: Column(
                     children: [
-                      Row(
-                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: _controller.appConstants.white,
-                              borderRadius: BorderRadius.circular(80),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.1),
-                                  spreadRadius: 4,
-                                  blurRadius: 7,
-                                  offset: Offset(0, 3), // changes position of shadow
+                      GestureDetector(
+                        onTap: () {
+
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => BewertungScreen()));
+                        },
+                        child: Container(
+                          child: Row(
+                            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: _controller.appConstants.white,
+                                  borderRadius: BorderRadius.circular(80),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.1),
+                                      spreadRadius: 4,
+                                      blurRadius: 7,
+                                      offset: Offset(0, 3), // changes position of shadow
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                            child: icon1,
-                          ),
-                          SizedBox(
-                            width: 16,
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: Container(
-                              child: Text(
-                                titel1,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                //textAlign: TextAlign.left,
+                                child: icon1,
                               ),
-                            ),
+                              SizedBox(
+                                width: 16,
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: Container(
+                                  child: Text(
+                                    titel1,
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    //textAlign: TextAlign.left,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Container(
+                                  child: Icon(Icons.keyboard_arrow_right, size: 50,),
+                                ),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              child: Icon(Icons.keyboard_arrow_right, size: 50,),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                       SizedBox(
                         height: 16,
