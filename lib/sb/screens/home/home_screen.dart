@@ -50,60 +50,65 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget build(BuildContext context) {
-    return Scaffold(
+    return SafeArea(
       //backgroundColor: Colors.red,
-      body: Center(
-        child: Container(
-          height: double.infinity,
-          width: double.infinity,
-          decoration: BoxDecoration(
-              //color: Colors.green,
-              ),
-          child: Column(
-            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _profilePicture(image),
-              _spacerLarge(),
-              _name(),
-              _spacerLarge(),
-              _ratingBar(),
-              _spacerLarge(),
-              _statistics(),
-              _spacerLarge(),
-              Container(
-                width: double.infinity,
-                //margin: EdgeInsets.fromLTRB(20, 10, 20, 20),
-                decoration: BoxDecoration(
-                  color: colors[4],
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 3,
-                      blurRadius: 7,
-                      offset: Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
-                ),
-                //color: Colors.yellow,
-                child: Column(children: [
+      child: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _profilePicture(image),
+                  _spacerSmall(),
+                  _name(),
+                  _spacerSmall(),
+                  _ratingBar(),
+                  _spacerLarge(),
+                  _statistics(),
                   _spacerSmall(),
                   Container(
-                    //margin: EdgeInsets.fromLTRB(20, 40, 20, 20),
-                    child: Text(
-                      'Deine nächste Fahrt:',
-                      style: TextStyle(fontSize: 24),
+                    width: double.infinity,
+                    margin: EdgeInsets.all(16),
+                    //margin: EdgeInsets.fromLTRB(20, 10, 20, 20),
+                    decoration: BoxDecoration(
+                      color: colors[4],
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 3,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
                     ),
+                    //color: Colors.yellow,
+                    child: Column(children: [
+                      _spacerLarge(),
+                      /*Container(
+                        //margin: EdgeInsets.fromLTRB(20, 40, 20, 20),
+                        child: Text(
+                          'Deine nächste Fahrt:',
+                          style: TextStyle(fontSize: 24),
+                        ),
+                      ),
+                      _spacerSmall(),*/
+                      _naechsteFahrt(fahrtDaten[0],fahrtDaten[1],fahrtDaten[2]),
+                      //_buchungenButton(),
+                    ]),
                   ),
-                  _spacerLarge(),
-                  _naechsteFahrt(fahrtDaten[0],fahrtDaten[1],fahrtDaten[2]),
-                  //_buchungenButton(),
-                ]),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
+          SizedBox(
+            height: 40,
+          ),
+        ],
       ),
+
     );
   }
 
@@ -183,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
           color: colors[1],
         ),
         onRatingUpdate: (rating) {
-          print(rating);
+          //print(rating);
         },
       ),
     );
@@ -233,18 +238,18 @@ class _HomeScreenState extends State<HomeScreen> {
       //margin: EdgeInsets.fromLTRB(25, 90, 25, 0),
       height: 150,
       width: 150,
-      /*decoration: BoxDecoration(
+      decoration: BoxDecoration(
         color: colors[0],
         borderRadius: BorderRadius.circular(80),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.grey.withOpacity(0.5),
             spreadRadius: 3,
             blurRadius: 7,
             offset: Offset(0, 3), // changes position of shadow
           ),
         ],
-      ),*/
+      ),
       child: Center(
         child: ClipRRect(
           borderRadius: BorderRadius.circular(80),
@@ -265,7 +270,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         children: [
           _displayFahrtInfo(start, ziel),
-          _spacerLarge(),
+          _spacerSmall(),
           Container(
             //margin: EdgeInsets.fromLTRB(20, 20, 20, 20),
             child: Text(
@@ -277,7 +282,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 0),
             child: CustomRoundButton(
-              text: "Starten",
+              text: "losfahren",
               textColor: _controller.appConstants.white,
               color: _controller.appConstants.turquoise,
               callback: () {
