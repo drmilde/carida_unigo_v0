@@ -40,14 +40,6 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
         length: 2,
         child: Column(
           children: [
-            WeekdaySelectWidget(
-              today: DateTime.now(),
-              onChange: (date) {
-                setState(() {
-                  widget.today = date;
-                });
-              },
-            ),
             TabBar(
               labelColor: _controller.appConstants.dark_grey,
               tabs: [
@@ -61,10 +53,10 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
                           fontSize: 14,
                         ),
                       ),
-                      SizedBox(
+                      /*SizedBox(
                         width: 32,
                       ),
-                      Icon(Icons.directions_car),
+                      Icon(Icons.directions_car),*/
                     ],
                     mainAxisAlignment: MainAxisAlignment.center,
                   ),
@@ -80,16 +72,26 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
                           fontSize: 14,
                         ),
                       ),
-                      SizedBox(
+                      /*SizedBox(
                         width: 32,
                       ),
-                      Icon(Icons.thumb_up_off_alt_rounded),
+                      Icon(Icons.thumb_up_off_alt_rounded),*/
                     ],
                     mainAxisAlignment: MainAxisAlignment.center,
                   ),
-                  height: 32,
                 ),
               ],
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            WeekdaySelectWidget(
+              today: DateTime.now(),
+              onChange: (date) {
+                setState(() {
+                  widget.today = date;
+                });
+              },
             ),
             Expanded(
               child: TabBarView(
@@ -136,7 +138,7 @@ class _BuchungenScreenState extends State<BuchungenScreen> {
               height: 16,
             ),*/
           SizedBox(
-            height: 24,
+            height: 16,
           ),
         ],
       ),
