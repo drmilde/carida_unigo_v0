@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:projects/sb/screens/einstellungen/einstellungen_screen.dart';
 
-class BewertungScreen extends StatefulWidget {
-  const BewertungScreen({Key? key}) : super(key: key);
+class PunkteScreen extends StatefulWidget {
+  const PunkteScreen({Key? key}) : super(key: key);
 
   @override
-  State<BewertungScreen> createState() => _BewertungScreenState();
+  State<PunkteScreen> createState() => _PunkteScreenState();
 }
 
-class _BewertungScreenState extends State<BewertungScreen> {
+class _PunkteScreenState extends State<PunkteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar('Bewertung', context),
+      appBar: _buildAppBar('Punkte', context),
     );
   }
   AppBar _buildAppBar(String title, BuildContext context) {

@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:projects/sb/screens/home/main_screen.dart';
+import 'package:projects/screens/empty_pre_loading_screen.dart';
 import 'package:projects/screens/pre_loading_screen.dart';
 
 // Design in
@@ -61,7 +63,8 @@ class MyApp extends StatelessWidget {
         Locale('en'), // English
         Locale('es'),
       ],
-      home: PreLoadingScreen(),
+      //home: PreLoadingScreen(),
+      home: EmptyPreLoadingScreen(),
     );
   }
 }
