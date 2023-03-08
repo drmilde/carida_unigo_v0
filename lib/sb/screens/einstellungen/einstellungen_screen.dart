@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:projects/sb/screens/einstellungen/allgemein_screen.dart';
+import 'package:projects/sb/screens/einstellungen/datenschutz_screen.dart';
+import 'package:projects/sb/screens/einstellungen/feedback_screen.dart';
+import 'package:projects/sb/screens/einstellungen/hilfe_screen.dart';
+import 'package:projects/sb/screens/einstellungen/impressum_screen.dart';
+import 'package:projects/sb/screens/einstellungen/mitteilungen_screen.dart';
 import 'package:projects/sb/screens/einstellungen/profil_einstellungen_screen.dart';
 import 'package:projects/sb/screens/einstellungen/punkte_screen.dart';
 import 'package:projects/sb/screens/welcome/start_screen.dart';
@@ -58,24 +64,42 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
         Icon(Icons.notifications),
         'Allgemein',
         Icon(Icons.settings),
-        callback1: () {},
-        callback2: () {},
+        callback1: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => MitteilungenScreen()));
+        },
+        callback2: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => AllgemeinScreen()));
+        },
       ),
       Box(
         'Datenschutz',
         Icon(Icons.lock),
         'Impressum',
         Icon(Icons.warning),
-        callback1: () {},
-        callback2: () {},
+        callback1: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => DatenschutzScreen()));
+        },
+        callback2: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => ImpressumScreen()));
+        },
       ),
       Box(
         'Hilfe',
         Icon(Icons.help),
         'Feedback',
         Icon(Icons.feedback),
-        callback1: () {},
-        callback2: () {},
+        callback1: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => HilfeScreen()));
+        },
+        callback2: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => FeedbackScreen()));
+        },
       ),
     ];
     // TODO: implement initState
