@@ -53,7 +53,7 @@ class ClickToAddMarkerScreenState extends State<ClickToAddMarkerScreen> {
         child: Column(
           children: [
             Container(
-              height: 200,
+              height: 100,
               child: ListView.builder(
                 itemCount: ortschaften.ortschaften.length,
                 itemBuilder: (context, index) {
@@ -100,7 +100,7 @@ class ClickToAddMarkerScreenState extends State<ClickToAddMarkerScreen> {
               ),
             ),
             Container(
-                height: 100,
+                height: 40,
                 color: Colors.yellow,
                 child: CustomRoundButton(
                   text: "harvest",
@@ -137,7 +137,7 @@ class ClickToAddMarkerScreenState extends State<ClickToAddMarkerScreen> {
   /* not allowed */
 
   void harvest() {
-    int index = 0;
+    int index = 2278;
     String startort = ortschaften.ortschaften[index];
     final periodicTimer =
         Timer.periodic(const Duration(seconds: 15), (timer) async {

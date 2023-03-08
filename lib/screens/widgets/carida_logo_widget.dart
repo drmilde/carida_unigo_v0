@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CaridaLogoWidget extends StatelessWidget {
-  double width = 647;
-  double ar = 647 / 341;
+  double width = 646.28;
+  double ar = 646.28 / 234.59;
 
   CaridaLogoWidget({required this.width, Key? key}) : super(key: key);
 
