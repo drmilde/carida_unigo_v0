@@ -116,6 +116,7 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
       body: SafeArea(
         child: Column(
           children: [
+            _profil(),
             Expanded(
               child: ListView.builder(
                 itemCount: boxen.length + 1,
