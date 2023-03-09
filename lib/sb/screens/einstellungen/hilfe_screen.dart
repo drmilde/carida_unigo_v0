@@ -17,11 +17,38 @@ class _HilfeScreenState extends State<HilfeScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Container(
-              height: 200,
-              width: double.infinity,
-              color: Colors.amber,
-              child: Text("Bewertungs Statistik (letzer Monat?)")
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 48,
+                width: double.infinity,
+                color: Colors.amber,
+                child: Center(
+                  child: Text("Onboarding"),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 48,
+                width: double.infinity,
+                color: Colors.amber,
+                child: Center(
+                  child: Text("FAQ"),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 48,
+                width: double.infinity,
+                color: Colors.amber,
+                child: Center(
+                  child: Text("Kontakt"),
+                ),
+              ),
             ),
           ],
         ),

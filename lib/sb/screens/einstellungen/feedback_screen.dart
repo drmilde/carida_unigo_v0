@@ -13,6 +13,35 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar('Feedback', context),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 400,
+                width: double.infinity,
+                color: Colors.blue,
+                child: Center(
+                  child: Text("Onboarding"),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 48,
+                width: double.infinity,
+                color: Colors.teal,
+                child: Center(
+                  child: Text("senden"),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
   AppBar _buildAppBar(String title, BuildContext context) {
