@@ -93,7 +93,7 @@ class UniGoIntroductionScreenState extends State<UniGoIntroductionScreen> {
           title: "Meine Angebote",
           bodyWidget: _buildBodyWidget(
             imageName: "buchungen.png",
-            text: "Hier sehen Sie Ihre wann Sie selber fahren und"
+            text: "Hier sehen Sie Ihre Angebote: wann Sie selber fahren und"
                 " und wann sie mitfahren möchten.",
             bodyStyle: bodyStyle,
           ),

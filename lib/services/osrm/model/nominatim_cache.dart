@@ -1,3 +1,4 @@
+import 'package:latlong2/latlong.dart';
 import 'package:string_similarity/string_similarity.dart';
 
 class NominatimCache {
@@ -16,6 +17,7 @@ class NominatimCache {
     "dessauer strasse 27 koblenz": "7.56688441015861,50.33962555",
     "dessauer strasse koblenz": "7.56688441015861,50.33962555",
   };
+
 
   String? getSimilar(String search) {
     double maxSim = 0.0;

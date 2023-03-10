@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projects/sb/screens/buchungen/buchungen_screen.dart';
+import 'package:projects/sb/screens/suche/map_suche_screen.dart';
 
 import '../../../services/controller/ug_state_controller.dart';
 import '../chat/chat_screen.dart';
@@ -25,7 +26,8 @@ class _MainScreenState extends State<MainScreen> {
 
   final screens = [
     BuchungenScreen(today: DateTime.now()),
-    SuchenScreen(),
+    //SuchenScreen(),
+    MapSucheScreen(),
     HomeScreen(),
     HinzufuegenScreen(),
     ChatScreen(),

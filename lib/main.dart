@@ -63,8 +63,8 @@ class MyApp extends StatelessWidget {
         Locale('en'), // English
         Locale('es'),
       ],
-      //home: PreLoadingScreen(),
-      home: EmptyPreLoadingScreen(),
+      home: PreLoadingScreen(),
+      //home: EmptyPreLoadingScreen(),
     );
   }
 }
