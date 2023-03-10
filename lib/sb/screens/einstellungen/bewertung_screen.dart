@@ -64,7 +64,29 @@ class _BewertungScreenState extends State<BewertungScreen> {
                   itemCount: 3,
                   itemBuilder: (context, index) {
                     if (index == 0) {
-                      return BarChartWidget();
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Container(
+                          width: double.infinity,
+                          height: 350,
+                          margin: EdgeInsets.fromLTRB(0, 10, 0, 20),
+                          padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                          decoration: BoxDecoration(
+                            color: _controller.appConstants.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 4,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: BarChartWidget(werte: [1, 2, 3, 4, 5, 4, 3]),
+                        ),
+                      );
                       //return _buildBoxPlot();
                     } else if (index == 1) {
                       return Padding(
