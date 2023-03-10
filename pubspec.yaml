@@ -53,6 +53,7 @@ dependencies:
   introduction_screen: ^3.1.6
   dartdap: ^0.6.5
   modal_bottom_sheet: ^2.1.2
+  flutter_switch: ^0.3.2
 
 dev_dependencies:
   flutter_test:
