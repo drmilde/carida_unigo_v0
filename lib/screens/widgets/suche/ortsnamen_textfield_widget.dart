@@ -24,7 +24,7 @@ class OrtsnamenAutoCompleteWidget extends StatelessWidget {
       optionsBuilder: (TextEditingValue textEditingValue) {
         return lookupOrtsnamen
             .where((Mapping county) => county.searchName
-                .contains(textEditingValue.text.toLowerCase().trim()))
+                .contains(_normalizeSearchTerm(textEditingValue)))
             .toList();
       },
       displayStringForOption: (Mapping option) => option.name,
@@ -114,5 +114,15 @@ class OrtsnamenAutoCompleteWidget extends StatelessWidget {
         );
       },
     );
+  }
+
+  String _normalizeSearchTerm(TextEditingValue textEditingValue) {
+    return textEditingValue.text
+        .toLowerCase()
+        .replaceAll(RegExp('[^a-zöäüß]'), ' ')
+        .replaceAll("  ", " ")
+        .replaceAll("  ", " ")
+        .replaceAll("  ", " ")
+        .trim();
   }
 }
