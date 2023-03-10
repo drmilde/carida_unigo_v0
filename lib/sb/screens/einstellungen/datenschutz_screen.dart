@@ -3,6 +3,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:projects/sb/screens/einstellungen/einstellungen_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../services/controller/ug_state_controller.dart';
 
@@ -25,8 +26,15 @@ class _DatenschutzScreenState extends State<DatenschutzScreen> {
   UGStateController _controller = Get.find();
   List<Box> boxen = [];
 
-  @override
+  final Uri _url = Uri.parse('https://www.hs-fulda.de/datenschutz');
 
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
+  }
+
+  @override
   void initState() {
     boxen = [
       Box("Standort", 'Datenschutzerklärung', false),
@@ -50,12 +58,12 @@ class _DatenschutzScreenState extends State<DatenschutzScreen> {
                   itemCount: boxen.length,
                   itemBuilder: (context, index) {
                     return Column(
-                        children: [
+                      children: [
                         _datenschutz(boxen[index]),
-                    SizedBox(
-                    height: 8,
-                    ),
-                    ],
+                        SizedBox(
+                          height: 8,
+                        ),
+                      ],
                     );
                   },
                 ),
@@ -66,6 +74,7 @@ class _DatenschutzScreenState extends State<DatenschutzScreen> {
       ),
     );
   }
+
   AppBar _buildAppBar(String title, BuildContext context) {
     return AppBar(
       title: Text(
@@ -80,8 +89,7 @@ class _DatenschutzScreenState extends State<DatenschutzScreen> {
       leading: BackButton(
         color: Color.fromARGB(255, 28, 31, 31),
         onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => EinstellungenScreen()));
+          Navigator.of(context).pop();
         },
       ),
       actions: [],
@@ -159,33 +167,39 @@ class _DatenschutzScreenState extends State<DatenschutzScreen> {
             SizedBox(
               height: 16,
             ),
-            Container(
-              child: Row(
-                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    flex: 3,
-                    child: Container(
-                      child: Text(
-                        box.label2,
-                        style: TextStyle(
-                          fontSize: 15,
-                          //fontWeight: FontWeight.bold,
+            GestureDetector(
+              onTap: () async {
+                print ("launch");
+                _launchUrl();
+              },
+              child: Container(
+                child: Row(
+                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: Container(
+                        child: Text(
+                          box.label2,
+                          style: TextStyle(
+                            fontSize: 15,
+                            //fontWeight: FontWeight.bold,
+                          ),
+                          //textAlign: TextAlign.left,
                         ),
-                        //textAlign: TextAlign.left,
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      child: Icon(
-                        Icons.keyboard_arrow_right,
-                        size: 50,
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        child: Icon(
+                          Icons.keyboard_arrow_right,
+                          size: 50,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],

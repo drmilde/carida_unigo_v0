@@ -26,17 +26,12 @@ class _BewertungScreenState extends State<BewertungScreen> {
   List<Box> boxen = [];
 
   final List<String> labelRating = [
-    'Durschnitt',
+    'Durchschnitt',
     'Freundlich',
     'Pünktlich',
     'Gesprächig'
   ];
-  final List<double> ratings = [
-    3,
-    4.0,
-    3.0,
-    2.0
-  ];
+  final List<double> ratings = [3, 4.0, 3.0, 2.0];
 
   bool status1 = false;
   bool status2 = false;
@@ -107,7 +102,7 @@ class _BewertungScreenState extends State<BewertungScreen> {
                                 spreadRadius: 4,
                                 blurRadius: 7,
                                 offset:
-                                Offset(0, 3), // changes position of shadow
+                                    Offset(0, 3), // changes position of shadow
                               ),
                             ],
                           ),
@@ -155,8 +150,7 @@ class _BewertungScreenState extends State<BewertungScreen> {
                         ),
                       );
 
-
-                        /*Column(
+                      /*Column(
                         children: [
                           Text(
                             labelRating[index - 1],
@@ -171,7 +165,7 @@ class _BewertungScreenState extends State<BewertungScreen> {
                         ],
                       );*/
                     } else {
-                      return _bewertung(boxen[index-2]);
+                      return _bewertung(boxen[index - 2]);
                     }
                   },
                 ),
@@ -208,8 +202,7 @@ class _BewertungScreenState extends State<BewertungScreen> {
       leading: BackButton(
         color: Color.fromARGB(255, 28, 31, 31),
         onPressed: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => EinstellungenScreen()));
+          Navigator.of(context).pop();
         },
       ),
       actions: [],
@@ -284,13 +277,14 @@ class _BewertungScreenState extends State<BewertungScreen> {
                         width: 100.0,
                         height: 35.0,
                         valueFontSize: 17.0,
-                        activeTextFontWeight: FontWeight.normal,
-                        inactiveTextFontWeight: FontWeight.normal,
+                        activeTextFontWeight: FontWeight.bold,
+                        inactiveTextFontWeight: FontWeight.bold,
                         toggleSize: 23.0,
                         value: status1,
                         borderRadius: 20.0,
                         padding: 8.0,
                         showOnOff: true,
+                        activeColor: _controller.appConstants.turquoise,
                         onToggle: (val) {
                           setState(() {
                             status1 = val;
@@ -340,6 +334,7 @@ class _BewertungScreenState extends State<BewertungScreen> {
                         borderRadius: 20.0,
                         padding: 8.0,
                         showOnOff: true,
+                        activeColor: _controller.appConstants.turquoise,
                         onToggle: (val) {
                           setState(() {
                             status2 = val;
