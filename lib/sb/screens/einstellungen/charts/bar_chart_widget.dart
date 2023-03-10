@@ -9,7 +9,9 @@ import '../../../../services/controller/ug_state_controller.dart';
 import 'bar_chart.dart';
 
 class BarChartWidget extends StatefulWidget {
-  BarChartWidget({Key? key}) : super(key: key);
+  List<double> werte = <double>[];
+
+  BarChartWidget({required this.werte, Key? key}) : super(key: key);
 
   @override
   _BarChartWidgetState createState() => _BarChartWidgetState();
@@ -18,7 +20,7 @@ class BarChartWidget extends StatefulWidget {
 class _BarChartWidgetState extends State<BarChartWidget> {
   UGStateController _controller = Get.find();
   List<BarValue<void>> _values = <BarValue<void>>[];
-  double targetMax = 0;
+  double targetMax = 5;
   double targetMin = 0;
   bool _showValues = false; // zeigt Werte an
   bool _smoothPoints = false;
@@ -35,27 +37,10 @@ class _BarChartWidgetState extends State<BarChartWidget> {
   }
 
   void _updateValues() {
-    final Random _rand = Random();
-    final double _difference = _rand.nextDouble() * 10;
-    targetMax = 5 +
-        ((_rand.nextDouble() * _difference * 0.75) - (_difference * 0.25))
-            .roundToDouble();
+    _values.clear();
     _values.addAll(List.generate(minItems, (index) {
-      return BarValue<void>(
-          targetMax * 0.4 + _rand.nextDouble() * targetMax * 0.9);
+      return BarValue<void>(widget.werte[index]);
     }));
-    targetMin = targetMax - ((_rand.nextDouble() * 3) + (targetMax * 0.2));
-  }
-
-  void _addValues() {
-    _values = List.generate(minItems, (index) {
-      if (_values.length > index) {
-        return _values[index];
-      }
-
-      return BarValue<void>(
-          targetMax * 0.4 + Random().nextDouble() * targetMax * 0.9);
-    });
   }
 
   @override
@@ -96,30 +81,23 @@ class _BarChartWidgetState extends State<BarChartWidget> {
             horizontalAxisStep: 1,
             verticalAxisStep: 1,
             verticalValuesPadding: const EdgeInsets.symmetric(vertical: 4.0),
-            horizontalValuesPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+            horizontalValuesPadding:
+                const EdgeInsets.symmetric(horizontal: 4.0),
             textStyle: Theme.of(context).textTheme.caption,
             gridColor:
                 //Theme.of(context).colorScheme.primaryContainer.withOpacity(0.2),
                 Colors.white,
           ),
-          TargetAreaDecoration(
-            //areaPadding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-            targetAreaFillColor:
-                _controller.appConstants.light_grey.withOpacity(0.5), // Bereichsfarbe Hintergrund
-            targetLineColor: _controller.appConstants.dark_grey.withOpacity(0.5), // Bereichslinienfarbe Hintergrund
-            //Theme.of(context).colorScheme.error,
-            targetAreaRadius: BorderRadius.circular(20.0), // Bereichsradius Hintergrund
-            targetMax: targetMax,
-            targetMin: targetMin,
-            colorOverTarget: //_controller.appConstants.light_green,
-            Theme.of(context).colorScheme.error,
-          ),
+          //_buildDurchschnittsDing(context),
         ],
         foregroundDecorations: [
-          SparkLineDecoration( // line des Mittelpunkts
+          SparkLineDecoration(
+            // line des Mittelpunkts
             lineWidth: 2.0,
             lineColor: //_controller.appConstants.light_green,
-                Theme.of(context).primaryColor.withOpacity(_showLine ? 1.0 : 0.0),
+                Theme.of(context)
+                    .primaryColor
+                    .withOpacity(_showLine ? 1.0 : 0.0),
             smoothPoints: _smoothPoints,
           ),
           ValueDecoration(
@@ -129,9 +107,29 @@ class _BarChartWidgetState extends State<BarChartWidget> {
                 .button!
                 .copyWith(color: Theme.of(context).colorScheme.onPrimary),
           ),
-          BorderDecoration(endWithChart: false)
+          BorderDecoration(
+            endWithChart: false,
+            borderWidth: 0,
+          )
         ],
       ),
+    );
+  }
+
+  TargetAreaDecoration _buildDurchschnittsDing(BuildContext context) {
+    return TargetAreaDecoration(
+      //areaPadding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+      targetAreaFillColor: _controller.appConstants.light_grey.withOpacity(0.5),
+      // Bereichsfarbe Hintergrund
+      targetLineColor: _controller.appConstants.dark_grey.withOpacity(0.5),
+      // Bereichslinienfarbe Hintergrund
+      //Theme.of(context).colorScheme.error,
+      targetAreaRadius: BorderRadius.circular(20.0),
+      // Bereichsradius Hintergrund
+      targetMax: targetMax,
+      targetMin: targetMin,
+      colorOverTarget: //_controller.appConstants.light_green,
+          Theme.of(context).colorScheme.error,
     );
   }
 }
