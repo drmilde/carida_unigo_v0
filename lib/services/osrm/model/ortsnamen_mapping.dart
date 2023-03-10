@@ -1,10 +1,19 @@
+import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 
 class Mapping {
   final String name;
+  late String searchName;
   final LatLng latlng;
 
-  const Mapping({required this.name, required this.latlng});
+   Mapping({required this.name, required this.latlng}) {
+     // TODO: implement Mapping
+     searchName = name.toLowerCase();
+     searchName = searchName.replaceAll(RegExp('[^a-zöäüß]'), ' ');
+     searchName = searchName.replaceAll("  ", " ").trim();
+     searchName = searchName.replaceAll("  ", " ").trim();
+     searchName = searchName.replaceAll("  ", " ").trim();
+   }
 
   @override
   String toString() {
@@ -17,9 +26,9 @@ List<Mapping> lookupOrtsnamen = <Mapping>[
   Mapping(
       name: "Hochschule Fulda", latlng: LatLng(50.5650744, 9.685991642142039)),
   Mapping(
-      name: "P1: Hochschule Fulda", latlng: LatLng(50.569938, 9.687144)),
+      name: "Parkplatz P1: Hochschule Fulda", latlng: LatLng(50.569938, 9.687144)),
   Mapping(
-      name: "P2: Hochschule Fulda", latlng: LatLng(50.565784, 9.683473)),
+      name: "Parkplatz P2: Hochschule Fulda", latlng: LatLng(50.565784, 9.683473)),
   Mapping(
       name: "Parkhaus: Hochschule Fulda", latlng: LatLng(50.565173, 9.682949)),
   Mapping(name: "Aarbergen", latlng: LatLng(50.2516294, 8.0801992)),

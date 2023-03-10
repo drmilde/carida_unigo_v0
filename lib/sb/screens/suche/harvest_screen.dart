@@ -10,16 +10,16 @@ import 'package:projects/services/osrm/model/ortschaften.dart';
 import '../../../screens/prototyp_dummies/maps/nominatim.dart';
 import '../../../screens/prototyp_dummies/maps/remote_services.dart';
 
-class ClickToAddMarkerScreen extends StatefulWidget {
-  const ClickToAddMarkerScreen({Key? key}) : super(key: key);
+class HarvestScreen extends StatefulWidget {
+  const HarvestScreen({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return ClickToAddMarkerScreenState();
+    return HarvestScreenState();
   }
 }
 
-class ClickToAddMarkerScreenState extends State<ClickToAddMarkerScreen> {
+class HarvestScreenState extends State<HarvestScreen> {
   Ortschaften ortschaften = Ortschaften();
   LatLng P3 = LatLng(50.570037, 9.687154);
   double size = 160;
@@ -141,7 +141,6 @@ class ClickToAddMarkerScreenState extends State<ClickToAddMarkerScreen> {
     String startort = ortschaften.ortschaften[index];
     final periodicTimer =
         Timer.periodic(const Duration(seconds: 15), (timer) async {
-
       startort = ortschaften.ortschaften[index];
       List<Nominatim> liste = await RemoteServices.fetchCoordinates(startort);
       if (liste.isNotEmpty) {

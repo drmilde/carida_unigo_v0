@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:projects/sb/screens/onboarding/unigo_introduction_screen.dart';
-import 'package:projects/sb/screens/suche/autocomplete_screen.dart';
-import 'package:projects/sb/screens/suche/click_to_add_marker_screen.dart';
 import 'package:projects/sb/screens/suche/map_suche_screen.dart';
-import 'package:projects/sb/screens/suche/select_address_location_screen.dart';
 import 'package:projects/sb/screens/welcome/start_screen.dart';
 import 'package:projects/screens/widgets/carida_logo_widget.dart';
 import 'package:projects/screens/widgets/custom_round_button.dart';
@@ -15,7 +12,6 @@ import 'package:projects/services/persistence/user_config.dart';
 import 'package:projects/services/unigo_service.dart';
 
 import '../../services/controller/ug_state_controller.dart';
-import '../sb/screens/home/main_screen.dart';
 import '../services/model/nutzer.dart';
 import '../services/model/profil.dart';
 import 'widgets/svg_dynamic_scaffold_widget.dart';

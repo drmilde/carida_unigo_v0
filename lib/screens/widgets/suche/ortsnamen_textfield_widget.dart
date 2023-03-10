@@ -15,16 +15,16 @@ class OrtsnamenAutoCompleteWidget extends StatelessWidget {
   MapController? mapController = MapController();
   Function(LatLng)? setMarker;
 
-  OrtsnamenAutoCompleteWidget({this.mapController, this.setMarker, Key? key}) : super(key: key);
+  OrtsnamenAutoCompleteWidget({this.mapController, this.setMarker, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Autocomplete<Mapping>(
       optionsBuilder: (TextEditingValue textEditingValue) {
         return lookupOrtsnamen
-            .where((Mapping county) => county.name
-                .toLowerCase()
-                .contains(textEditingValue.text.toLowerCase()))
+            .where((Mapping county) => county.searchName
+                .contains(textEditingValue.text.toLowerCase().trim()))
             .toList();
       },
       displayStringForOption: (Mapping option) => option.name,

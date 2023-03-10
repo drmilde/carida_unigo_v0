@@ -1,15 +1,9 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+
 import 'package:latlong2/latlong.dart';
 import 'package:positioned_tap_detector_2/positioned_tap_detector_2.dart';
-import 'package:projects/screens/widgets/custom_round_button.dart';
 import 'package:projects/screens/widgets/suche/ortsnamen_textfield_widget.dart';
-import 'package:projects/services/osrm/model/ortschaften.dart';
-
-import '../../../screens/prototyp_dummies/maps/nominatim.dart';
-import '../../../screens/prototyp_dummies/maps/remote_services.dart';
 
 class MapSucheScreen extends StatefulWidget {
   const MapSucheScreen({Key? key}) : super(key: key);
@@ -21,7 +15,6 @@ class MapSucheScreen extends StatefulWidget {
 }
 
 class MapSucheScreenState extends State<MapSucheScreen> {
-  Ortschaften ortschaften = Ortschaften();
   LatLng P3 = LatLng(50.570037, 9.687154);
   double size = 160;
   late final _mapController;
@@ -40,6 +33,7 @@ class MapSucheScreenState extends State<MapSucheScreen> {
   @override
   void initState() {
     _mapController = MapController();
+
     // TODO: implement initState
     super.initState();
   }
