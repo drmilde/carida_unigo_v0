@@ -55,8 +55,8 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
               MaterialPageRoute(builder: (context) => BewertungScreen()));
         },
         callback2: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => PunkteScreen()));
+          /*Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => PunkteScreen()));*/
         },
       ),
       Box(

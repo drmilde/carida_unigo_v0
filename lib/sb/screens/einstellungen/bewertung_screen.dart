@@ -58,7 +58,7 @@ class _BewertungScreenState extends State<BewertungScreen> {
               child: Expanded(
                 child: ListView.builder(
                   scrollDirection: Axis.vertical,
-                  itemCount: 6,
+                  itemCount: 3,
                   itemBuilder: (context, index) {
                     if (index == 0) {
                       return Padding(
@@ -83,8 +83,73 @@ class _BewertungScreenState extends State<BewertungScreen> {
                           ),
                         ),
                       );
-                    } else if (index > 0 && index < 5) {
-                      return Column(
+                    } else if (index == 1) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Container(
+                          width: double.infinity,
+                          height: 350,
+                          margin: EdgeInsets.fromLTRB(0, 10, 0, 20),
+                          padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                          decoration: BoxDecoration(
+                            color: _controller.appConstants.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 4,
+                                blurRadius: 7,
+                                offset:
+                                Offset(0, 3), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            children: [
+                              Text(
+                                labelRating[0],
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                              _ratingBar(),
+                              SizedBox(
+                                height: 24,
+                              ),
+                              Text(
+                                labelRating[1],
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                              _ratingBar(),
+                              SizedBox(
+                                height: 24,
+                              ),
+                              Text(
+                                labelRating[2],
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                              _ratingBar(),
+                              SizedBox(
+                                height: 24,
+                              ),
+                              Text(
+                                labelRating[3],
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                              _ratingBar(),
+                            ],
+                          ),
+                        ),
+                      );
+
+
+                        /*Column(
                         children: [
                           Text(
                             labelRating[index - 1],
@@ -97,9 +162,9 @@ class _BewertungScreenState extends State<BewertungScreen> {
                             height: 8,
                           ),
                         ],
-                      );
+                      );*/
                     } else {
-                      return _bewertung(boxen[index-5]);
+                      return _bewertung(boxen[index-2]);
                     }
                   },
                 ),
