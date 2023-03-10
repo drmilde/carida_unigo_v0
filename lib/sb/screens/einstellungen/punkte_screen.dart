@@ -14,6 +14,7 @@ class PunkteScreen extends StatefulWidget {
 
 class _PunkteScreenState extends State<PunkteScreen> {
   UGStateController _controller = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,8 +29,7 @@ class _PunkteScreenState extends State<PunkteScreen> {
                 height: 200,
                 width: double.infinity,
                 color: Colors.amber,
-                child:
-                Center(child: Text("Punkte Statistik (letzer Monat?)")),
+                child: Center(child: Text("Punkte Statistik (letzer Monat?)")),
               ),
             ),
             Padding(
@@ -39,8 +39,7 @@ class _PunkteScreenState extends State<PunkteScreen> {
                 width: double.infinity,
                 color: Colors.amber,
                 child: Center(
-                  child:
-                  Text("aktueller Punktestand"),
+                  child: Text("aktueller Punktestand"),
                 ),
               ),
             ),
@@ -51,18 +50,18 @@ class _PunkteScreenState extends State<PunkteScreen> {
                   scrollDirection: Axis.horizontal,
                   itemCount: 5,
                   itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          //height: 48,
-                          width: 150,
-                          color: Colors.orange,
-                          child: Center(
-                            child: Text("Gutschein"),
-                          ),
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        //height: 48,
+                        width: 150,
+                        color: Colors.orange,
+                        child: Center(
+                          child: Text("Gutschein"),
                         ),
-                      );
-                    },
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
@@ -71,6 +70,7 @@ class _PunkteScreenState extends State<PunkteScreen> {
       ),
     );
   }
+
   AppBar _buildAppBar(String title, BuildContext context) {
     return AppBar(
       title: Text(
@@ -85,8 +85,7 @@ class _PunkteScreenState extends State<PunkteScreen> {
       leading: BackButton(
         color: Color.fromARGB(255, 28, 31, 31),
         onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => EinstellungenScreen()));
+          Navigator.of(context).pop();
         },
       ),
       actions: [],

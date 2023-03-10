@@ -51,12 +51,12 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
         'Punkte',
         Icon(Icons.thumb_up),
         callback1: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => BewertungScreen()));
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => BewertungScreen()));
         },
         callback2: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => PunkteScreen()));
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => PunkteScreen()));
         },
       ),
       Box(
@@ -69,8 +69,8 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
               MaterialPageRoute(builder: (context) => MitteilungenScreen()));
         },
         callback2: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => AllgemeinScreen()));
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => AllgemeinScreen()));
         },
       ),
       Box(
@@ -83,8 +83,8 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
               MaterialPageRoute(builder: (context) => DatenschutzScreen()));
         },
         callback2: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => ImpressumScreen()));
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => ImpressumScreen()));
         },
       ),
       Box(
@@ -93,12 +93,12 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
         'Feedback',
         Icon(Icons.feedback),
         callback1: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => HilfeScreen()));
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => HilfeScreen()));
         },
         callback2: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => FeedbackScreen()));
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => FeedbackScreen()));
         },
       ),
     ];
@@ -288,21 +288,21 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
 
   Container _buildShadowLine() {
     return Container(
-            height: 2,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: _controller.appConstants.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
-                  spreadRadius: 4,
-                  blurRadius: 7,
-                  offset: Offset(0, 3), // changes position of shadow
-                ),
-              ],
-            ),
-          );
+      height: 2,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: _controller.appConstants.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 4,
+            blurRadius: 7,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+    );
   }
 
   Padding _profil() {
@@ -389,8 +389,7 @@ class _EinstellungenScreenState extends State<EinstellungenScreen> {
       leading: BackButton(
         color: Color.fromARGB(255, 28, 31, 31),
         onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => MainScreen()));
+          Navigator.of(context).pop();
         },
       ),
       actions: [],

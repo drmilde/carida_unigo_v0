@@ -29,8 +29,7 @@ class _AllgemeinScreenState extends State<AllgemeinScreen> {
       leading: BackButton(
         color: Color.fromARGB(255, 28, 31, 31),
         onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => EinstellungenScreen()));
+          Navigator.of(context).pop();
         },
       ),
       actions: [],
