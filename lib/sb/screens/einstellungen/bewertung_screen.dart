@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:projects/sb/screens/einstellungen/charts/bar_chart_widget.dart';
 import 'package:projects/sb/screens/einstellungen/einstellungen_screen.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
@@ -63,28 +64,8 @@ class _BewertungScreenState extends State<BewertungScreen> {
                   itemCount: 3,
                   itemBuilder: (context, index) {
                     if (index == 0) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Container(
-                          width: double.infinity,
-                          height: 250,
-                          margin: EdgeInsets.fromLTRB(0, 10, 0, 20),
-                          padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                          decoration: BoxDecoration(
-                            color: _controller.appConstants.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 4,
-                                blurRadius: 7,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
+                      return BarChartWidget();
+                      //return _buildBoxPlot();
                     } else if (index == 1) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -182,6 +163,30 @@ class _BewertungScreenState extends State<BewertungScreen> {
                     Center(child: Text("Bewertungs Statistik (letzer Monat?)")),
               ),
             ),*/
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBoxPlot() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Container(
+        width: double.infinity,
+        height: 250,
+        margin: EdgeInsets.fromLTRB(0, 10, 0, 20),
+        padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+        decoration: BoxDecoration(
+          color: _controller.appConstants.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 4,
+              blurRadius: 7,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
           ],
         ),
       ),
