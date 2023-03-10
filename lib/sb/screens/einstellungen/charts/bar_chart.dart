@@ -9,7 +9,7 @@ class BarChart<T> extends StatelessWidget {
   BarChart({
     required List<T> data,
     required DataToValue<T> dataToValue,
-    this.height = 240.0,
+    this.height = 250.0,
     this.backgroundDecorations = const [],
     this.foregroundDecorations = const [],
     this.chartBehaviour = const ChartBehaviour(),
