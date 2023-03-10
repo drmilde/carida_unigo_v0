@@ -1,0 +1,120 @@
+{
+  "profil": [
+    {
+      "bild": 100
+    },
+    {
+      "displayname": "tinkerbell"
+    },
+    {
+      "description": "ueber mich"
+    },
+    {
+      "heimatort": [
+        {
+          "name": "Lauterbach"
+        },
+        {
+          "latlng": [
+            {
+              "latitude": 50.2345
+            },
+            {
+              "longitude": 9.2345
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fahrzeuge": [
+        "Opel Corsa",
+        "Audi A1",
+        "Dacia Spring",
+        "Mercedes E Klasse"
+      ]
+    },
+    {
+      "geschlecht": [
+        "weiblich",
+        "männlich",
+        "divers",
+        "keine Angabe"
+      ]
+    }
+  ],
+  "bewertung": [
+    {
+      "bewertet": true
+    },
+    {
+      "bewertung anzeigen": true
+    },
+    {
+      "statistik": [
+        {
+          "durchschnitt": 1.2
+        },
+        {
+          "freundlich": 1.2
+        },
+        {
+          "puenktlich": 1.2
+        },
+        {
+          "gespraechig": 1.2
+        }
+      ]
+    }
+  ],
+  "erfolge": [
+    {
+      "punktestand": 250
+    },
+    {
+      "gutscheine": [
+        {
+          "gutschein": [
+            {
+              "verwendung": "tree/food",
+              "name": "Mensa",
+              "beschreibung": "Ein Nachtisch in der Mensa."
+            }
+          ]
+        },
+        {
+          "gutschein": []
+        },
+        {
+          "gutschein": []
+        }
+      ]
+    },
+    {
+      "badges": [
+        {
+          "badge": []
+        },
+        {
+          "badge": []
+        },
+        {
+          "badge": []
+        }
+      ]
+    },
+    {
+      "gespart": [
+        {
+          "kgco2": []
+        },
+        {
+          "kmgefahren": []
+        },
+        {
+          "kosten": []
+        }
+      ]
+    }
+  ]
+}
