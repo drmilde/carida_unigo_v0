@@ -181,6 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
         minRating: 1,
         direction: Axis.horizontal,
         allowHalfRating: true,
+        ignoreGestures: true,
         itemCount: 5,
         itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
         itemBuilder: (context, _) => Icon(

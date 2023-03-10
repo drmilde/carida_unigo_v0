@@ -31,6 +31,13 @@ class _BewertungScreenState extends State<BewertungScreen> {
     'Pünktlich',
     'Gesprächig'
   ];
+  final List<double> ratings = [
+    3,
+    4.0,
+    3.0,
+    2.0
+  ];
+
   bool status1 = false;
   bool status2 = false;
 
@@ -112,7 +119,7 @@ class _BewertungScreenState extends State<BewertungScreen> {
                                   fontSize: 18,
                                 ),
                               ),
-                              _ratingBar(),
+                              _ratingBar(ratings[0]),
                               SizedBox(
                                 height: 24,
                               ),
@@ -122,7 +129,7 @@ class _BewertungScreenState extends State<BewertungScreen> {
                                   fontSize: 18,
                                 ),
                               ),
-                              _ratingBar(),
+                              _ratingBar(ratings[1]),
                               SizedBox(
                                 height: 24,
                               ),
@@ -132,7 +139,7 @@ class _BewertungScreenState extends State<BewertungScreen> {
                                   fontSize: 18,
                                 ),
                               ),
-                              _ratingBar(),
+                              _ratingBar(ratings[2]),
                               SizedBox(
                                 height: 24,
                               ),
@@ -142,7 +149,7 @@ class _BewertungScreenState extends State<BewertungScreen> {
                                   fontSize: 18,
                                 ),
                               ),
-                              _ratingBar(),
+                              _ratingBar(ratings[3]),
                             ],
                           ),
                         ),
@@ -209,15 +216,16 @@ class _BewertungScreenState extends State<BewertungScreen> {
     );
   }
 
-  Container _ratingBar() {
+  Container _ratingBar(double rating) {
     return Container(
       //margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
       child: RatingBar.builder(
-        initialRating: 3,
+        initialRating: rating,
         minRating: 1,
         direction: Axis.horizontal,
         allowHalfRating: true,
         itemCount: 5,
+        ignoreGestures: true,
         itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
         itemBuilder: (context, _) => Icon(
           Icons.star,
