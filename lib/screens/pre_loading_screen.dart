@@ -158,18 +158,6 @@ class PreLoadingScreen extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => MapSucheScreen()));
           },
         ),
-        SizedBox(
-          height: 16,
-        ),
-        CustomRoundButton(
-          text: "Autocomplet test",
-          textColor: _controller.appConstants.white,
-          color: _controller.appConstants.turquoise,
-          callback: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => AutoCompleteDemo()));
-          },
-        ),
         Expanded(
           child: Container(
             width: 100,

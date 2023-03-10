@@ -53,7 +53,10 @@ class MapSucheScreenState extends State<MapSucheScreen> {
         padding: const EdgeInsets.all(8),
         child: Column(
           children: [
-            OrtsnamenAutoCompleteWidget(),
+            OrtsnamenAutoCompleteWidget(
+              mapController: _mapController,
+              setMarker: _processLatLang,
+            ),
             SizedBox(
               height: 8.0,
             ),
@@ -97,27 +100,5 @@ class MapSucheScreenState extends State<MapSucheScreen> {
     setState(() {});
   }
 
-  /* not allowed */
-
-  void harvest() {
-    int index = 2278;
-    String startort = ortschaften.ortschaften[index];
-    final periodicTimer =
-        Timer.periodic(const Duration(seconds: 15), (timer) async {
-      startort = ortschaften.ortschaften[index];
-      List<Nominatim> liste = await RemoteServices.fetchCoordinates(startort);
-      if (liste.isNotEmpty) {
-        double lat = double.tryParse(liste[0].lat!) ?? P3.latitude;
-        double lng = double.tryParse(liste[0].lon!) ?? P3.longitude;
-
-        print("${index} ${startort}: ${lat}, ${lng}");
-
-        _mapController.move(LatLng(lat, lng), zoom);
-      }
-      index++;
-      if (index >= ortschaften.ortschaften.length) {
-        timer.cancel();
-      }
-    });
-  }
+/* not allowed */
 }

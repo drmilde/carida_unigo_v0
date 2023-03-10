@@ -1,17 +1,21 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
+import 'package:latlong2/latlong.dart';
 
 import '../../../services/controller/ug_state_controller.dart';
 import '../../../services/osrm/model/ortsnamen_mapping.dart';
 
 class OrtsnamenAutoCompleteWidget extends StatelessWidget {
-  OrtsnamenAutoCompleteWidget({Key? key}) : super(key: key);
-
   UGStateController _controller = Get.find();
   bool showBorder = true;
   String labelText = "Ortsname";
+  MapController? mapController = MapController();
+  Function(LatLng)? setMarker;
+
+  OrtsnamenAutoCompleteWidget({this.mapController, this.setMarker, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +76,8 @@ class OrtsnamenAutoCompleteWidget extends StatelessWidget {
       },
       onSelected: (Mapping selection) {
         print('Selected: ${selection.name}');
+        mapController!.move(selection.latlng, 13);
+        setMarker!(selection.latlng);
       },
       optionsViewBuilder: (BuildContext context,
           AutocompleteOnSelected<Mapping> onSelected,
@@ -83,7 +89,7 @@ class OrtsnamenAutoCompleteWidget extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 width: 300,
-                height:300,
+                height: 300,
                 color: _controller.appConstants.turquoise,
                 child: ListView.builder(
                   padding: EdgeInsets.all(10.0),
