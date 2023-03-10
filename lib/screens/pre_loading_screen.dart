@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:projects/sb/screens/onboarding/unigo_introduction_screen.dart';
+import 'package:projects/sb/screens/suche/autocomplete_screen.dart';
 import 'package:projects/sb/screens/suche/click_to_add_marker_screen.dart';
+import 'package:projects/sb/screens/suche/map_suche_screen.dart';
 import 'package:projects/sb/screens/suche/select_address_location_screen.dart';
 import 'package:projects/sb/screens/welcome/start_screen.dart';
 import 'package:projects/screens/widgets/carida_logo_widget.dart';
@@ -152,8 +154,20 @@ class PreLoadingScreen extends StatelessWidget {
           textColor: _controller.appConstants.white,
           color: _controller.appConstants.turquoise,
           callback: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => ClickToAddMarkerScreen()));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => MapSucheScreen()));
+          },
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        CustomRoundButton(
+          text: "Autocomplet test",
+          textColor: _controller.appConstants.white,
+          color: _controller.appConstants.turquoise,
+          callback: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => AutoCompleteDemo()));
           },
         ),
         Expanded(
