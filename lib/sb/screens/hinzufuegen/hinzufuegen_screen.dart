@@ -6,13 +6,20 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:projects/screens/widgets/custom_popup_widget.dart';
 import 'package:projects/services/controller/ug_state_controller.dart';
 import 'package:projects/services/extensions/unigo_service_angebot_extension.dart';
+import 'package:projects/services/osrm/model/ortsnamen_mapping.dart';
 
 import '../../../screens/widgets/forms/form_date_field.dart';
 import '../../../screens/widgets/forms/form_submit_button.dart';
 import '../../../screens/widgets/forms/form_text_field.dart';
 import '../../../screens/widgets/forms/form_time_field.dart';
+import '../../../screens/widgets/suche/ortsnamen_fahrt_buchen_widget.dart';
 import '../../../services/model/angebot.dart';
+import '../../../services/osrm/model/osrm_service_provider.dart';
 import '../../../services/unigo_service.dart';
+import '../maps/nominatim.dart';
+import '../maps/remote_services.dart';
+
+import '../../../services/osrm/model/osrm.dart' as osrm;
 
 class HinzufuegenScreen extends StatefulWidget {
   const HinzufuegenScreen({Key? key}) : super(key: key);
@@ -21,7 +28,8 @@ class HinzufuegenScreen extends StatefulWidget {
   State<HinzufuegenScreen> createState() => _HinzufuegenScreenState();
 }
 
-class _HinzufuegenScreenState extends State<HinzufuegenScreen> with TickerProviderStateMixin{
+class _HinzufuegenScreenState extends State<HinzufuegenScreen>
+    with TickerProviderStateMixin {
   UGStateController _controller = Get.find();
   UniGoService service = UniGoService();
   var formKey = GlobalKey<FormBuilderState>();
@@ -89,22 +97,15 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> with TickerProvid
           ),
           Container(
             width: double.maxFinite,
-            height: 375,
+            height: 250,
             child: TabBarView(
               controller: _tabController,
               children: [
                 _fahrtHinzufuegen(),
                 _fahrtHinzufuegen(),
-                Container(
-                  height: 30,
-                  width: 30,
-                  color: Colors.yellow,
-                ),
+                Container(width: 200, height: 200, color: Colors.amberAccent),
               ],
             ),
-          ),
-          SizedBox(
-            height: 16,
           ),
         ],
       ),
@@ -277,27 +278,29 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> with TickerProvid
     );
   }
 
-  Container _fahrtHinzufuegen() {
-    return Container(
-      margin: EdgeInsets.all(16),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: _controller.appConstants.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 4,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
-          ),
-        ],
-      ),
-      //child: _oldForm(),
+  Widget _fahrtHinzufuegen() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
       child: Container(
-        margin: EdgeInsets.fromLTRB(10, 20, 10, 20),
-        //color: Colors.blue,
-        child: _buildForm(context),
+        width: double.infinity,
+        height: 200,
+        decoration: BoxDecoration(
+          color: _controller.appConstants.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 4,
+              blurRadius: 7,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
+        //child: _oldForm(),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: _buildForm(context),
+        ),
       ),
     );
   }
@@ -323,21 +326,7 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> with TickerProvid
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          CustomFormTextField(
-            formKey: formKey,
-            name: "standort",
-            labelText: "Standort",
-            value: "Hünfeld",
-            showBorder: true,
-          ),
-          const SizedBox(height: 16),
-          CustomFormTextField(
-            formKey: formKey,
-            name: "ziel",
-            labelText: "Ziel",
-            value: "Hochschule Fulda",
-            showBorder: true,
-          ),
+          OrtsnamenBuchenWidget(),
           const SizedBox(height: 16),
           Container(
             width: 300,
@@ -387,6 +376,30 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> with TickerProvid
               DateTime zeit = formKey.currentState!.value['zeit'];
 
               print(standort);
+              List<Mapping> m = filterLookup(standort);
+              m = m.where((Mapping county) {
+                return county.searchName
+                    .startsWith(normalizeSearchTerm(standort));
+              }).toList();
+              print(m);
+              double lat = 0;
+              double lng = 0;
+
+              if (m.isEmpty) {
+                // Nominatim und osrm Anfrage
+                String? startCoords = await _getCoordString(standort);
+                List<String> coords = startCoords!.split(",");
+                lat = double.tryParse(coords[0]) ?? 0;
+                lng = double.tryParse(coords[1]) ?? 0;
+                String search = "${startCoords};9.685992,50.565074";
+                await _loadOsrm(search!);
+              } else {
+                lat = m[0].latlng.latitude;
+                lng = m[0].latlng.longitude;
+                String search = "${lng},${lat};9.685992,50.565074";
+                await _loadOsrm(search!);
+              }
+              // ende
 
               String zs = zeit.toString();
               zs = zs.substring(zs.indexOf(" ")).trim();
@@ -398,15 +411,14 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> with TickerProvid
                 freiplaetze: int.parse(freiplaetze),
                 startort: "${standort}",
                 zielort: "${ziel}",
-                distanz: 0.0,
-                latitude: 0.0,
-                longitude: 0.0,
+                distanz: osrmRoute.getDistance(),
+                latitude: lat,
+                longitude: lng,
                 hasprofile: [],
               );
 
               Angebot result =
-              await service.createAngebotById(id: 0, data: angebot);
-
+                  await service.createAngebotById(id: 0, data: angebot);
 
               print(result);
 
@@ -438,5 +450,47 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> with TickerProvid
         ],
       ),
     );
+  }
+
+  /// OSRM Nominatim hilfsfunktionen
+
+  osrm.Osrm osrmRoute = osrm.Osrm.empty();
+
+  Future<bool> _loadOsrm(String search) async {
+    osrmRoute = await OSRMServiceProvider.getRoute(
+      coordString: search,
+      objectFromJson: osrm.osrmFromJson,
+    );
+
+    return true;
+  }
+
+  Future<String?> _getCoordString(String sterm) async {
+    double lat = 0;
+    double lng = 0;
+
+    sterm = sterm.toLowerCase().trim();
+    sterm = sterm.replaceAll(",", " ");
+    sterm = sterm.replaceAll(RegExp(r"\s+"), " ");
+
+    /*
+    String? similar = cache.getSimilar(sterm);
+    if (similar != "") {
+      return cache.lookup[similar];
+    }
+
+     */
+
+    List<Nominatim> liste = await RemoteServices.fetchCoordinates(sterm);
+    if (liste.isNotEmpty) {
+      print(liste[0].lat);
+      print(liste[0].lon);
+
+      lat = double.tryParse(liste[0].lat!) ?? 0;
+      lng = double.tryParse(liste[0].lon!) ?? 0;
+      print(lat);
+      print(lng);
+    }
+    return ("${lng},${lat}");
   }
 }

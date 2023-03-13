@@ -33,7 +33,7 @@ class OSRMServiceProvider {
     String resUTF8 = utf8.decode(response.bodyBytes);
     if (response.statusCode == 200) {
       Osrm data = objectFromJson(resUTF8);
-      data.printRoutes();
+      //data.printRoutes();
       return (data);
     } else {
       return Osrm.empty();
