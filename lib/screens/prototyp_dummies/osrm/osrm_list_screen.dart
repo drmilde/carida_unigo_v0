@@ -100,6 +100,7 @@ class _OsrmListScreenState extends State<OsrmListScreen> {
 
   Widget _buildListView(AsyncSnapshot<bool> snapshot) {
     List<osrm.Step> steps = osrmRoute.getSteps();
+    print (osrmRoute.getDistance());
     return Expanded(
       child: RefreshIndicator(
         onRefresh: () async {

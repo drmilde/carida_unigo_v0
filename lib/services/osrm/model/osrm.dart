@@ -53,6 +53,14 @@ class Osrm {
     }
   }
 
+  double getDistance() {
+    double result = 0;
+    for (Step s in getSteps()) {
+      result += s.distance;
+    }
+    return result;
+  }
+
   void printRoutes() {
     for (Route r in routes) {
       r.printOut();

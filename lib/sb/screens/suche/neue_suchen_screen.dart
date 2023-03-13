@@ -183,7 +183,7 @@ class _NeueSuchenScreenState extends State<NeueSuchenScreen> {
 
   Container _ortsnameTextField() {
     return Container(
-      width: 140,
+      width: 200,
       child: OrtsnamenAutoCompleteWidget(
         mapController: null,
         setMarker: (latlng) {},

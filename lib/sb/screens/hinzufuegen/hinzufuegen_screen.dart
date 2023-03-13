@@ -398,6 +398,9 @@ class _HinzufuegenScreenState extends State<HinzufuegenScreen> with TickerProvid
                 freiplaetze: int.parse(freiplaetze),
                 startort: "${standort}",
                 zielort: "${ziel}",
+                distanz: 0.0,
+                latitude: 0.0,
+                longitude: 0.0,
                 hasprofile: [],
               );
 

@@ -21,6 +21,9 @@ class Angebot {
     required this.zielort,
     required this.datum,
     required this.uhrzeit,
+    required this.distanz,
+    required this.latitude,
+    required this.longitude,
     required this.freiplaetze,
     required this.hasprofile,
   });
@@ -30,6 +33,9 @@ class Angebot {
   String zielort;
   DateTime datum;
   String uhrzeit;
+  double distanz;
+  double latitude;
+  double longitude;
   int freiplaetze;
   List<int> hasprofile;
 
@@ -41,12 +47,10 @@ class Angebot {
     this.uhrzeit = "uhrzeit",
     this.freiplaetze = 0,
     this.hasprofile = const [],
+    this.distanz = 0.0,
+    this.latitude = 0.0,
+    this.longitude = 0.0,
   });
-
-  String getUhrzeitNormalized() {
-    List<String> parts = uhrzeit.split(":");
-    return "${parts[0]}:${parts[1]}";
-  }
 
   factory Angebot.fromJson(Map<String, dynamic> json) => Angebot(
         id: json["id"],
@@ -54,6 +58,9 @@ class Angebot {
         zielort: json["zielort"],
         datum: DateTime.parse(json["datum"]),
         uhrzeit: json["uhrzeit"],
+        distanz: json["distanz"],
+        latitude: json["latitude"],
+        longitude: json["longitude"],
         freiplaetze: json["freiplaetze"],
         hasprofile: List<int>.from(json["hasprofile"].map((x) => x)),
       );
@@ -65,6 +72,9 @@ class Angebot {
         "datum":
             "${datum.year.toString().padLeft(4, '0')}-${datum.month.toString().padLeft(2, '0')}-${datum.day.toString().padLeft(2, '0')}",
         "uhrzeit": uhrzeit,
+        "distanz": distanz,
+        "latitude": latitude,
+        "longitude": longitude,
         "freiplaetze": freiplaetze,
         "hasprofile": List<dynamic>.from(hasprofile.map((x) => x)),
       };

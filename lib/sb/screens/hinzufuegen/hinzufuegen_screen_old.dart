@@ -398,6 +398,9 @@ class _HinzufuegenScreenOldState extends State<HinzufuegenScreenOld> {
                 freiplaetze: int.parse(freiplaetze),
                 startort: "${standort}",
                 zielort: "${ziel}",
+                latitude: 0.0,
+                longitude: 0.0,
+                distanz: 0.0,
                 hasprofile: [],
               );
 

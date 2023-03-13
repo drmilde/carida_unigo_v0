@@ -43,6 +43,9 @@ class _AngebotListScreenState extends State<AngebotListScreen> {
                 freiplaetze: 0,
                 startort: "hier",
                 zielort: "da",
+                longitude: 0.0,
+                latitude: 0.0,
+                distanz: 0.0,
                 hasprofile: []);
 
             Angebot result = await service.createAngebotById(id: 0, data: angebot);

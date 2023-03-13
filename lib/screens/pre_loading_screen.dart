@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:projects/sb/screens/onboarding/unigo_introduction_screen.dart';
 import 'package:projects/sb/screens/suche/map_suche_screen.dart';
 import 'package:projects/sb/screens/welcome/start_screen.dart';
+import 'package:projects/screens/prototyp_dummies/osrm/osrm_list_screen.dart';
 import 'package:projects/screens/widgets/carida_logo_widget.dart';
 import 'package:projects/screens/widgets/custom_round_button.dart';
 import 'package:projects/screens/widgets/hsfulda_logo_widget.dart';
@@ -153,6 +154,18 @@ class PreLoadingScreen extends StatelessWidget {
           callback: () {
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => MapSucheScreen()));
+          },
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        CustomRoundButton(
+          text: "OSRM Liste",
+          textColor: _controller.appConstants.white,
+          color: _controller.appConstants.turquoise,
+          callback: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => OsrmListScreen()));
           },
         ),
         Expanded(

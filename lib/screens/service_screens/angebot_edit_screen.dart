@@ -115,6 +115,9 @@ class AngebotEditScreen extends StatelessWidget {
                   freiplaetze: int.parse(_formKey.currentState!.value['freiplaetze']),
                   uhrzeit: _formKey.currentState!.value['uhrzeit'],
                   datum: DateTime.parse(_formKey.currentState!.value['datum']),
+                  distanz: 0.0,
+                  latitude: 0.0,
+                  longitude: 0.0,
                   hasprofile: []
                 );
 

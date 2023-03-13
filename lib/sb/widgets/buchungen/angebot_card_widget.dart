@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:projects/services/controller/ug_state_controller.dart';
 import 'package:projects/services/model/angebot.dart';
+import 'package:projects/services/model/angebot_extension.dart';
 
 class AngebotCardWidget extends StatelessWidget {
   UGStateController _controller = Get.find();
