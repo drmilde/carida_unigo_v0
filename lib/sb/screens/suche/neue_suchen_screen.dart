@@ -3,6 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:projects/screens/widgets/buche_hs_fulda_widget.dart';
 import 'package:projects/services/controller/ug_state_controller.dart';
 import 'package:projects/services/extensions/unigo_service_angebot_extension.dart';
 
@@ -11,6 +12,7 @@ import '../../../screens/widgets/forms/form_date_field.dart';
 import '../../../screens/widgets/forms/form_submit_button.dart';
 import '../../../screens/widgets/forms/form_text_field.dart';
 import '../../../screens/widgets/forms/form_time_field.dart';
+import '../../../screens/widgets/suche/ortsnamen_textfield_widget.dart';
 import '../../../services/model/angebot.dart';
 import '../../../services/unigo_service.dart';
 import '../maps/nominatim.dart';
@@ -28,6 +30,7 @@ class _NeueSuchenScreenState extends State<NeueSuchenScreen> {
   UniGoService service = UniGoService();
   List<Angebot> fahrten = [];
   bool istFahrer = true;
+  bool isHinfahrt = true;
 
   String search = "";
 
@@ -123,10 +126,67 @@ class _NeueSuchenScreenState extends State<NeueSuchenScreen> {
             //color: Colors.blue,
             child: Padding(
               padding: const EdgeInsets.only(top: 16.0, bottom: 8),
-              child: _buildForm(context),
+              //child: _buildForm(context),
+              child: _buildNewForm(context),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildNewForm(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        SizedBox(width:16),
+        isHinfahrt ? _ortsnameTextField() : _bucheLogo(),
+        Container(
+          child: Icon(Icons.arrow_forward_outlined),
+        ),
+        isHinfahrt ? _bucheLogo() : _ortsnameTextField(),
+        Expanded(
+          child: GestureDetector(
+            onTap: () {
+              setState(() {
+                isHinfahrt = !isHinfahrt;
+              });
+            },
+            child: Container(
+              child: Icon(Icons.sync_alt_outlined),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _bucheLogo() {
+    return Container(
+      width: 42,
+      height: 42,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: Colors.black,
+          width: 1,
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: BucheHSFuldaWidget(
+          width: 32,
+        ),
+      ),
+    );
+  }
+
+  Container _ortsnameTextField() {
+    return Container(
+      width: 140,
+      child: OrtsnamenAutoCompleteWidget(
+        mapController: null,
+        setMarker: (latlng) {},
       ),
     );
   }

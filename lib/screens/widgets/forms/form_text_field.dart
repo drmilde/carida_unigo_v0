@@ -11,6 +11,7 @@ class CustomFormTextField extends StatelessWidget {
   String labelText = "";
   String value = "";
   bool showBorder = false;
+  bool isDense = true;
 
   double width = 300;
 
@@ -20,7 +21,8 @@ class CustomFormTextField extends StatelessWidget {
       this.labelText = "",
       this.value = "",
       this.width = 300,
-      this.showBorder = false,
+      this.showBorder = true,
+      this.isDense = true,
       Key? key})
       : super(key: key);
 
@@ -38,14 +40,14 @@ class CustomFormTextField extends StatelessWidget {
       width: width,
       child: FormBuilderTextField(
         style: TextStyle(
-          fontSize: 14,
+          fontSize: isDense? 14: 20,
         ),
         textAlignVertical: TextAlignVertical.center,
         autovalidateMode: AutovalidateMode.disabled,
         name: name,
         cursorColor: Colors.black,
         decoration: InputDecoration(
-          isDense: true,
+          isDense: isDense,
           hintText: labelText,
           labelText: labelText,
           filled: true,

@@ -41,6 +41,7 @@ class OrtsnamenAutoCompleteWidget extends StatelessWidget {
             print("Dieser Eintrag: ${entry}");
           },
           decoration: InputDecoration(
+            isDense: true,
             //hintText: "Ortsname",
             labelText: labelText,
             filled: true,
@@ -76,8 +77,10 @@ class OrtsnamenAutoCompleteWidget extends StatelessWidget {
       },
       onSelected: (Mapping selection) {
         print('Selected: ${selection.name}');
-        mapController!.move(selection.latlng, 13);
-        setMarker!(selection.latlng);
+        if (mapController != null) {
+          mapController!.move(selection.latlng, 13);
+          setMarker!(selection.latlng);
+        }
       },
       optionsViewBuilder: (BuildContext context,
           AutocompleteOnSelected<Mapping> onSelected,
