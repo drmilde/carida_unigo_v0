@@ -37,10 +37,15 @@ class CustomFormTextField extends StatelessWidget {
     return Container(
       width: width,
       child: FormBuilderTextField(
+        style: TextStyle(
+          fontSize: 14,
+        ),
+        textAlignVertical: TextAlignVertical.center,
         autovalidateMode: AutovalidateMode.disabled,
         name: name,
         cursorColor: Colors.black,
         decoration: InputDecoration(
+          isDense: true,
           hintText: labelText,
           labelText: labelText,
           filled: true,

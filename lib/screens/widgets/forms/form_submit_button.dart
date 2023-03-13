@@ -13,6 +13,7 @@ class CustomFormSubmitButton extends StatelessWidget {
   Color? textColor;
   VoidCallback callback;
   bool showShadow = false;
+  bool isDense = false;
 
   CustomFormSubmitButton({
     required this.formKey,
@@ -21,6 +22,7 @@ class CustomFormSubmitButton extends StatelessWidget {
     this.color,
     this.textColor,
     this.showShadow = false,
+    this.isDense = false,
     Key? key,
   }) : super(key: key);
 
@@ -32,6 +34,8 @@ class CustomFormSubmitButton extends StatelessWidget {
   Widget _SubmitButton(
       {String text = "Submit", required VoidCallback callback}) {
     return CustomRoundButton(
+      isDense: isDense,
+      height: 48,
       text: text,
       textColor: textColor,
       color: color,

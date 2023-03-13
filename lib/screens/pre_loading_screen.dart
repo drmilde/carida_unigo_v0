@@ -12,6 +12,7 @@ import 'package:projects/services/persistence/user_config.dart';
 import 'package:projects/services/unigo_service.dart';
 
 import '../../services/controller/ug_state_controller.dart';
+import '../sb/screens/suche/suchen_screen.dart';
 import '../services/model/nutzer.dart';
 import '../services/model/profil.dart';
 import 'widgets/svg_dynamic_scaffold_widget.dart';

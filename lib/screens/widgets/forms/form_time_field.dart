@@ -35,11 +35,15 @@ class CustomFormTimeField extends StatelessWidget {
     required DateTime value,
   }) {
     FormBuilderDateTimePicker dtpicker = FormBuilderDateTimePicker(
+      style: TextStyle(
+        fontSize: 14,
+      ),
       autovalidateMode: AutovalidateMode.disabled,
       name: name,
       inputType: InputType.time,
       cursorColor: Colors.black,
       decoration: InputDecoration(
+        isDense: true,
         hintText: labelText,
         labelText: labelText,
         filled: true,

@@ -37,11 +37,15 @@ class CustomFormDateField extends StatelessWidget {
     return Container(
       width: width,
       child: FormBuilderDateTimePicker (
+        style: TextStyle(
+          fontSize: 14,
+        ),
         autovalidateMode: AutovalidateMode.disabled,
         name: name,
         inputType: InputType.date,
         cursorColor: Colors.black,
         decoration: InputDecoration(
+          isDense: true,
           hintText: labelText,
           labelText: labelText,
           filled: true,

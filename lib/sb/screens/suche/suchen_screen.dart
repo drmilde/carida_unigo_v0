@@ -80,7 +80,7 @@ class _SuchenScreenState extends State<SuchenScreen> {
           children: [
             Expanded(
               child: Container(
-                child: _buildFlutterMap(),
+                //child: _buildFlutterMap(),
               ),
             ),
             SizedBox(

@@ -10,7 +10,8 @@ import '../chat/chat_screen.dart';
 import '../einstellungen/einstellungen_screen.dart';
 import '../hinzufuegen/hinzufuegen_screen.dart';
 import '../hinzufuegen/hinzufuegen_screen_old.dart';
-import '../suche/suche_screen.dart';
+import '../suche/neue_suchen_screen.dart';
+import '../suche/suchen_screen.dart';
 import 'home_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -26,8 +27,8 @@ class _MainScreenState extends State<MainScreen> {
 
   final screens = [
     BuchungenScreen(today: DateTime.now()),
-    //SuchenScreen(),
-    MapSucheScreen(),
+    NeueSuchenScreen(),
+    //MapSucheScreen(),
     HomeScreen(),
     HinzufuegenScreen(),
     ChatScreen(),
@@ -73,24 +74,6 @@ class _MainScreenState extends State<MainScreen> {
       ),
     ];
     return Scaffold(
-      /*
-      drawer: Drawer(),
-      showDrawer: false,
-      //appbar: AppBar(),
-      showAppbar: false,
-      fab: FloatingActionButton(
-        onPressed: () {},
-        child: Text("+"),
-      ),
-      showFab: false,
-      //bottomNavigationBar: UnigoBottomNavigationsBar(),
-      showBottonNavigationBar: true,
-
-      backgroundColor: _controller.appConstants.dark_grey,
-      image: "assets/images/background2.svg",
-
-       */
-
       //extendBody: true,
       //extendBodyBehindAppBar: true,
 
@@ -121,12 +104,6 @@ class _MainScreenState extends State<MainScreen> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: Container(),
-        /*
-        leading: BackButton(
-          color: Color.fromARGB(255, 28, 31, 31),
-        ),
-
-         */
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -157,13 +134,6 @@ class _MainScreenState extends State<MainScreen> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: Container(),
-        /*
-        leading: BackButton(
-          color: Color.fromARGB(255, 28, 31, 31),
-          onPressed: _controller.callbacks[index],
-        ),
-
-         */
       );
     }
   }

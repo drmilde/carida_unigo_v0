@@ -8,10 +8,11 @@ class CustomRoundButton extends StatelessWidget {
   VoidCallback callback;
   String text;
   double width = 220;
-  double height = 55;
+  double height = 45;
   Color? color;
   Color? textColor;
   bool showShadow = false;
+  bool isDense = false;
 
   CustomRoundButton(
       {required this.text,
@@ -21,6 +22,7 @@ class CustomRoundButton extends StatelessWidget {
       this.width = 220,
       this.height = 45,
       this.showShadow = false,
+      this.isDense = false,
       Key? key})
       : super(key: key) {
     color = color ?? _controller.appConstants.button_dark;
@@ -32,7 +34,7 @@ class CustomRoundButton extends StatelessWidget {
     return GestureDetector(
       onTap: callback,
       child: Container(
-        height: height,
+        height: isDense? 32: height,
         width: width,
         decoration: BoxDecoration(
           color: color,
@@ -54,7 +56,7 @@ class CustomRoundButton extends StatelessWidget {
             style: GoogleFonts.inter(
               color: textColor,
               //fontWeight: FontWeight.bold,
-              fontSize: 20,
+              fontSize: isDense? 16: 20,
             ),
           ),
         ),
