@@ -3,6 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:projects/sb/widgets/buchungen/angebot_card_widget.dart';
 import 'package:projects/screens/widgets/buche_hs_fulda_widget.dart';
 import 'package:projects/services/controller/ug_state_controller.dart';
 import 'package:projects/services/extensions/unigo_service_angebot_extension.dart';
@@ -139,7 +140,7 @@ class _NeueSuchenScreenState extends State<NeueSuchenScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        SizedBox(width:16),
+        SizedBox(width: 16),
         isHinfahrt ? _ortsnameTextField() : _bucheLogo(),
         Container(
           child: Icon(Icons.arrow_forward_outlined),
@@ -335,21 +336,11 @@ class _NeueSuchenScreenState extends State<NeueSuchenScreen> {
           itemCount: fahrten.length,
           itemBuilder: (context, index) {
             final fahrt = fahrten[index];
-            return _angebotCard(
-              fahrt.startort,
-              fahrt.zielort,
-              fahrt.uhrzeit,
-              _controller.appConstants.dark_grey,
-              istFahrer
-                  ? Icon(
-                      Icons.directions_car,
-                      color: _controller.appConstants.turquoise,
-                    )
-                  : Icon(
-                      Icons.thumb_up,
-                      color: _controller.appConstants.light_green,
-                    ),
-              Icon(Icons.delete),
+            return AngebotCardWidget(
+              angebot: fahrt,
+              onDelete: () {},
+              onDetail: () {},
+              arrowColor: _controller.appConstants.dark_grey,
             );
           },
         ),
